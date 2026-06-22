@@ -6,7 +6,6 @@
     <title>TitikSinggah - Jelajahi Keindahan Nusantara</title>
     <meta name="description" content="Temukan destinasi wisata, kuliner khas, dan penginapan terbaik di provinsi Anda secara otomatis dengan perencanaan itinerary pintar.">
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,7 +34,6 @@
         }
     </script>
 
-    <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -220,15 +218,14 @@
             body.print-modal-active #detail-modal .bg-slate-50.p-4 {
                 display: none !important;
             }
-        }</style>
+        }
+    </style>
 </head>
 <body class="min-h-screen flex flex-col text-gray-800 antialiased overflow-x-hidden">
 
-    <!-- NAVIGATION -->
     <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 shadow-sm transition-all duration-300 animate-fade-in-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <!-- Premium Dynamic SVG Logo -->
                 <div class="flex items-center gap-2.5 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
                     <div class="flex items-center justify-center h-10 w-10 bg-primary-600 rounded-xl shadow-md text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -240,7 +237,6 @@
                 </div>
                 
                 <div class="flex items-center gap-3 sm:gap-4">
-                    <!-- Connection & Realtime Sync Indicator Badge -->
                     <div id="location-badge" class="bg-primary-50 text-primary-700 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full border border-primary-100 flex items-center gap-1.5 shadow-sm transition-all">
                         <span class="relative flex h-2 w-2">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
@@ -249,13 +245,11 @@
                         <span id="location-text" class="truncate max-w-[120px] sm:max-w-none">Mendeteksi Lokasi...</span>
                     </div>
                     
-                    <!-- Admin Panel Button (Wired correctly inside ES Module script) -->
                     <button id="admin-login-btn" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition duration-200 flex items-center gap-2 shadow-md hover:shadow-lg active:scale-95">
                         <i class="fa-solid fa-user-shield text-xs"></i>
                         <span>Admin Portal</span>
                     </button>
                     
-                    <!-- Admin Quick Back Button -->
                     <button id="admin-quick-dashboard-btn" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition duration-200 items-center gap-2 shadow-md">
                         <i class="fa-solid fa-gauge"></i>
                         <span>Dashboard Admin</span>
@@ -265,12 +259,10 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <section class="relative bg-gradient-to-br from-primary-950 via-primary-900 to-slate-950 text-white overflow-hidden py-20 sm:py-28 px-4 pb-28">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.15),transparent_60%)]"></div>
         <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
         
-        <!-- Decorative Animated Floating Elements -->
         <div class="absolute top-12 left-8 md:left-24 text-emerald-400/20 w-16 h-16 animate-plane-float pointer-events-none hidden sm:block">
             <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
                 <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l7 2.5z"/>
@@ -298,7 +290,6 @@
                 Mengeksplorasi destinasi legendaris, kuliner ikonik, dan hotel ternyaman berdasarkan provinsi tempat Anda berada saat ini dengan penawaran paket harga terlengkap.
             </p>
 
-            <!-- Dynamic Location Control Console -->
             <div class="mt-10 max-w-xl mx-auto bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-5 shadow-2xl animate-scale-in glowing-premium-console" style="animation-delay: 300ms;">
                 <div class="flex flex-col sm:flex-row items-center gap-4">
                     <div class="flex items-center gap-3 w-full sm:w-auto text-left flex-1">
@@ -314,14 +305,12 @@
                     <div class="w-full sm:w-auto text-left shrink-0">
                         <label for="province-selector" class="block text-[10px] text-emerald-300/80 font-bold tracking-wider uppercase mb-1">Pilih Provinsi Manual</label>
                         <select id="province-selector" onchange="handleManualProvinceChange(this.value)" class="w-full bg-slate-950/60 border border-white/20 text-white rounded-xl px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer transition-all duration-200 hover:border-emerald-400">
-                            <!-- Populated Dynamically via JS -->
-                        </select>
+                            </select>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Moving Wave Divider -->
         <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10">
             <svg class="relative block w-[200%] h-[50px] min-h-[30px]" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
                 <path class="wave-moving-1 opacity-25" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,8.75,55.05,17,83.66,23.83,149.7,39.66,219.17,58.33,321.39,56.44Z" fill="#f8fafc"></path>
@@ -330,10 +319,8 @@
         </div>
     </section>
 
-    <!-- MAIN DASHBOARD CONTENT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
         
-        <!-- Category Tabs -->
         <div class="flex justify-center border-b border-gray-200 mb-8 overflow-x-auto pb-px custom-scrollbar animate-fade-in-up" style="animation-delay: 400ms;">
             <div class="flex space-x-2 sm:space-x-8">
                 <button onclick="switchCategory('wisata')" id="tab-wisata" class="category-tab border-b-2 border-primary-600 text-primary-600 px-4 py-3 text-sm sm:text-base font-bold flex items-center gap-2 transition duration-200">
@@ -355,7 +342,6 @@
             </div>
         </div>
 
-        <!-- Search Bar and Headline -->
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 animate-fade-in-up" style="animation-delay: 450ms;">
             <div class="text-center sm:text-left">
                 <h3 id="category-headline" class="text-xl sm:text-2xl font-extrabold text-gray-900">Wisata Populer Terdekat</h3>
@@ -370,16 +356,13 @@
             </div>
         </div>
 
-        <!-- Dynamic Destination Card Grid -->
         <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
-            <!-- Dynamic loading state -->
             <div class="col-span-full py-16 text-center">
                 <i class="fa-solid fa-spinner animate-spin text-3xl text-primary-500 mb-3"></i>
                 <p class="text-gray-500 text-sm">Menghubungkan ke database awan real-time...</p>
             </div>
         </div>
 
-        <!-- PREMIUM DYNAMIC ITINERARY PLANNER SECTION -->
         <section id="itinerary-section" class="bg-gradient-to-br from-emerald-900 to-primary-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden animate-fade-in-up" style="animation-delay: 500ms;">
             <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-50/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-primary-500/15 rounded-full blur-2xl pointer-events-none"></div>
@@ -395,9 +378,7 @@
                 </p>
             </div>
 
-            <!-- Dynamic Planning Form -->
             <form id="itinerary-form" onsubmit="generateItinerary(event)" class="grid grid-cols-1 md:grid-cols-12 gap-5 bg-white/10 backdrop-blur-md p-5 sm:p-6 rounded-2xl border border-white/10 relative z-10 shadow-lg">
-                <!-- Column 1: General Constraints -->
                 <div class="md:col-span-3">
                     <label for="itinerary-days" class="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-1.5">Durasi Perjalanan</label>
                     <select id="itinerary-days" onchange="updateItineraryBudgetMeter()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer">
@@ -426,14 +407,12 @@
                     </select>
                 </div>
 
-                <!-- Column 2: Manual Selectors -->
                 <div class="md:col-span-3">
                     <label for="itinerary-select-wisata" class="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-1.5">
                         <i class="fa-solid fa-map-location-dot text-emerald-400 mr-1"></i> Wisata Pilihan
                     </label>
                     <select id="itinerary-select-wisata" onchange="updateItineraryBudgetMeter()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer">
-                        <!-- Populated dynamically -->
-                    </select>
+                        </select>
                 </div>
 
                 <div class="md:col-span-3">
@@ -441,8 +420,7 @@
                         <i class="fa-solid fa-utensils text-emerald-400 mr-1"></i> Kuliner Pilihan
                     </label>
                     <select id="itinerary-select-kuliner" onchange="updateItineraryBudgetMeter()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer">
-                        <!-- Populated dynamically -->
-                    </select>
+                        </select>
                 </div>
 
                 <div class="md:col-span-3">
@@ -450,11 +428,9 @@
                         <i class="fa-solid fa-hotel text-emerald-400 mr-1"></i> Penginapan Pilihan
                     </label>
                     <select id="itinerary-select-penginapan" onchange="updateItineraryBudgetMeter()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer">
-                        <!-- Populated dynamically -->
-                    </select>
+                        </select>
                 </div>
 
-                <!-- Transport & Layanan Guide -->
                 <div class="md:col-span-3">
                     <label for="itinerary-select-transport" class="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-1.5">
                         <i class="fa-solid fa-car-side text-emerald-400 mr-1"></i> Transport & Sopir/Guide
@@ -468,7 +444,6 @@
                     </select>
                 </div>
 
-                <!-- Budget Health Meter Status -->
                 <div class="md:col-span-8 bg-black/40 border border-white/10 rounded-xl p-4 flex flex-col justify-center">
                     <span class="text-[10px] font-bold text-emerald-300 tracking-widest uppercase block mb-1">Status Pengukur Anggaran Rencana</span>
                     <div class="w-full bg-white/15 rounded-full h-2.5 overflow-hidden">
@@ -484,16 +459,13 @@
                     </button>
                 </div>
 
-                <!-- Cost Estimation Details -->
                 <div class="md:col-span-12 border-t border-white/10 pt-4 mt-2">
                     <h5 class="text-xs font-bold text-emerald-300 uppercase tracking-widest mb-2.5">Ringkasan Estimasi Biaya Berdasarkan Hari</h5>
                     <div id="itinerary-budget-summary" class="bg-slate-950/40 p-4 rounded-xl border border-white/5">
-                        <!-- Filled dynamically -->
-                    </div>
+                        </div>
                 </div>
             </form>
 
-            <!-- Dynamic Itinerary Output Area -->
             <div id="itinerary-result" class="mt-8 bg-white text-gray-800 rounded-2xl p-6 border border-gray-100 hidden relative z-10 shadow-2xl animate-scale-in">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5 mb-6">
                     <div>
@@ -511,28 +483,23 @@
                     </div>
                 </div>
 
-                <!-- Timeline Output Container -->
                 <div id="itinerary-timeline" class="space-y-8 relative before:absolute before:inset-y-0 before:left-3.5 before:w-0.5 before:bg-slate-100">
-                    <!-- Populated dynamically via JS -->
-                </div>
+                    </div>
             </div>
         </section>
     </main>
 
-    <!-- Interactive Detail Modal -->
     <div id="detail-modal" class="fixed inset-0 z-50 overflow-y-auto hidden animate-scale-in">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm transition-opacity" onclick="closeDetailModal()"></div>
             
             <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-2xl sm:w-full border border-gray-100 flex flex-col max-h-[90vh]">
-                <!-- Modal Cover Image with gradient overlay -->
                 <div class="relative h-56 sm:h-72 w-full shrink-0 overflow-hidden">
                     <img id="detail-image" src="" alt="" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
                     <button onclick="closeDetailModal()" class="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full p-2.5 transition active:scale-95">
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
-                    <!-- Category Badge -->
                     <div class="absolute bottom-4 left-4 flex flex-wrap gap-2 items-center">
                         <span id="detail-category-badge" class="px-3 py-1 bg-primary-600 text-white text-xs font-bold rounded-lg shadow-md uppercase tracking-wider"></span>
                         <span id="detail-rating-badge" class="px-2.5 py-1 bg-amber-500 text-white text-xs font-bold rounded-lg shadow-md flex items-center gap-1">
@@ -541,7 +508,6 @@
                     </div>
                 </div>
 
-                <!-- Modal Body Content with Custom Scrollbar -->
                 <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6">
                     <div>
                         <div class="flex items-center gap-2 text-xs font-bold text-primary-600 uppercase tracking-widest mb-1">
@@ -555,18 +521,14 @@
                         </p>
                     </div>
 
-                    <!-- Description -->
                     <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
                         <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Deskripsi Lengkap</h4>
                         <p id="detail-desc" class="text-gray-700 text-sm leading-relaxed"></p>
                     </div>
 
-                    <!-- Category Specific Information Panels -->
                     <div id="detail-specific-section" class="space-y-4">
-                        <!-- Filled Dynamically via JS based on category -->
-                    </div>
+                        </div>
 
-                    <!-- Detailed Pricing Grid -->
                     <div class="bg-emerald-50/75 rounded-2xl p-5 border border-emerald-100 space-y-3">
                         <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-widest flex items-center gap-1.5">
                             <i class="fa-solid fa-tags"></i> Rincian Biaya & Tarif Terbaru
@@ -587,13 +549,11 @@
                         </div>
                     </div>
 
-                    <!-- Dynamic Reviews Section -->
                     <div class="border-t border-gray-150 pt-5 space-y-4">
                         <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
                             <i class="fa-regular fa-comments"></i> Ulasan Pengunjung (<span id="review-count">0</span>)
                         </h4>
                         
-                        <!-- Review Input Area -->
                         <div class="bg-slate-50 p-4 rounded-2xl border border-gray-150 space-y-3 text-left">
                             <span class="text-xs font-bold text-gray-700 block">Tulis Ulasan Anda</span>
                             <div class="flex items-center gap-1.5">
@@ -611,22 +571,17 @@
                             <button onclick="submitUserReview()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition active:scale-95">Kirim Ulasan</button>
                         </div>
 
-                        <!-- Rendered Reviews List -->
                         <div id="reviews-list-container" class="space-y-3 text-left">
-                            <!-- Populated dynamically via JS -->
-                        </div>
+                            </div>
                     </div>
 
-                    <!-- Actions Panel -->
                     <div class="flex flex-col sm:flex-row gap-3 justify-end items-center pt-2">
-                        <!-- Brochure Download split option -->
                         <div class="relative w-full sm:w-auto">
                             <button id="detail-download-btn" onclick="toggleDownloadDropdown(event)" class="w-full sm:w-auto px-5 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200 rounded-xl transition shadow-sm flex items-center justify-center gap-2 font-bold text-sm">
                                 <i class="fa-solid fa-file-arrow-down text-emerald-600"></i>
                                 <span>Unduh Brosur</span>
                                 <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-gray-400"></i>
                             </button>
-                            <!-- Dropdown List -->
                             <div id="download-dropdown" class="absolute right-0 bottom-full mb-2 w-52 bg-white border border-gray-100 rounded-2xl shadow-xl hidden z-50 overflow-hidden divide-y divide-gray-100">
                                 <button onclick="downloadAsPDF()" class="w-full text-left px-4 py-3 hover:bg-slate-50 text-xs sm:text-sm font-semibold text-gray-700 flex items-center gap-2.5 transition">
                                     <i class="fa-solid fa-file-pdf text-red-500 text-base"></i>
@@ -649,7 +604,6 @@
         </div>
     </div>
 
-    <!-- Admin Access Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideLoginModal()"></div>
@@ -701,8 +655,8 @@
                     <div class="mt-6 bg-slate-50 rounded-xl p-3 border border-gray-100">
                         <p class="text-[11px] text-gray-600 leading-relaxed">
                             💡 <b>Akun Demo yang Bisa Digunakan (Sinkronisasi Antar Laptop):</b><br>
-                            • <b>Super Admin:</b> <code class="bg-white px-1 border rounded">superadmin</code> / <code class="bg-white px-1 border rounded">superadmin123</code> (Bisa kelola semua)<br>
-                            • <b>Admin Lampung:</b> <code class="bg-white px-1 border rounded">budi_lampung</code> / <code class="bg-white px-1 border rounded">budi123</code> (Khusus Lampung)
+                            • <b>Super Admin:</b> <code class="bg-white px-1 border rounded">superadmin</code> / <code class="bg-white px-1 border rounded">superadmin123</code><br>
+                            • <b>Admin Lampung:</b> <code class="bg-white px-1 border rounded">budi_lampung</code> / <code class="bg-white px-1 border rounded">budi123</code>
                         </p>
                     </div>
                 </div>
@@ -710,7 +664,6 @@
         </div>
     </div>
 
-    <!-- Admin Fullscreen Control Panel View -->
     <div id="admin-dashboard-view" class="fixed inset-0 bg-slate-50 z-50 overflow-y-auto hidden">
         <header class="bg-gray-900 text-white px-4 sm:px-6 py-4 sticky top-0 z-10 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-md">
             <div class="flex items-center gap-3">
@@ -746,7 +699,6 @@
             </div>
         </header>
 
-        <!-- Admin Dashboard Tabs -->
         <div id="admin-tabs-bar" class="bg-white border-b border-gray-200 px-4 sm:px-6 sticky top-[72px] z-[9]">
             <div class="max-w-7xl mx-auto flex gap-1 overflow-x-auto">
                 <button onclick="switchAdminTab('destinations')" id="tab-btn-destinations" class="admin-tab-btn flex items-center gap-2 px-4 py-3.5 text-xs font-bold border-b-2 border-primary-600 text-primary-700 whitespace-nowrap">
@@ -764,9 +716,7 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-            <!-- TAB 1: DATA DESTINASI -->
             <div id="admin-tab-destinations" class="admin-tab-content">
-                <!-- Dashboard Info Banner -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                     <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
                         <div class="h-12 w-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl"><i class="fa-solid fa-map-location-dot"></i></div>
@@ -798,7 +748,6 @@
                     </div>
                 </div>
 
-                <!-- Table Filter & Search -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-gray-50/50">
                         <h3 class="text-base font-extrabold text-gray-900 flex items-center gap-2">
@@ -834,18 +783,15 @@
                                 </tr>
                             </thead>
                             <tbody id="dashboard-table-body" class="divide-y divide-gray-100 text-sm">
-                                <!-- Populated Dynamically -->
-                            </tbody>
+                                </tbody>
                         </table>
 
                         <div id="dashboard-mobile-list" class="divide-y divide-gray-100 block md:hidden">
-                            <!-- Populated Dynamically -->
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: VERIFIKASI DESTINASI -->
             <div id="admin-tab-verification" class="admin-tab-content hidden">
                 <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm mb-6">
                     <h3 class="text-xl font-extrabold text-gray-900 flex items-center gap-2">
@@ -855,10 +801,8 @@
                     <p class="text-xs text-gray-500 mt-1">Review dan verifikasi kiriman tempat wisata atau kuliner dari Admin Regional sebelum ditampilkan publik.</p>
                 </div>
 
-                <!-- Verifikasi Grid -->
                 <div id="verification-list" class="grid grid-cols-1 gap-6">
-                    <!-- Populated dynamically -->
-                </div>
+                    </div>
                 
                 <div id="verification-empty" class="hidden bg-white rounded-2xl border border-gray-100 p-12 text-center shadow-sm">
                     <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -868,7 +812,6 @@
                     <p class="text-xs text-gray-400">Tidak ada pengajuan destinasi baru dalam antrian saat ini.</p>
                 </div>
 
-                <!-- Riwayat Verifikasi -->
                 <div class="mt-10 bg-white rounded-2xl p-6 border border-gray-150">
                     <h4 class="text-sm font-extrabold text-gray-900 mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-clock-rotate-left text-gray-400"></i> Riwayat Verifikasi Pengajuan
@@ -885,14 +828,12 @@
                                 </tr>
                             </thead>
                             <tbody id="verification-history-list" class="divide-y divide-gray-100">
-                                <!-- Populated dynamically -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB: KELOLA ADMIN REGIONAL -->
             <div id="admin-tab-regional-admins" class="admin-tab-content hidden">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
                     <div>
@@ -908,7 +849,6 @@
                     </button>
                 </div>
 
-                <!-- Admin Regional List Table -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="p-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
                         <h4 class="text-sm font-extrabold text-gray-900">Petugas Wilayah Terdaftar</h4>
@@ -927,8 +867,7 @@
                                 </tr>
                             </thead>
                             <tbody id="regional-admin-table-body" class="divide-y divide-gray-100 text-sm">
-                                <!-- Populated dynamically -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -937,7 +876,6 @@
         </div>
     </div>
 
-    <!-- MODAL: TAMBAH/EDIT ADMIN REGIONAL -->
     <div id="add-regional-admin-modal" class="fixed inset-0 z-[60] overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideAddRegionalAdminModal()"></div>
@@ -970,7 +908,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 tracking-wider uppercase mb-1">Provinsi Wilayah</label>
-                            <select id="ra-province" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <select id="ra-province" name="province" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
                                 <option value="">-- Pilih Provinsi --</option>
                             </select>
                         </div>
@@ -994,7 +932,6 @@
         </div>
     </div>
 
-    <!-- MODAL: PENOLAKAN DENGAN ALASAN -->
     <div id="reject-reason-modal" class="fixed inset-0 z-[70] overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm"></div>
@@ -1019,7 +956,6 @@
         </div>
     </div>
 
-    <!-- Add / Edit Destination Modal -->
     <div id="add-edit-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideAddEditModal()"></div>
@@ -1055,8 +991,7 @@
                         <div>
                             <label for="form-province" class="block text-xs font-bold text-gray-700 tracking-wider uppercase mb-1">Provinsi</label>
                             <select id="form-province" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
-                                <!-- Populated Dynamically via JS -->
-                            </select>
+                                </select>
                         </div>
                         <div>
                             <label for="form-location" class="block text-xs font-bold text-gray-700 tracking-wider uppercase mb-1">Lokasi Detail (Kota/Kabupaten)</label>
@@ -1080,7 +1015,6 @@
                         <input type="url" id="form-action-link" required placeholder="https://www.instagram.com/pariwisata_lampung" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
                     </div>
 
-                    <!-- Pricing Section -->
                     <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100/50 space-y-3">
                         <span class="block text-xs font-bold text-emerald-850 uppercase tracking-widest flex items-center gap-1.5">
                             <i class="fa-solid fa-money-bill-wave"></i> Atur Biaya & Paket Tarif
@@ -1121,7 +1055,6 @@
         </div>
     </div>
 
-    <!-- Reusable Premium Confirmation Modal (Replaces browser confirm dialog) -->
     <div id="custom-confirm-modal" class="fixed inset-0 z-[100] overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="closeCustomConfirm()"></div>
@@ -1146,7 +1079,6 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal (Specific Destination) -->
     <div id="delete-confirm-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="closeDeleteModal()"></div>
@@ -1171,10 +1103,8 @@
         </div>
     </div>
 
-    <!-- Toast Notification Overlay -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
 
-    <!-- Footer Section -->
     <footer class="bg-gray-900 text-white/70 py-12 border-t border-gray-800 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -1198,34 +1128,32 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-6 text-center text-xs text-gray-600">
-                &copy; 2026 TitikSinggah Indonesia. Seluruh hak cipta dilindungi.
+                © 2026 TitikSinggah Indonesia. Seluruh hak cipta dilindungi.
             </div>
         </div>
     </footer>
 
-    <!-- Firebase SDK Imports & Real-Time Setup Module -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-                // --- FIREBASE CONFIGURATION & INITIALIZATION ---
-                const fallbackConfig = {
-                        apiKey: "AIzaSyC_dDQHTGlLSdlvv7__GGzNShPlQsFIzgM",
-                        authDomain: "titiksinggah-app.firebaseapp.com",
-                        projectId: "titiksinggah-app",
-                        storageBucket: "titiksinggah-app.firebasestorage.app",
-                        messagingSenderId: "254951989273",
-                        appId: "1:254951989273:web:40a285259ce3cd14c68a88",
-                        measurementId: "G-PLYKZ5P24B"
-                };
-                const configStr = typeof __firebase_config !== 'undefined' ? __firebase_config : JSON.stringify(fallbackConfig);
+        const fallbackConfig = {
+            apiKey: "AIzaSyC_dDQHTGlLSdlvv7__GGzNShPlQsFIzgM",
+            authDomain: "titiksinggah-app.firebaseapp.com",
+            projectId: "titiksinggah-app",
+            storageBucket: "titiksinggah-app.firebasestorage.app",
+            messagingSenderId: "254951989273",
+            appId: "1:254951989273:web:40a285259ce3cd14c68a88",
+            measurementId: "G-PLYKZ5P24B"
+        };
+        const configStr = typeof __firebase_config !== 'undefined' ? __firebase_config : JSON.stringify(fallbackConfig);
         const firebaseConfig = JSON.parse(configStr);
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'titiksinggah-realtime';
+        const trackingAppId = typeof __app_id !== 'undefined' ? __app_id : 'titiksinggah-realtime';
 
         // --- CONSTANTS & DEFAULT SEEDS (FALLBACKS) ---
         const PROVINCES = [
@@ -1440,12 +1368,10 @@
         let selectedRating = 0;
         let currentVerifyItem = null;
 
-        // Seeding flags to avoid loops
         let hasSeededDestinations = false;
         let hasSeededPending = false;
         let hasSeededAdmins = false;
 
-        // Reusable Confirmation Pipeline (replaces window.confirm)
         let pendingConfirmAction = null;
 
         // --- CUSTOM MODAL CONFIRM SYSTEM ---
@@ -1479,8 +1405,7 @@
         function startRealtimeListeners() {
             if (!auth.currentUser) return;
 
-            // 1. Destinations Synchronizer
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'destinations'), (snapshot) => {
+            onSnapshot(collection(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations'), (snapshot) => {
                 const tempDest = [];
                 snapshot.forEach(doc => {
                     tempDest.push({ id: doc.id, ...doc.data() });
@@ -1497,12 +1422,9 @@
                 if (document.getElementById('admin-dashboard-view') && !document.getElementById('admin-dashboard-view').classList.contains('hidden')) {
                     refreshDashboardTable();
                 }
-            }, (error) => {
-                console.error("Destinations Sync Error:", error);
             });
 
-            // 2. Pending Submissions Synchronizer
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations'), (snapshot) => {
+            onSnapshot(collection(db, 'artifacts', trackingAppId, 'public', 'data', 'pendingDestinations'), (snapshot) => {
                 const tempPending = [];
                 snapshot.forEach(doc => {
                     tempPending.push({ id: doc.id, ...doc.data() });
@@ -1518,12 +1440,9 @@
                 if (document.getElementById('admin-tab-verification') && !document.getElementById('admin-tab-verification').classList.contains('hidden')) {
                     renderVerificationList();
                 }
-            }, (error) => {
-                console.error("Pending Sync Error:", error);
             });
 
-            // 3. Regional Admins Synchronizer
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'regionalAdmins'), (snapshot) => {
+            onSnapshot(collection(db, 'artifacts', trackingAppId, 'public', 'data', 'regionalAdmins'), (snapshot) => {
                 const tempAdmins = [];
                 snapshot.forEach(doc => {
                     tempAdmins.push({ id: doc.id, ...doc.data() });
@@ -1538,52 +1457,43 @@
                 if (document.getElementById('admin-tab-regional-admins') && !document.getElementById('admin-tab-regional-admins').classList.contains('hidden')) {
                     renderRegionalAdminsTable();
                 }
-            }, (error) => {
-                console.error("Admins Sync Error:", error);
             });
 
-            // 4. Verification History Synchronizer
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'verificationHistory'), (snapshot) => {
+            onSnapshot(collection(db, 'artifacts', trackingAppId, 'public', 'data', 'verificationHistory'), (snapshot) => {
                 const tempHistory = [];
                 snapshot.forEach(doc => {
                     tempHistory.push({ id: doc.id, ...doc.data() });
                 });
-
-                // Rule 2 compliant sorting (JS sort in-memory instead of complex database indexing)
                 tempHistory.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
                 verificationHistory = tempHistory;
                 if (document.getElementById('admin-tab-verification') && !document.getElementById('admin-tab-verification').classList.contains('hidden')) {
                     renderVerificationHistory();
                 }
-            }, (error) => {
-                console.error("History Sync Error:", error);
             });
         }
 
-        // --- FIRST-BOOT INITIALIZATIONS (SEEDING) ---
+        // --- SEEDING CONTROLS ---
         async function seedDestinations() {
             hasSeededDestinations = true;
             for (const item of DEFAULT_DESTINATIONS) {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), item);
+                await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations', item.id), item);
             }
         }
 
         async function seedPending() {
             hasSeededPending = true;
             for (const item of DEFAULT_PENDING_DESTINATIONS) {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id), item);
+                await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'pendingDestinations', item.id), item);
             }
         }
 
         async function seedAdmins() {
             hasSeededAdmins = true;
             for (const item of DEFAULT_REGIONAL_ADMINS) {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'regionalAdmins', item.id), item);
+                await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'regionalAdmins', item.id), item);
             }
         }
 
-        // --- FIREBASE SECURITY AUTH PIPELINE (AWAIT AUTH FIRST BEFORE QUERYING - RULE 3) ---
         async function initAuth() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -1599,24 +1509,19 @@
 
         // --- APP INITIALIZATION ---
         window.addEventListener('DOMContentLoaded', async () => {
-            // Restore Session
             const session = localStorage.getItem('titik_singgah_session');
             if (session) {
                 loggedInUser = JSON.parse(session);
             }
 
-            // Wire up premium modal events
             const confirmActionBtn = document.getElementById('confirm-modal-action-btn');
             if (confirmActionBtn) {
                 confirmActionBtn.onclick = function() {
-                    if (pendingConfirmAction) {
-                        pendingConfirmAction();
-                    }
+                    if (pendingConfirmAction) pendingConfirmAction();
                     closeCustomConfirm();
                 };
             }
 
-            // WIRE UP MISSING ADMIN PORTAL CLICKS
             const adminLoginBtn = document.getElementById('admin-login-btn');
             if (adminLoginBtn) {
                 adminLoginBtn.onclick = showLoginModal;
@@ -1626,7 +1531,6 @@
             populateProvinceDropdowns();
             startLocationDetection();
 
-            // Run security authentication before performing operations (RULE 3)
             await initAuth();
         });
 
@@ -1637,7 +1541,6 @@
             }
         });
 
-        // Global split dropdown closer
         window.addEventListener('click', function(e) {
             const dropdown = document.getElementById('download-dropdown');
             const downloadBtn = document.getElementById('detail-download-btn');
@@ -1682,7 +1585,7 @@
             });
         }
 
-        // --- GEOLOCATION GPS PIPELINE ---
+        // --- GEOLOCATION PIPELINE ---
         function startLocationDetection() {
             const badgeText = document.getElementById('location-text');
             const heroDetected = document.getElementById('hero-detected-province');
@@ -1716,14 +1619,10 @@
                             }
                             applyFallbackLocation("Wilayah Tidak Terdaftar");
                         } catch (error) {
-                            console.error("OSM Error:", error);
                             applyFallbackLocation("Error Geocoding");
                         }
                     },
-                    (error) => {
-                        console.warn("GPS Blocked:", error.message);
-                        applyFallbackLocation("Akses GPS Ditolak");
-                    },
+                    (error) => applyFallbackLocation("Akses GPS Ditolak"),
                     { enableHighAccuracy: true, timeout: 8000 }
                 );
             } else {
@@ -1755,12 +1654,10 @@
             renderDestinations();
         }
 
-        // --- ITINERARY COMPILER ---
+        // --- ITINERARY LOGIC ---
         function updateItineraryProvinceUI(provinceName) {
             const label = document.getElementById('itinerary-current-province');
-            if (label) {
-                label.textContent = provinceName;
-            }
+            if (label) label.textContent = provinceName;
             populateItinerarySelectors();
         }
 
@@ -1781,19 +1678,13 @@
             kulinerSelect.innerHTML = '<option value="">-- Pilih Kuliner --</option>';
             penginapanSelect.innerHTML = '<option value="">-- Pilih Penginapan --</option>';
 
-            const filteredWisata = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'wisata');
-            const filteredKuliner = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'kuliner');
-            const filteredPenginapan = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'penginapan');
+            const fWisata = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'wisata');
+            const fKuliner = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'kuliner');
+            const fPenginapan = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'penginapan');
 
-            filteredWisata.forEach(item => {
-                wisataSelect.innerHTML += `<option value="${item.id}">${item.name} (${item.costWeekday})</option>`;
-            });
-            filteredKuliner.forEach(item => {
-                kulinerSelect.innerHTML += `<option value="${item.id}">${item.name} (${item.costWeekday})</option>`;
-            });
-            filteredPenginapan.forEach(item => {
-                penginapanSelect.innerHTML += `<option value="${item.id}">${item.name} (${item.costWeekday})</option>`;
-            });
+            fWisata.forEach(item => wisataSelect.innerHTML += `<option value="${item.id}">${item.name} (${item.costWeekday})</option>`);
+            fKuliner.forEach(item => kulinerSelect.innerHTML += `<option value="${item.id}">${item.name} (${item.costWeekday})</option>`);
+            fPenginapan.forEach(item => penginapanSelect.innerHTML += `<option value="${item.id}">${item.name} (${item.costWeekday})</option>`);
 
             suggestItineraryByBudget();
         }
@@ -1804,29 +1695,22 @@
             const transType = document.getElementById('itinerary-select-transport').value || 'none';
             const transCost = (TRANSPORT_RATES[transType] || 0) * days;
 
-            const filteredWisata = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'wisata');
-            const filteredKuliner = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'kuliner');
-            const filteredPenginapan = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'penginapan');
+            const fWisata = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'wisata');
+            const fKuliner = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'kuliner');
+            const fPenginapan = database.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category === 'penginapan');
 
-            let bestWisata = filteredWisata[0] || null;
-            let bestKuliner = filteredKuliner[0] || null;
-            let bestPenginapan = filteredPenginapan[0] || null;
+            let bestWisata = fWisata[0] || null;
+            let bestKuliner = fKuliner[0] || null;
+            let bestPenginapan = fPenginapan[0] || null;
 
             let foundMatch = false;
-
-            for (let w of filteredWisata) {
-                for (let k of filteredKuliner) {
-                    for (let p of filteredPenginapan) {
-                        const totalCost = (extractPrice(w.costWeekday)) + 
-                                          (extractPrice(k.costWeekday) * days * 2) + 
-                                          (extractPrice(p.costWeekday) * (days - 1 || 1)) +
-                                          transCost;
+            for (let w of fWisata) {
+                for (let k of fKuliner) {
+                    for (let p of fPenginapan) {
+                        const totalCost = (extractPrice(w.costWeekday)) + (extractPrice(k.costWeekday) * days * 2) + (extractPrice(p.costWeekday) * (days - 1 || 1)) + transCost;
                         if (totalCost <= userBudget) {
-                            bestWisata = w;
-                            bestKuliner = k;
-                            bestPenginapan = p;
-                            foundMatch = true;
-                            break;
+                            bestWisata = w; bestKuliner = k; bestPenginapan = p;
+                            foundMatch = true; break;
                         }
                     }
                     if (foundMatch) break;
@@ -1841,21 +1725,8 @@
             updateItineraryBudgetMeter();
         }
 
-        const TRANSPORT_RATES = {
-            none: 0,
-            motor: 80000,
-            mobil_lepas: 350000,
-            mobil_driver: 650000,
-            guide_allin: 1100000
-        };
-
-        const TRANSPORT_LABELS = {
-            none: "Tanpa Transportasi (Mandiri)",
-            motor: "Sewa Motor Mandiri",
-            mobil_lepas: "Sewa Mobil Lepas Kunci",
-            mobil_driver: "Sewa Mobil + Sopir Lokal",
-            guide_allin: "Guide Lokal + Transportasi All-In"
-        };
+        const TRANSPORT_RATES = { none: 0, motor: 80000, mobil_lepas: 350000, mobil_driver: 650000, guide_allin: 1100000 };
+        const TRANSPORT_LABELS = { none: "Tanpa Transportasi (Mandiri)", motor: "Sewa Motor Mandiri", mobil_lepas: "Sewa Mobil Lepas Kunci", mobil_driver: "Sewa Mobil + Sopir Lokal", guide_allin: "Guide Lokal + Transportasi All-In" };
 
         function updateItineraryBudgetMeter() {
             const userBudget = parseInt(document.getElementById('itinerary-budget-num').value) || 0;
@@ -1896,7 +1767,6 @@
             if (userBudget === 0) {
                 meterBar.style.width = "0%";
                 meterText.textContent = "Masukkan nominal anggaran liburan untuk memetakan kapasitas.";
-                meterText.className = "text-xs text-emerald-300/80 mt-2 block";
                 return;
             }
 
@@ -1905,21 +1775,18 @@
 
             if (totalEstimated <= userBudget) {
                 meterBar.className = "h-full bg-emerald-400 rounded-full transition-all duration-300";
-                const sisa = userBudget - totalEstimated;
-                meterText.textContent = `Anggaran Aman! Tersisa Rp ${sisa.toLocaleString('id-ID')} untuk saku & belanja oleh-oleh.`;
+                meterText.textContent = `Anggaran Aman! Tersisa Rp ${(userBudget - totalEstimated).toLocaleString('id-ID')} untuk saku & belanja.`;
                 meterText.className = "text-xs text-emerald-300 font-bold mt-2 block";
             } else {
                 meterBar.className = "h-full bg-red-500 rounded-full transition-all duration-300";
-                const over = totalEstimated - userBudget;
-                meterText.textContent = `Melebihi Anggaran! Estimasi biaya berlebih sebesar Rp ${over.toLocaleString('id-ID')}.`;
+                meterText.textContent = `Melebihi Anggaran! Estimasi biaya berlebih sebesar Rp ${(totalEstimated - userBudget).toLocaleString('id-ID')}.`;
                 meterText.className = "text-xs text-red-300 font-bold mt-2 block";
             }
         }
 
-        // --- DISPLAY & RENDERING CONTROL ---
+        // --- DISPLAY AND RENDERING CONTROL ---
         function switchCategory(category) {
             currentCategory = category;
-            
             document.querySelectorAll('.category-tab').forEach(tab => {
                 tab.classList.remove('border-primary-600', 'text-primary-600', 'font-bold');
                 tab.classList.add('border-transparent', 'text-gray-500', 'font-medium');
@@ -1947,7 +1814,6 @@
                 headline.textContent = 'Rental Kendaraan & Guide Lokal';
                 subtitle.textContent = 'Sewa kendaraan terpercaya serta sewa jasa pemandu wisata berlisensi lokal.';
             }
-
             renderDestinations();
         }
 
@@ -1977,12 +1843,7 @@
                             <i class="fa-solid fa-folder-open"></i>
                         </div>
                         <h4 class="text-base font-bold text-gray-800">Tidak Ada Data Ditemukan</h4>
-                        <p class="text-xs text-gray-400 mt-1 max-w-sm mx-auto">Belum ada konten ${currentCategory} untuk Provinsi ${detectedProvince} yang sesuai pencarian Anda.</p>
-                        ${loggedInUser ? `
-                            <button onclick="showAddEditModalWithPrefill('${currentCategory}', '${detectedProvince}')" class="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold text-xs rounded-xl shadow transition">
-                                <i class="fa-solid fa-plus"></i> Usulkan Destinasi Baru
-                            </button>
-                        ` : ''}
+                        <p class="text-xs text-gray-400 mt-1 max-w-sm mx-auto">Belum ada konten ${currentCategory} untuk Provinsi ${detectedProvince} yang sesuai.</p>
                     </div>
                 `;
                 return;
@@ -1992,7 +1853,6 @@
                 const card = document.createElement('div');
                 card.className = "bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 flex flex-col group hover:-translate-y-1 stagger-card";
                 card.style.animationDelay = `${idx * 75}ms`;
-                
                 card.innerHTML = `
                     <div class="relative h-48 w-full overflow-hidden bg-gray-50">
                         <img src="${item.image}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/14532d/ffffff?text=${encodeURIComponent(item.name)}'">
@@ -2011,7 +1871,6 @@
                             </p>
                             <p class="text-xs text-gray-500 mt-3 line-clamp-2 leading-relaxed">${item.description}</p>
                         </div>
-                        
                         <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
                             <div class="text-[11px] text-gray-500">
                                 <span class="block">Mulai Dari:</span>
@@ -2027,23 +1886,17 @@
             });
         }
 
-        // --- REVIEWS LOGIC ---
+        // --- REVIEWS SYSTEM ---
         function setupReviewStarSelector() {
             const starContainer = document.getElementById('review-star-selector');
             if (!starContainer) return;
             const stars = starContainer.querySelectorAll('i');
-
             stars.forEach(star => {
                 star.onclick = function() {
-                    const ratingValue = parseInt(this.getAttribute('data-val'));
-                    selectedRating = ratingValue;
-                    
+                    const val = parseInt(this.getAttribute('data-val'));
+                    selectedRating = val;
                     stars.forEach((s, idx) => {
-                        if (idx < ratingValue) {
-                            s.className = "fa-solid fa-star text-amber-400 hover:scale-110 transition";
-                        } else {
-                            s.className = "fa-regular fa-star hover:scale-110 transition";
-                        }
+                        s.className = idx < val ? "fa-solid fa-star text-amber-400 hover:scale-110 transition" : "fa-regular fa-star hover:scale-110 transition";
                     });
                 };
             });
@@ -2053,26 +1906,21 @@
             const container = document.getElementById('reviews-list-container');
             const countEl = document.getElementById('review-count');
             if (!container || !countEl) return;
-            
+
             container.innerHTML = '';
             const reviews = item.reviews || [];
             countEl.textContent = reviews.length;
 
             if (reviews.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-400 italic text-center py-2">Belum ada ulasan untuk tempat ini. Jadilah yang pertama memberikan ulasan!</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-400 italic text-center py-2">Belum ada ulasan. Jadi yang pertama!</p>`;
                 return;
             }
 
             reviews.forEach(rev => {
                 let starsHTML = '';
                 for (let i = 1; i <= 5; i++) {
-                    if (i <= rev.rating) {
-                        starsHTML += `<i class="fa-solid fa-star text-amber-400 text-[10px]"></i>`;
-                    } else {
-                        starsHTML += `<i class="fa-regular fa-star text-gray-300 text-[10px]"></i>`;
-                    }
+                    starsHTML += i <= rev.rating ? `<i class="fa-solid fa-star text-amber-400 text-[10px]"></i>` : `<i class="fa-regular fa-star text-gray-300 text-[10px]"></i>`;
                 }
-
                 container.innerHTML += `
                     <div class="bg-gray-50 border border-gray-100 p-3.5 rounded-xl space-y-1">
                         <div class="flex items-center justify-between">
@@ -2086,25 +1934,14 @@
         }
 
         async function submitUserReview() {
-            if (!activeDetailItemId) return;
-            if (!auth.currentUser) {
-                showToast("⚠️ Menghubungkan database...", "error");
-                return;
-            }
+            if (!activeDetailItemId || !auth.currentUser) return;
+            const uInput = document.getElementById('review-username-input');
+            const cInput = document.getElementById('review-text-input');
+            const name = uInput.value.trim();
+            const comment = cInput.value.trim();
 
-            const usernameInput = document.getElementById('review-username-input');
-            const commentInput = document.getElementById('review-text-input');
-
-            const name = usernameInput.value.trim();
-            const comment = commentInput.value.trim();
-
-            if (!name || !comment) {
-                showToast("⚠️ Harap isi nama dan komentar Anda!", "error");
-                return;
-            }
-
-            if (selectedRating === 0) {
-                showToast("⚠️ Harap berikan rating bintang!", "error");
+            if (!name || !comment || selectedRating === 0) {
+                showToast("⚠️ Harap lengkapi nama, ulasan, dan rating bintang!", "error");
                 return;
             }
 
@@ -2112,384 +1949,218 @@
             if (!item) return;
 
             const currentReviews = item.reviews || [];
-            currentReviews.push({
-                username: name,
-                rating: selectedRating,
-                comment: comment
-            });
-
-            const totalRating = currentReviews.reduce((acc, curr) => acc + curr.rating, 0);
-            const newRating = parseFloat((totalRating / currentReviews.length).toFixed(1));
+            currentReviews.push({ username: name, rating: selectedRating, comment: comment });
+            const total = currentReviews.reduce((acc, curr) => acc + curr.rating, 0);
+            const newRating = parseFloat((total / currentReviews.length).toFixed(1));
 
             try {
-                // Update on Cloud Firestore
-                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'destinations', activeDetailItemId);
-                await updateDoc(docRef, {
-                    reviews: currentReviews,
-                    rating: newRating
+                await updateDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations', activeDetailItemId), {
+                    reviews: currentReviews, rating: newRating
                 });
-
                 showToast("✅ Ulasan Anda diterbitkan secara real-time!", "success");
-                
                 document.getElementById('detail-rating-text').textContent = newRating.toFixed(1);
                 renderReviews(item);
-
-                usernameInput.value = '';
-                commentInput.value = '';
-                selectedRating = 0;
-                const starContainer = document.getElementById('review-star-selector');
-                if (starContainer) {
-                    const stars = starContainer.querySelectorAll('i');
-                    stars.forEach(s => s.className = "fa-regular fa-star hover:scale-110 transition");
-                }
+                uInput.value = ''; cInput.value = ''; selectedRating = 0;
+                document.getElementById('review-star-selector').querySelectorAll('i').forEach(s => s.className = "fa-regular fa-star hover:scale-110 transition");
             } catch (e) {
-                console.error(e);
-                showToast("⚠️ Gagal mengirim ulasan ke database.", "error");
+                showToast("⚠️ Gagal mengirim ulasan.", "error");
             }
         }
 
-        // --- INTERACTIVE DETAIL MODAL ---
+        // --- DETAIL MODAL CONTROL ---
         function openDetailModal(id) {
             const item = database.find(d => d.id === id);
             if (!item) return;
-
             activeDetailItemId = id;
 
-            const usernameInput = document.getElementById('review-username-input');
-            const commentInput = document.getElementById('review-text-input');
-            if (usernameInput) usernameInput.value = '';
-            if (commentInput) commentInput.value = '';
+            document.getElementById('review-username-input').value = '';
+            document.getElementById('review-text-input').value = '';
             selectedRating = 0;
-            const starContainer = document.getElementById('review-star-selector');
-            if (starContainer) {
-                const stars = starContainer.querySelectorAll('i');
-                stars.forEach(s => s.className = "fa-regular fa-star hover:scale-110 transition");
-            }
+            document.getElementById('review-star-selector').querySelectorAll('i').forEach(s => s.className = "fa-regular fa-star hover:scale-110 transition");
 
             renderReviews(item);
 
             document.getElementById('detail-image').src = item.image;
-            document.getElementById('detail-image').onerror = function() {
-                this.src = `https://placehold.co/800x450/14532d/ffffff?text=${encodeURIComponent(item.name)}`;
-            };
             document.getElementById('detail-category-badge').textContent = item.category;
             document.getElementById('detail-rating-text').textContent = Number(item.rating).toFixed(1);
             document.getElementById('detail-province-text').textContent = item.province;
             document.getElementById('detail-title').textContent = item.name;
             document.getElementById('detail-location').querySelector('span').textContent = item.location;
             document.getElementById('detail-desc').textContent = item.description;
-
             document.getElementById('detail-cost-weekday').textContent = item.costWeekday || 'Rp -';
             document.getElementById('detail-cost-weekend').textContent = item.costWeekend || 'Rp -';
             document.getElementById('detail-cost-package').textContent = item.costPackage || 'Tidak Tersedia';
 
             const specificSection = document.getElementById('detail-specific-section');
             specificSection.innerHTML = '';
-
             const actionBtn = document.getElementById('detail-action-btn');
             const actionText = document.getElementById('detail-action-text');
             const actionIcon = document.getElementById('detail-action-icon');
-
             actionBtn.className = "w-full sm:w-auto px-6 py-3 text-white font-bold text-sm rounded-xl transition shadow flex items-center justify-center gap-2";
 
             if (item.category === 'wisata') {
-                actionText.textContent = "Buka Peta Lokasi";
-                actionBtn.href = item.actionLink || `https://maps.google.com/?q=${encodeURIComponent(item.name + " " + item.location)}`;
+                actionText.textContent = "Buka Peta Lokasi"; actionBtn.href = item.actionLink || "#";
                 actionBtn.classList.add("bg-primary-600", "hover:bg-primary-700");
                 actionIcon.className = "fa-solid fa-map-location-dot text-sm";
-                
                 specificSection.innerHTML = `
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4">
-                            <span class="text-xs font-bold text-indigo-800 uppercase tracking-wider block mb-1">⏰ Waktu Terbaik Berkunjung</span>
-                            <p class="text-xs text-indigo-900 leading-relaxed font-semibold">${item.bestTime || "Pagi atau Sore Hari"}</p>
-                        </div>
-                        <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4">
-                            <span class="text-xs font-bold text-amber-800 uppercase tracking-wider block mb-1">🎟️ Aktivitas Terpopuler</span>
-                            <p class="text-xs text-amber-900 leading-relaxed font-semibold">${item.activities || "Menikmati pemandangan alam bebas dan berfoto."}</p>
-                        </div>
-                    </div>
-                `;
+                        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4"><span class="text-xs font-bold text-indigo-800 uppercase block mb-1">⏰ Waktu Terbaik</span><p class="text-xs text-indigo-900 font-semibold">${item.bestTime || "Pagi/Sore"}</p></div>
+                        <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4"><span class="text-xs font-bold text-amber-800 uppercase block mb-1">🎟️ Aktivitas</span><p class="text-xs text-amber-900 font-semibold">${item.activities || "Menikmati pemandangan alam."}</p></div>
+                    </div>`;
             } else if (item.category === 'kuliner') {
-                actionText.textContent = "Instagram / Sosmed Usaha";
-                actionBtn.href = item.actionLink || "https://instagram.com";
-                actionBtn.classList.add("bg-gradient-to-r", "from-pink-600", "via-purple-600", "to-indigo-600", "hover:opacity-90");
+                actionText.textContent = "Sosmed Resto"; actionBtn.href = item.actionLink || "#";
+                actionBtn.classList.add("bg-gradient-to-r", "from-pink-600", "via-purple-600", "to-indigo-600");
                 actionIcon.className = "fa-brands fa-instagram text-sm";
-
                 specificSection.innerHTML = `
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-orange-50 border border-orange-100 rounded-2xl p-4">
-                            <span class="text-xs font-bold text-orange-800 uppercase tracking-wider block mb-1">🥘 Menu Utama Rekomendasi</span>
-                            <p class="text-xs text-orange-900 leading-relaxed font-bold">${item.famousDish || "Menu Spesial Tradisional"}</p>
-                        </div>
-                        <div class="bg-teal-50 border border-teal-100 rounded-2xl p-4">
-                            <span class="text-xs font-bold text-teal-800 uppercase tracking-wider block mb-1">🌶️ Bahan Dasar Dominan</span>
-                            <p class="text-xs text-teal-900 leading-relaxed font-semibold">${item.ingredients || "Rempah Nusantara Khas"}</p>
-                        </div>
-                    </div>
-                `;
+                        <div class="bg-orange-50 border border-orange-100 rounded-2xl p-4"><span class="text-xs font-bold text-orange-800 uppercase block mb-1">🥘 Menu Utama</span><p class="text-xs text-orange-900 font-bold">${item.famousDish || "Menu Rekomendasi"}</p></div>
+                        <div class="bg-teal-50 border border-teal-100 rounded-2xl p-4"><span class="text-xs font-bold text-teal-800 uppercase block mb-1">🌶️ Bahan Dasar</span><p class="text-xs text-teal-900 font-semibold">${item.ingredients || "Rempah Khas"}</p></div>
+                    </div>`;
             } else if (item.category === 'penginapan') {
-                actionText.textContent = "Instagram / Sosmed Usaha";
-                actionBtn.href = item.actionLink || "https://instagram.com";
-                actionBtn.classList.add("bg-gradient-to-r", "from-slate-800", "to-slate-950", "hover:opacity-90");
+                actionText.textContent = "Hubungi Hotel"; actionBtn.href = item.actionLink || "#";
+                actionBtn.classList.add("bg-gradient-to-r", "from-slate-800", "to-slate-950");
                 actionIcon.className = "fa-brands fa-instagram text-sm";
-
-                const amenitiesList = item.amenities || ["WiFi", "AC", "Sarapan", "Shower Hangat"];
-                const amenitiesHTML = amenitiesList.map(a => `
-                    <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-sm">
-                        <i class="fa-solid fa-circle-check text-emerald-500"></i>
-                        <span>${a}</span>
-                    </span>
-                `).join('');
-
-                specificSection.innerHTML = `
-                    <div class="space-y-3">
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block">Fasilitas Utama Penginapan</span>
-                        <div class="flex flex-wrap gap-2">
-                            ${amenitiesHTML}
-                        </div>
-                    </div>
-                `;
+                const am = item.amenities || ["WiFi", "AC", "Sarapan"];
+                specificSection.innerHTML = `<div class="space-y-3"><span class="text-xs font-bold text-gray-400 uppercase block">Fasilitas</span><div class="flex flex-wrap gap-2">${am.map(a => `<span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-sm"><i class="fa-solid fa-circle-check text-emerald-500"></i>${a}</span>`).join('')}</div></div>`;
             } else if (item.category === 'transportasi') {
-                actionText.textContent = "Instagram / Sosmed Usaha";
-                actionBtn.href = item.actionLink || "https://instagram.com";
-                actionBtn.classList.add("bg-gradient-to-r", "from-teal-600", "to-emerald-500", "hover:opacity-90");
+                actionText.textContent = "Hubungi Penyedia"; actionBtn.href = item.actionLink || "#";
+                actionBtn.classList.add("bg-gradient-to-r", "from-teal-600", "to-emerald-500");
                 actionIcon.className = "fa-brands fa-instagram text-sm";
-
                 specificSection.innerHTML = `
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-teal-50 border border-teal-100 rounded-2xl p-4">
-                            <span class="text-xs font-bold text-teal-800 uppercase tracking-wider block mb-1">🚗 Armada Kendaraan Tersedia</span>
-                            <p class="text-xs text-teal-900 leading-relaxed font-bold">${item.vehicles || "Avanza, Xpander, Motor Matic"}</p>
-                        </div>
-                        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4">
-                            <span class="text-xs font-bold text-indigo-800 uppercase tracking-wider block mb-1">🗺️ Wilayah Cakupan Jasa</span>
-                            <p class="text-xs text-indigo-900 leading-relaxed font-semibold">${item.serviceArea || "Area Kota & Sekitarnya"}</p>
-                        </div>
-                    </div>
-                `;
+                        <div class="bg-teal-50 border border-teal-100 rounded-2xl p-4"><span class="text-xs font-bold text-teal-800 uppercase block mb-1">🚗 Armada</span><p class="text-xs text-teal-900 font-bold">${item.vehicles || "Matic & Avanza"}</p></div>
+                        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4"><span class="text-xs font-bold text-indigo-800 uppercase block mb-1">🗺️ Cakupan</span><p class="text-xs text-indigo-900 font-semibold">${item.serviceArea || "Seluruh Wilayah"}</p></div>
+                    </div>`;
             }
 
-            const dropdown = document.getElementById('download-dropdown');
-            if (dropdown) dropdown.classList.add('hidden');
-
-            const modal = document.getElementById('detail-modal');
-            modal.classList.remove('hidden');
+            document.getElementById('download-dropdown').classList.add('hidden');
+            document.getElementById('detail-modal').classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
         }
 
         function closeDetailModal() {
-            const modal = document.getElementById('detail-modal');
-            modal.classList.add('hidden');
+            document.getElementById('detail-modal').classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
             activeDetailItemId = null;
         }
 
         function toggleDownloadDropdown(event) {
             event.stopPropagation();
-            const dropdown = document.getElementById('download-dropdown');
-            if (dropdown) {
-                dropdown.classList.toggle('hidden');
-            }
+            document.getElementById('download-dropdown').classList.toggle('hidden');
         }
 
-        // --- EXPORT PDF/JPEG BROCHURES ---
         function downloadAsPDF() {
             if (!activeDetailItemId) return;
             document.getElementById('download-dropdown').classList.add('hidden');
-            
-            // Set Print State specifically to print Brochure
             document.body.classList.add('print-modal-active');
             document.body.classList.remove('print-itinerary-active');
-            
             window.print();
-            
-            // Reset state
-            setTimeout(() => {
-                document.body.classList.remove('print-modal-active');
-            }, 1000);
+            setTimeout(() => document.body.classList.remove('print-modal-active'), 1000);
         }
 
         function downloadAsJPEG() {
             if (!activeDetailItemId) return;
             document.getElementById('download-dropdown').classList.add('hidden');
-            
             const item = database.find(d => d.id === activeDetailItemId);
             if (!item) return;
 
             showToast("⌛ Menyusun gambar brosur...", "info");
-
-            // Build Beautiful Dynamic JPEG Card using HTML5 Canvas API
             const canvas = document.createElement('canvas');
-            canvas.width = 800;
-            canvas.height = 600;
+            canvas.width = 800; canvas.height = 600;
             const ctx = canvas.getContext('2d');
 
-            // Draw Clean White Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#14532d'; ctx.fillRect(0, 0, canvas.width, 180);
 
-            // Top Header Header Ribbon (Premium Theme)
-            ctx.fillStyle = '#14532d'; // primary-900 / dark green
-            ctx.fillRect(0, 0, canvas.width, 180);
-
-            // Draw Category Meta
-            ctx.fillStyle = '#4ade80'; // text-emerald-400
-            ctx.font = 'bold 16px "Plus Jakarta Sans", "Inter", sans-serif';
+            ctx.fillStyle = '#4ade80'; ctx.font = 'bold 16px sans-serif';
             ctx.fillText(`${item.province.toUpperCase()} • ${item.category.toUpperCase()}`, 50, 60);
 
-            // Draw Header Text (Name of the location)
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 30px "Plus Jakarta Sans", "Inter", sans-serif';
+            ctx.fillStyle = '#ffffff'; ctx.font = 'bold 30px sans-serif';
             ctx.fillText(item.name, 50, 105);
 
-            // Draw Address
-            ctx.fillStyle = '#e2e8f0';
-            ctx.font = '14px "Plus Jakarta Sans", "Inter", sans-serif';
+            ctx.fillStyle = '#e2e8f0'; ctx.font = '14px sans-serif';
             ctx.fillText(`📍 ${item.location}  |  Rating: ★ ${Number(item.rating).toFixed(1)}`, 50, 140);
 
-            // Write Body Title
-            ctx.fillStyle = '#1e293b';
-            ctx.font = 'bold 18px "Plus Jakarta Sans", "Inter", sans-serif';
+            ctx.fillStyle = '#1e293b'; ctx.font = 'bold 18px sans-serif';
             ctx.fillText('DESKRIPSI DESTINASI & REKOMENDASI:', 50, 230);
 
-            // Wrap and Render Description Lines
-            ctx.fillStyle = '#475569';
-            ctx.font = '14px "Plus Jakarta Sans", "Inter", sans-serif';
+            ctx.fillStyle = '#475569'; ctx.font = '14px sans-serif';
             const descWords = item.description.split(' ');
-            let line = '';
-            let y = 260;
-            const maxWidth = 700;
-            const lineHeight = 24;
-
+            let line = '', y = 260;
             for (let n = 0; n < descWords.length; n++) {
                 let testLine = line + descWords[n] + ' ';
-                let metrics = ctx.measureText(testLine);
-                let testWidth = metrics.width;
-                if (testWidth > maxWidth && n > 0) {
-                    ctx.fillText(line, 50, y);
-                    line = descWords[n] + ' ';
-                    y += lineHeight;
-                } else {
-                    line = testLine;
-                }
+                if (ctx.measureText(testLine).width > 700 && n > 0) {
+                    ctx.fillText(line, 50, y); line = descWords[n] + ' '; y += 24;
+                } else { line = testLine; }
             }
             ctx.fillText(line, 50, y);
 
-            // Draw Beautiful Tariff Box
             y += 45;
-            ctx.fillStyle = '#f0fdf4'; // Light green background
-            ctx.strokeStyle = '#bbf7d0'; // Border green
-            ctx.lineWidth = 1;
-            ctx.fillRect(50, y, 700, 130);
-            ctx.strokeRect(50, y, 700, 130);
+            ctx.fillStyle = '#f0fdf4'; ctx.strokeStyle = '#bbf7d0'; ctx.lineWidth = 1;
+            ctx.fillRect(50, y, 700, 130); ctx.strokeRect(50, y, 700, 130);
 
-            // Tariff Text Headers
-            ctx.fillStyle = '#166534'; // Green-800
-            ctx.font = 'bold 16px "Plus Jakarta Sans", "Inter", sans-serif';
+            ctx.fillStyle = '#166534'; ctx.font = 'bold 16px sans-serif';
             ctx.fillText('RINCIAN TARIF & BIAYA DI LOKASI:', 70, y + 35);
-
-            ctx.fillStyle = '#334155';
-            ctx.font = '14px "Plus Jakarta Sans", "Inter", sans-serif';
+            ctx.fillStyle = '#334155'; ctx.font = '14px sans-serif';
             ctx.fillText(`Hari Biasa (Weekday) :   ${item.costWeekday || 'Rp 0'}`, 70, y + 70);
             ctx.fillText(`Akhir Pekan (Weekend) :   ${item.costWeekend || 'Rp 0'}`, 70, y + 98);
             ctx.fillText(`Paket Khusus/Promo     :   ${item.costPackage || 'Tidak Tersedia'}`, 410, y + 70);
 
-            // Footer branding text
-            ctx.fillStyle = '#94a3b8';
-            ctx.font = '12px "Plus Jakarta Sans", "Inter", sans-serif';
-            ctx.fillText('Brosur resmi digenerasikan otomatis oleh TitikSinggah - Jelajahi Keindahan Nusantara © 2026', 50, 560);
+            ctx.fillStyle = '#94a3b8'; ctx.font = '12px sans-serif';
+            ctx.fillText('Brosur resmi digenerasikan oleh TitikSinggah © 2026', 50, 560);
 
-            // Render Unsplash image into canvas cleanly using CORS setup
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.src = item.image;
+            const img = new Image(); img.crossOrigin = 'anonymous'; img.src = item.image;
             img.onload = function() {
                 try {
-                    // Fit image into clean card ratio inside top right header
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.arc(650, 90, 55, 0, Math.PI * 2, true);
-                    ctx.closePath();
-                    ctx.clip();
-                    ctx.drawImage(img, 595, 35, 110, 110);
-                    ctx.restore();
-                } catch(err) {
-                    console.log("CORS Image load failed, drawing card without avatar image.");
-                }
-                triggerDownload();
+                    ctx.save(); ctx.beginPath(); ctx.arc(650, 90, 55, 0, Math.PI * 2, true); ctx.clip();
+                    ctx.drawImage(img, 595, 35, 110, 110); ctx.restore();
+                } catch(e){}
+                done();
             };
-            img.onerror = function() {
-                triggerDownload();
-            };
+            img.onerror = done;
 
-            function triggerDownload() {
+            function done() {
                 try {
-                    const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
                     const link = document.createElement('a');
                     link.download = `Brosur_${item.name.replace(/\s+/g, '_')}.jpg`;
-                    link.href = dataUrl;
-                    document.body.appendChild(link);
+                    link.href = canvas.toDataURL('image/jpeg', 0.95);
                     link.click();
-                    document.body.removeChild(link);
                     showToast("📸 Brosur JPEG berhasil diunduh!", "success");
-                } catch (e) {
-                    console.error("Canvas export blocked by cross-origin security", e);
-                    showToast("⚠️ Brosur gagal diekspor ke JPEG karena proteksi CORS eksternal. Silakan pilih 'Simpan Format PDF'!", "error");
+                } catch(e) {
+                    showToast("⚠️ Proteksi CORS gambar aktif. Gunakan PDF!", "error");
                 }
             }
         }
 
-        // --- AUTHENTICATION & PORTAL PIPELINE ---
-        function showLoginModal() {
-            document.getElementById('login-modal').classList.remove('hidden');
-        }
-
-        function hideLoginModal() {
-            document.getElementById('login-modal').classList.add('hidden');
-            document.getElementById('login-form').reset();
-        }
+        // --- AUTH & SESSION PIPELINE ---
+        function showLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
+        function hideLoginModal() { document.getElementById('login-modal').classList.add('hidden'); document.getElementById('login-form').reset(); }
 
         function handleLoginSubmit(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value;
 
-            // 1. Root Super Admin Validation
             if (username === 'superadmin' && password === 'superadmin123') {
                 loggedInUser = { fullname: 'Super Administrator', username: 'superadmin', role: 'root', province: 'ALL' };
                 localStorage.setItem('titik_singgah_session', JSON.stringify(loggedInUser));
-                updateAdminAuthUI();
-                hideLoginModal();
-                showToast("🔓 Berhasil masuk sebagai Super Admin!", "success");
-                showAdminDashboard();
-                return;
+                updateAdminAuthUI(); hideLoginModal(); showToast("🔓 Selamat Datang Super Admin!", "success"); showAdminDashboard(); return;
             }
 
-            // 2. Regional Admin Validation on Cloud State
             const matchedRA = regionalAdmins.find(admin => admin.username === username && admin.password === password);
             if (matchedRA) {
-                if (!matchedRA.active) {
-                    showToast("🔒 Akun Anda dinonaktifkan oleh pusat. Silakan hubungi Super Admin.", "error");
-                    return;
-                }
+                if (!matchedRA.active) { showToast("🔒 Akun nonaktif. Hubungi pusat.", "error"); return; }
                 loggedInUser = { fullname: matchedRA.fullname, username: matchedRA.username, role: 'regional', province: matchedRA.province };
                 localStorage.setItem('titik_singgah_session', JSON.stringify(loggedInUser));
-                updateAdminAuthUI();
-                hideLoginModal();
-                showToast(`🔓 Berhasil masuk sebagai Admin Wilayah ${matchedRA.province}!`, "success");
-                showAdminDashboard();
+                updateAdminAuthUI(); hideLoginModal(); showToast(`🔓 Selamat Datang Admin Wilayah ${matchedRA.province}!`, "success"); showAdminDashboard();
             } else {
                 showToast("❌ Username atau password salah!", "error");
             }
         }
 
         function handleLogout() {
-            loggedInUser = null;
-            localStorage.removeItem('titik_singgah_session');
-            updateAdminAuthUI();
-            closeAdminDashboard();
-            showToast("🔒 Sesi admin berakhir. Berhasil keluar.", "info");
+            loggedInUser = null; localStorage.removeItem('titik_singgah_session');
+            updateAdminAuthUI(); closeAdminDashboard(); showToast("🔒 Keluar sistem admin.", "info");
         }
 
         function updateAdminAuthUI() {
@@ -2497,870 +2168,454 @@
             const quickDashboardBtn = document.getElementById('admin-quick-dashboard-btn');
 
             if (loggedInUser) {
-                loginBtn.classList.add('hidden');
-                quickDashboardBtn.classList.remove('hidden');
-                quickDashboardBtn.classList.add('flex');
+                loginBtn.classList.add('hidden'); quickDashboardBtn.classList.remove('hidden'); quickDashboardBtn.classList.add('flex');
                 quickDashboardBtn.onclick = showAdminDashboard;
-                
                 document.getElementById('admin-user-name-display').textContent = loggedInUser.fullname;
                 document.getElementById('admin-role-badge').textContent = loggedInUser.role === 'root' ? 'Super Admin' : `Admin ${loggedInUser.province}`;
                 
-                const raTabBtn = document.getElementById('tab-btn-regional-admins');
-                const verifTabBtn = document.getElementById('tab-btn-verification');
-                if (loggedInUser.role === 'root') {
-                    if (raTabBtn) raTabBtn.style.display = 'block';
-                    if (verifTabBtn) verifTabBtn.style.display = 'block';
-                } else {
-                    if (raTabBtn) raTabBtn.style.display = 'none';
-                    if (verifTabBtn) verifTabBtn.style.display = 'none';
-                }
+                const rBtn = document.getElementById('tab-btn-regional-admins');
+                const vBtn = document.getElementById('tab-btn-verification');
+                if (rBtn) rBtn.style.display = loggedInUser.role === 'root' ? 'block' : 'none';
+                if (vBtn) vBtn.style.display = loggedInUser.role === 'root' ? 'block' : 'none';
             } else {
-                loginBtn.classList.remove('hidden');
-                quickDashboardBtn.classList.add('hidden');
-                quickDashboardBtn.classList.remove('flex');
+                loginBtn.classList.remove('hidden'); quickDashboardBtn.classList.add('hidden'); quickDashboardBtn.classList.remove('flex');
             }
-
             renderDestinations();
         }
 
-        // --- ADMIN DASHBOARD TABS ENGINE ---
         function switchAdminTab(tabName) {
-            document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.add('hidden'));
-            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-                btn.classList.remove('border-primary-600', 'text-primary-700');
-                btn.classList.add('border-transparent', 'text-gray-500');
-            });
+            document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab-btn').forEach(b => { b.classList.remove('border-primary-600', 'text-primary-700'); b.classList.add('border-transparent', 'text-gray-500'); });
 
             document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
             document.getElementById(`tab-btn-${tabName}`).classList.remove('border-transparent', 'text-gray-500');
             document.getElementById(`tab-btn-${tabName}`).classList.add('border-primary-600', 'text-primary-700');
 
-            if (tabName === 'destinations') {
-                refreshDashboardTable();
-            } else if (tabName === 'regional-admins') {
-                renderRegionalAdminsTable();
-            } else if (tabName === 'verification') {
-                renderVerificationList();
-            }
+            if (tabName === 'destinations') refreshDashboardTable();
+            else if (tabName === 'regional-admins') renderRegionalAdminsTable();
+            else if (tabName === 'verification') renderVerificationList();
         }
 
-        function showAdminDashboard() {
-            document.getElementById('admin-dashboard-view').classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-            switchAdminTab('destinations');
-        }
+        function showAdminDashboard() { document.getElementById('admin-dashboard-view').classList.remove('hidden'); document.body.classList.add('overflow-hidden'); switchAdminTab('destinations'); }
+        function closeAdminDashboard() { document.getElementById('admin-dashboard-view').classList.add('hidden'); document.body.classList.remove('overflow-hidden'); renderDestinations(); }
 
-        function closeAdminDashboard() {
-            document.getElementById('admin-dashboard-view').classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-            renderDestinations();
-        }
-
-        // --- COMPREHENSIVE GENERATE ITINERARY ---
+        // --- COMPILER ITINERARY PROCESS ---
         function generateItinerary(event) {
             event.preventDefault();
-
             const days = parseInt(document.getElementById('itinerary-days').value);
             const userBudget = parseInt(document.getElementById('itinerary-budget-num').value) || 0;
             const theme = document.getElementById('itinerary-theme').value;
 
-            const wisataId = document.getElementById('itinerary-select-wisata').value;
-            const kulinerId = document.getElementById('itinerary-select-kuliner').value;
-            const penginapanId = document.getElementById('itinerary-select-penginapan').value;
+            const wId = document.getElementById('itinerary-select-wisata').value;
+            const kId = document.getElementById('itinerary-select-kuliner').value;
+            const pId = document.getElementById('itinerary-select-penginapan').value;
             const transType = document.getElementById('itinerary-select-transport').value || 'none';
 
-            const wItem = database.find(item => item.id === wisataId) || { name: "Wisata Pilihan", location: detectedProvince, description: "Eksplorasi panorama indah sekitar." };
-            const kItem = database.find(item => item.id === kulinerId) || { name: "Kuliner Khas", location: detectedProvince, description: "Santapan lezat menu lokal otentik." };
-            const pItem = database.find(item => item.id === penginapanId) || { name: "Penginapan Favorit", location: detectedProvince, contact: "-" };
+            const wItem = database.find(item => item.id === wId) || { name: "Wisata Alam", location: detectedProvince, description: "Eksplorasi alam." };
+            const kItem = database.find(item => item.id === kId) || { name: "Kuliner Lokal", location: detectedProvince, description: "Santapan menu khas." };
+            const pItem = database.find(item => item.id === pId) || { name: "Penginapan", location: detectedProvince };
 
             showToast("⏳ Merancang agenda liburan terbaik...", "info");
-
-            const timelineContainer = document.getElementById('itinerary-timeline');
-            timelineContainer.innerHTML = '';
+            const container = document.getElementById('itinerary-timeline');
+            container.innerHTML = '';
 
             document.getElementById('itinerary-result-meta').textContent = `${days} HARI ${days - 1 > 0 ? days - 1 + ' MALAM' : ''} • BUDGET RP ${userBudget.toLocaleString('id-ID')} • TEMA ${theme.toUpperCase()}`;
-            document.getElementById('itinerary-result-title').textContent = `Jadwal Perjalanan - Wisata ${detectedProvince}`;
+            document.getElementById('itinerary-result-title').textContent = `Jadwal Wisata Resmi - ${detectedProvince}`;
 
             const themeActivities = {
-                "Petualangan": [
-                    "Trekking eksplorasi alam, berfoto dengan satwa lokal.",
-                    "Petualangan rute menantang, tracking hutan atau susur tebing.",
-                    "Eksplorasi panorama ekstrem puncak atau pesisir tersembunyi."
-                ],
-                "Kulineran": [
-                    "Berburu oleh-oleh jajanan legendaris & snack tradisional khas setempat.",
-                    "Mengikuti kelas memasak mini atau bincang resep rahasia dengan warga lokal.",
-                    "Menjelajahi pasar kuliner malam mencari street food unik."
-                ],
-                "Keluarga": [
-                    "Piknik santai di spot teduh sambil bertukar hadiah kenangan.",
-                    "Menonton pertunjukan seni budaya lokal bersama keluarga.",
-                    "Sesi santai berkumpul malam bernyanyi dan minum teh hangat tradisional."
-                ],
-                "Budaya": [
-                    "Keliling situs bersejarah, melihat peninggalan purbakala berarsitektur estetik.",
-                    "Mengmengunjungi museum mini & belajar anyaman kerajinan tangan lokal.",
-                    "Menyaksikan langsung upacara adat tradisional atau tarian selamat datang."
-                ]
+                "Petualangan": ["Trekking eksplorasi alam terbuka.", "Petualangan jalur menantang.", "Eksplorasi panorama pesisir tersembunyi."],
+                "Kulineran": ["Berburu kuliner legendaris setempat.", "Bincang rasa & resep otentik.", "Keliling pasar malam kuliner lokal."],
+                "Keluarga": ["Piknik santai & berfoto ceria.", "Menonton seni pertunjukan lokal.", "Sesi malam teh hangat & berkumpul."],
+                "Budaya": ["Keliling situs bersejarah daerah.", "Belajar kerajinan tangan lokal.", "Menyaksikan ritual adat adat/tarian."]
             };
 
             for (let day = 1; day <= days; day++) {
-                const dayWrapper = document.createElement('div');
-                dayWrapper.className = "relative pl-8 sm:pl-10 animate-fade-in-up";
-                dayWrapper.style.animationDelay = `${day * 100}ms`;
+                const div = document.createElement('div');
+                div.className = "relative pl-8 sm:pl-10 animate-fade-in-up";
+                div.style.animationDelay = `${day * 100}ms`;
 
-                const actIndex = (day - 1) % 3;
-                const dailySpecialActivity = themeActivities[theme] ? themeActivities[theme][actIndex] : "Menikmati waktu luang dengan bersantai di sekitar lokasi.";
+                const idx = (day - 1) % 3;
+                const activityText = themeActivities[theme] ? themeActivities[theme][idx] : "Santai menikmati waktu luang.";
 
-                dayWrapper.innerHTML = `
-                    <div class="absolute left-0 top-1 bg-primary-600 text-white font-extrabold text-xs px-2 py-1 rounded-lg shadow-md tracking-wider">HARI ${day}</div>
-                    
+                div.innerHTML = `
+                    <div class="absolute left-0 top-1 bg-primary-600 text-white font-extrabold text-xs px-2 py-1 rounded-lg">HARI ${day}</div>
                     <div class="space-y-6 pt-8">
                         ${transType !== 'none' ? `
-                        <div class="flex flex-col sm:flex-row gap-4 bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100/30 shadow-sm transition text-left">
-                            <span class="text-xs font-bold text-emerald-800 bg-emerald-100/50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">07:00 - 08:00</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-car text-emerald-600 animate-pulse"></i> Penjemputan / Commute Perjalanan
-                                </h5>
-                                <p class="text-xs text-gray-600 mt-2 leading-relaxed">
-                                    Memulai aktivitas hari ke-${day} dengan fasilitas transportasi <b>${TRANSPORT_LABELS[transType]}</b>.
-                                </p>
-                            </div>
+                        <div class="flex flex-col sm:flex-row gap-4 bg-emerald-50/50 p-4 rounded-2xl border text-left">
+                            <span class="text-xs font-bold text-emerald-800 bg-emerald-100/50 px-2.5 py-1 rounded-lg self-auto">07:00 - 08:00</span>
+                            <div class="flex-1"><h5>🚗 Mobil/Motor Mobilisasi Awal</h5><p class="text-xs text-gray-600 mt-1">Perjalanan nyaman dengan <b>${TRANSPORT_LABELS[transType]}</b>.</p></div>
+                        </div>` : ''}
+                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border text-left">
+                            <span class="text-xs font-bold text-primary-700 bg-primary-50 px-2.5 py-1 rounded-lg">08:00 - 11:30</span>
+                            <div class="flex-1"><h5>📍 Wisata: ${wItem.name}</h5><p class="text-xs text-gray-600 mt-1">${wItem.description}</p></div>
                         </div>
-                        ` : ''}
-
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-primary-700 bg-primary-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">08:00 - 11:30</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-map-location-dot text-indigo-500"></i> Eksplorasi Wisata: ${wItem.name}
-                                </h5>
-                                <p class="text-xs text-gray-500 mt-0.5">📍 ${wItem.location}</p>
-                                <p class="text-xs text-gray-600 mt-2 leading-relaxed">${wItem.description}</p>
-                            </div>
+                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border text-left">
+                            <span class="text-xs font-bold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-lg">12:00 - 14:00</span>
+                            <div class="flex-1"><h5>🥘 Kuliner khas: ${kItem.name}</h5><p class="text-xs text-gray-600 mt-1">${kItem.description}</p></div>
                         </div>
-
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">12:00 - 14:00</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-utensils text-orange-500"></i> Istirahat & Makan Siang di ${kItem.name}
-                                </h5>
-                                <p class="text-xs text-gray-500 mt-0.5">📍 ${kItem.location}</p>
-                                <p class="text-xs text-gray-600 mt-2 leading-relaxed">${kItem.description}</p>
-                            </div>
+                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border text-left">
+                            <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg">15:00 - 18:00</span>
+                            <div class="flex-1"><h5>📸 Aktivitas Tema [${theme}]:</h5><p class="text-xs text-gray-600 mt-1">${activityText}</p></div>
                         </div>
-
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">15:00 - 18:00</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-camera text-indigo-500"></i> Tema [${theme}]: ${dailySpecialActivity}
-                                </h5>
-                            </div>
-                        </div>
-
                         ${day < days ? `
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">19:00 - Selesai</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-hotel text-emerald-500"></i> Istirahat di ${pItem.name}
-                                </h5>
-                                <p class="text-xs text-gray-500 mt-0.5">📍 ${pItem.location} • Kontak: ${pItem.contact || '-'}</p>
-                            </div>
-                        </div>
-                        ` : `
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">19:00 - Selesai</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-plane-departure text-red-500"></i> Perjalanan Kembali Pulang
-                                </h5>
-                                <p class="text-xs text-gray-600 mt-1 leading-relaxed">Itinerary selesai. Terima kasih telah menjelajah bersama TitikSinggah!</p>
-                            </div>
-                        </div>
-                        `}
-                    </div>
-                `;
-                timelineContainer.appendChild(dayWrapper);
+                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border text-left">
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">19:00 - Selesai</span>
+                            <div class="flex-1"><h5>🏨 Bermalam di: ${pItem.name}</h5><p class="text-xs text-gray-400 mt-1">📍 ${pItem.location}</p></div>
+                        </div>` : `<div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border text-left"><span class="text-xs font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-lg">19:00 - Selesai</span><div class="flex-1"><h5>🛫 Perjalanan Pulang</h5><p class="text-xs text-gray-600 mt-1">Liburan selesai, terimakasih!</p></div></div>`}
+                    </div>`;
+                container.appendChild(div);
             }
 
             document.getElementById('itinerary-result').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('itinerary-result').scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+            setTimeout(() => document.getElementById('itinerary-result').scrollIntoView({ behavior: 'smooth' }), 100);
         }
 
-        // --- PRINT ITINERARY COMPONENT ---
-        function printGeneratedItinerary() {
-            // Apply Itinerary specific Print State
-            document.body.classList.add('print-itinerary-active');
-            document.body.classList.remove('print-modal-active');
-            
-            window.print();
-            
-            // Revert state
-            setTimeout(() => {
-                document.body.classList.remove('print-itinerary-active');
-            }, 1000);
-        }
+        function printGeneratedItinerary() { document.body.classList.add('print-itinerary-active'); document.body.classList.remove('print-modal-active'); window.print(); setTimeout(() => document.body.classList.remove('print-itinerary-active'), 1000); }
+        function resetItineraryForm() { document.getElementById('itinerary-form').reset(); document.getElementById('itinerary-result').classList.add('hidden'); suggestItineraryByBudget(); showToast("🔄 Rencana direset.", "info"); }
 
-        function resetItineraryForm() {
-            document.getElementById('itinerary-form').reset();
-            document.getElementById('itinerary-result').classList.add('hidden');
-            suggestItineraryByBudget();
-            showToast("🔄 Formulir dikosongkan.", "info");
-        }
+        function triggerRestoreSeedDatabase() { showCustomConfirm("Reset Database Nasional", "Reset isi basis data bawaan awal? Aksi ini akan menghapus semua input manual.", async () => await restoreSeedDatabase(), true); }
 
-        // --- TRIGGER RESTORE SEED DATABASE WITH PREMIUM MODAL ---
-        function triggerRestoreSeedDatabase() {
-            showCustomConfirm(
-                "Reset Database Nasional",
-                "Apakah Anda yakin ingin menyetel ulang database pariwisata nasional ke setelan bawaan? Seluruh data kustom real-time saat ini akan dihapus permanen.",
-                async () => {
-                    await restoreSeedDatabase();
-                },
-                true
-            );
-        }
-
-        // --- RESET AND PURGE CLOUD DATABASE TO INITIAL SEEDS ---
         async function restoreSeedDatabase() {
             showToast("⌛ Sedang membersihkan data awan...", "info");
-
             try {
-                // Delete existing items
-                for (const item of database) {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id));
-                }
-                for (const item of pendingDestinations) {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id));
-                }
-                for (const item of verificationHistory) {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'verificationHistory', item.id));
-                }
-
-                hasSeededDestinations = false;
-                hasSeededPending = false;
-
-                await seedDestinations();
-                await seedPending();
-
-                showToast("🔄 Database berhasil dipulihkan secara real-time ke setelan bawaan!", "success");
-            } catch (e) {
-                console.error(e);
-                showToast("⚠️ Pembersihan basis data awan gagal.", "error");
-            }
+                for (let i of database) await deleteDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations', i.id));
+                for (let i of pendingDestinations) await deleteDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'pendingDestinations', i.id));
+                for (let i of verificationHistory) await deleteDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'verificationHistory', i.id));
+                hasSeededDestinations = false; hasSeededPending = false;
+                await seedDestinations(); await seedPending();
+                showToast("🔄 Database berhasil dipulihkan secara real-time!", "success");
+            } catch(e) { showToast("⚠️ Gagal mereset database.", "error"); }
         }
 
-        // --- ADMIN DESTINATIONS TABLE LOGIC ---
+        // --- ADMIN ACTIONS LOGIC ---
         function refreshDashboardTable() {
             const tbody = document.getElementById('dashboard-table-body');
-            const mobileList = document.getElementById('dashboard-mobile-list');
-            
-            tbody.innerHTML = '';
-            mobileList.innerHTML = '';
+            const mList = document.getElementById('dashboard-mobile-list');
+            if (!tbody || !mList) return;
+            tbody.innerHTML = ''; mList.innerHTML = '';
 
-            const selectedProvinceFilter = document.getElementById('db-filter-province').value;
-            const selectedCategoryFilter = document.getElementById('db-filter-category').value;
-            const searchKeyword = document.getElementById('db-search-input').value.toLowerCase().trim();
+            const pFilter = document.getElementById('db-filter-province').value;
+            const cFilter = document.getElementById('db-filter-category').value;
+            const kword = document.getElementById('db-search-input').value.toLowerCase().trim();
 
-            const filteredData = database.filter(item => {
-                const matchesRoleScope = loggedInUser.role === 'root' || item.province === loggedInUser.province;
-                
-                const matchesProvince = selectedProvinceFilter === 'ALL' || item.province === selectedProvinceFilter;
-                const matchesCategory = selectedCategoryFilter === 'ALL' || item.category === selectedCategoryFilter;
-                const matchesSearch = item.name.toLowerCase().includes(searchKeyword) || 
-                                      item.location.toLowerCase().includes(searchKeyword) ||
-                                      item.province.toLowerCase().includes(searchKeyword);
-                return matchesRoleScope && matchesProvince && matchesCategory && matchesSearch;
+            const fData = database.filter(item => {
+                const matchScope = loggedInUser.role === 'root' || item.province === loggedInUser.province;
+                const matchProv = pFilter === 'ALL' || item.province === pFilter;
+                const matchCat = cFilter === 'ALL' || item.category === cFilter;
+                const matchSrch = item.name.toLowerCase().includes(kword) || item.location.toLowerCase().includes(kword);
+                return matchScope && matchProv && matchCat && matchSrch;
             });
 
-            // Local Memory Sorting (Rule 2 Compliant)
-            const scopeDB = database.filter(item => loggedInUser.role === 'root' || item.province === loggedInUser.province);
-            document.getElementById('stat-count-wisata').textContent = scopeDB.filter(item => item.category === 'wisata').length;
-            document.getElementById('stat-count-kuliner').textContent = scopeDB.filter(item => item.category === 'kuliner').length;
-            document.getElementById('stat-count-penginapan').textContent = scopeDB.filter(item => item.category === 'penginapan').length;
-            document.getElementById('stat-count-transportasi').textContent = scopeDB.filter(item => item.category === 'transportasi').length;
+            const scope = database.filter(i => loggedInUser.role === 'root' || i.province === loggedInUser.province);
+            document.getElementById('stat-count-wisata').textContent = scope.filter(i => i.category === 'wisata').length;
+            document.getElementById('stat-count-kuliner').textContent = scope.filter(i => i.category === 'kuliner').length;
+            document.getElementById('stat-count-penginapan').textContent = scope.filter(i => i.category === 'penginapan').length;
+            document.getElementById('stat-count-transportasi').textContent = scope.filter(i => i.category === 'transportasi').length;
 
-            if (filteredData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-gray-400 text-xs">Tidak ada data rekomendasi terdaftar.</td></tr>`;
-                mobileList.innerHTML = `<p class="p-6 text-center text-gray-400 text-xs">Tidak ada data rekomendasi terdaftar.</p>`;
+            if (fData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-gray-400 text-xs">Tidak ada data.</td></tr>`;
                 return;
             }
 
-            filteredData.forEach(item => {
+            fData.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/50 transition border-b border-gray-100";
+                tr.className = "hover:bg-slate-50 border-b border-gray-100 text-sm";
                 tr.innerHTML = `
-                    <td class="py-4 px-6 shrink-0">
-                        <img src="${item.image}" class="h-10 w-16 object-cover rounded-lg border border-gray-100" onerror="this.src='https://placehold.co/150x100?text=Gambar'">
-                    </td>
+                    <td class="py-4 px-6"><img src="${item.image}" class="h-10 w-16 object-cover rounded-lg border"></td>
                     <td class="py-4 px-6 font-bold text-gray-900">${item.name}</td>
-                    <td class="py-4 px-6">
-                        <span class="block text-xs font-semibold text-gray-800">${item.province}</span>
-                        <span class="inline-block px-2 py-0.5 mt-1 rounded text-[10px] font-bold uppercase tracking-wider ${
-                            item.category === 'wisata' ? 'bg-indigo-100 text-indigo-800' :
-                            item.category === 'kuliner' ? 'bg-orange-100 text-orange-800' : 
-                            item.category === 'penginapan' ? 'bg-emerald-100 text-emerald-800' : 'bg-teal-100 text-teal-800'
-                        }">${item.category}</span>
-                    </td>
-                    <td class="py-4 px-6 text-xs">
-                        <div class="flex items-center gap-1 font-bold text-amber-500 mb-1">
-                            <i class="fa-solid fa-star"></i> <span>${Number(item.rating).toFixed(1)}</span>
-                        </div>
-                        <div class="text-emerald-800 font-semibold">WD: ${item.costWeekday}</div>
-                        <div class="text-amber-700 font-semibold">WE: ${item.costWeekend}</div>
-                    </td>
-                    <td class="py-4 px-6 text-xs text-gray-400 max-w-xs truncate">${item.description}</td>
+                    <td class="py-4 px-6"><span>${item.province}</span><br><span class="text-[10px] uppercase font-bold text-primary-700 bg-primary-50 px-1 rounded">${item.category}</span></td>
+                    <td class="py-4 px-6 text-xs"><div class="text-amber-500">★ ${Number(item.rating).toFixed(1)}</div><div>WD: ${item.costWeekday}</div></td>
+                    <td class="py-4 px-6 text-xs text-gray-400 truncate max-w-xs">${item.description}</td>
                     <td class="py-4 px-6 text-center">
                         <div class="flex items-center justify-center gap-2">
-                            <button onclick="showAddEditModal('${item.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-blue-600 rounded-lg transition" title="Edit">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button onclick="openDeleteConfirmModal('${item.id}')" class="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition" title="Hapus">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                            <button onclick="showAddEditModal('${item.id}')" class="p-2 bg-slate-100 rounded text-blue-600"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="openDeleteConfirmModal('${item.id}')" class="p-2 bg-red-50 rounded text-red-600"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
 
-                const mobCard = document.createElement('div');
-                mobCard.className = "p-4 space-y-3 flex items-center gap-4 bg-white";
-                mobCard.innerHTML = `
-                    <img src="${item.image}" class="h-14 w-20 object-cover rounded-xl shrink-0" onerror="this.src='https://placehold.co/150x100?text=Gambar'">
-                    <div class="flex-1 overflow-hidden">
-                        <div class="flex justify-between items-start">
-                            <h5 class="text-xs font-bold text-gray-900 truncate">${item.name}</h5>
-                            <span class="text-[9px] font-black uppercase text-primary-700 tracking-wider bg-primary-50 px-1.5 py-0.5 rounded ml-2 shrink-0">${item.category}</span>
-                        </div>
-                        <p class="text-[10px] text-gray-400 font-semibold truncate mt-0.5">${item.province} • ${item.location}</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <div class="text-[9px] text-gray-500 font-medium leading-tight">
-                                <div>WD: <span class="font-bold text-emerald-800">${item.costWeekday}</span></div>
-                                <div>WE: <span class="font-bold text-amber-800">${item.costWeekend}</span></div>
-                            </div>
-                            <div class="flex items-center gap-1.5 shrink-0">
-                                <button onclick="showAddEditModal('${item.id}')" class="p-1.5 bg-slate-100 hover:bg-slate-200 text-blue-600 rounded-lg text-xs">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                                <button onclick="openDeleteConfirmModal('${item.id}')" class="p-1.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                mobileList.appendChild(mobCard);
+                const div = document.createElement('div');
+                div.className = "p-4 bg-white flex items-center gap-3";
+                div.innerHTML = `<img src="${item.image}" class="h-12 w-16 object-cover rounded-xl shrink-0"><div class="flex-1 truncate"><h5 class="text-xs font-bold text-gray-900">${item.name}</h5><p class="text-[10px] text-gray-400">${item.province} • ${item.category}</p></div><div class="flex gap-1"><button onclick="showAddEditModal('${item.id}')" class="p-1.5 bg-slate-100 text-blue-600 rounded"><i class="fa-solid fa-pen"></i></button></div>`;
+                mList.appendChild(div);
             });
         }
 
-        // --- MANAGE SUBMISSION / DIRECT EDITS ON FIRESTORE ---
         function showAddEditModal(id = null) {
             const form = document.getElementById('destination-form');
-            form.reset();
-            document.getElementById('form-id').value = '';
+            form.reset(); document.getElementById('form-id').value = '';
+            document.getElementById('form-status-msg').classList.add('hidden');
 
-            const modalTitle = document.getElementById('form-modal-title');
-            const modal = document.getElementById('add-edit-modal');
-            const statusMsg = document.getElementById('form-status-msg');
-            const submitBtnText = document.getElementById('form-submit-btn-text');
-
-            statusMsg.classList.add('hidden');
-
-            const provSelect = document.getElementById('form-province');
-            if (loggedInUser.role === 'regional') {
-                provSelect.value = loggedInUser.province;
-                provSelect.disabled = true; 
-            } else {
-                provSelect.disabled = false;
-            }
+            const pSel = document.getElementById('form-province');
+            if (loggedInUser.role === 'regional') { pSel.value = loggedInUser.province; pSel.disabled = true; } 
+            else { pSel.disabled = false; }
 
             if (id) {
-                const item = database.find(d => d.id === id);
-                if (!item) return;
-
-                modalTitle.textContent = "Ubah Rekomendasi Destinasi";
-                document.getElementById('form-id').value = item.id;
-                document.getElementById('form-name').value = item.name;
-                document.getElementById('form-category').value = item.category;
-                document.getElementById('form-province').value = item.province;
-                document.getElementById('form-location').value = item.location;
-                document.getElementById('form-rating').value = item.rating;
-                document.getElementById('form-action-link').value = item.actionLink || '';
-                document.getElementById('form-cost-weekday').value = item.costWeekday || '';
-                document.getElementById('form-cost-weekend').value = item.costWeekend || '';
-                document.getElementById('form-cost-package').value = item.costPackage || '';
-                document.getElementById('form-image').value = item.image;
-                document.getElementById('form-desc').value = item.description;
-                submitBtnText.textContent = "Simpan Perubahan";
+                const i = database.find(d => d.id === id); if (!i) return;
+                document.getElementById('form-id').value = i.id;
+                document.getElementById('form-name').value = i.name;
+                document.getElementById('form-category').value = i.category;
+                document.getElementById('form-province').value = i.province;
+                document.getElementById('form-location').value = i.location;
+                document.getElementById('form-rating').value = i.rating;
+                document.getElementById('form-action-link').value = i.actionLink || '';
+                document.getElementById('form-cost-weekday').value = i.costWeekday || '';
+                document.getElementById('form-cost-weekend').value = i.costWeekend || '';
+                document.getElementById('form-cost-package').value = i.costPackage || '';
+                document.getElementById('form-image').value = i.image;
+                document.getElementById('form-desc').value = i.description;
+                document.getElementById('form-submit-btn-text').textContent = "Simpan Perubahan";
             } else {
-                modalTitle.textContent = "Tambah Rekomendasi Baru";
+                document.getElementById('form-submit-btn-text').textContent = loggedInUser.role === 'regional' ? "Ajukan Verifikasi" : "Publikasikan Langsung";
                 if (loggedInUser.role === 'regional') {
-                    statusMsg.textContent = `💡 Sebagai Admin Regional, pengajuan destinasi baru Anda akan masuk ke antrian verifikasi sebelum dipublikasikan ke publik.`;
-                    statusMsg.classList.remove('hidden');
-                    submitBtnText.textContent = "Ajukan Verifikasi";
-                } else {
-                    submitBtnText.textContent = "Publikasikan Langsung";
+                    document.getElementById('form-status-msg').textContent = "💡 Pengajuan Admin Regional masuk antrian verifikasi pusat.";
+                    document.getElementById('form-status-msg').classList.remove('hidden');
                 }
             }
-
-            modal.classList.remove('hidden');
+            document.getElementById('add-edit-modal').classList.remove('hidden');
         }
 
-        function showAddEditModalWithPrefill(category, province) {
-            showAddEditModal();
-            document.getElementById('form-category').value = category;
-            document.getElementById('form-province').value = province;
-        }
-
-        function hideAddEditModal() {
-            document.getElementById('add-edit-modal').classList.add('hidden');
-            document.getElementById('destination-form').reset();
-        }
+        function showAddEditModalWithPrefill(cat, prov) { showAddEditModal(); document.getElementById('form-category').value = cat; document.getElementById('form-province').value = prov; }
+        function hideAddEditModal() { document.getElementById('add-edit-modal').classList.add('hidden'); }
 
         async function handleFormSubmit(event) {
             event.preventDefault();
             if (!auth.currentUser) return;
-            
-            const formId = document.getElementById('form-id').value;
-            const name = document.getElementById('form-name').value.trim();
-            const category = document.getElementById('form-category').value;
-            const province = document.getElementById('form-province').value;
-            const location = document.getElementById('form-location').value.trim();
-            const rating = parseFloat(document.getElementById('form-rating').value);
-            const actionLink = document.getElementById('form-action-link').value.trim();
-            const costWeekday = document.getElementById('form-cost-weekday').value.trim();
-            const costWeekend = document.getElementById('form-cost-weekend').value.trim();
-            const costPackage = document.getElementById('form-cost-package').value.trim() || 'Tidak Tersedia';
-            const image = document.getElementById('form-image').value.trim();
-            const description = document.getElementById('form-desc').value.trim();
+
+            const fid = document.getElementById('form-id').value;
+            const payload = {
+                name: document.getElementById('form-name').value.trim(),
+                category: document.getElementById('form-category').value,
+                province: document.getElementById('form-province').value,
+                location: document.getElementById('form-location').value.trim(),
+                rating: parseFloat(document.getElementById('form-rating').value),
+                actionLink: document.getElementById('form-action-link').value.trim(),
+                costWeekday: document.getElementById('form-cost-weekday').value.trim(),
+                costWeekend: document.getElementById('form-cost-weekend').value.trim(),
+                costPackage: document.getElementById('form-cost-package').value.trim() || 'Tidak Tersedia',
+                image: document.getElementById('form-image').value.trim(),
+                description: document.getElementById('form-desc').value.trim()
+            };
 
             try {
-                if (formId) {
-                    // Update Destination
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'destinations', formId);
-                    await setDoc(docRef, {
-                        name, category, province, location, rating, actionLink, costWeekday, costWeekend, costPackage, image, description,
-                        reviews: database.find(d => d.id === formId)?.reviews || []
-                    }, { merge: true });
+                if (fid) {
+                    payload.reviews = database.find(d => d.id === fid)?.reviews || [];
+                    await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations', fid), payload, { merge: true });
                     showToast("💾 Berhasil memperbarui data rekomendasi!", "success");
                 } else {
-                    // Add Destination
-                    const generatedId = 'dest-' + Date.now();
-                    const newObj = {
-                        id: generatedId,
-                        name, category, province, location, rating, actionLink, costWeekday, costWeekend, costPackage, image, description,
-                        reviews: []
-                    };
-
+                    const generatedId = 'dest-' + Date.now(); payload.id = generatedId; payload.reviews = [];
                     if (loggedInUser.role === 'regional') {
-                        // Submit to Pending Queue
-                        newObj.submittedBy = loggedInUser.username;
-                        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', generatedId), newObj);
-                        showToast("📤 Berhasil diajukan! Menunggu tinjauan Super Admin di laptop lain.", "info");
+                        payload.submittedBy = loggedInUser.username;
+                        await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'pendingDestinations', generatedId), payload);
+                        showToast("📤 Diajukan ke Super Admin secara real-time!", "info");
                     } else {
-                        // Publish Immediately (Root Super Admin)
-                        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', generatedId), newObj);
-                        showToast("🆕 Rekomendasi baru diterbitkan langsung secara real-time!", "success");
+                        await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations', generatedId), payload);
+                        showToast("🆕 Rekomendasi baru diterbitkan langsung!", "success");
                     }
                 }
-
                 hideAddEditModal();
-            } catch (err) {
-                console.error(err);
-                showToast("⚠️ Terjadi kesalahan saat menyimpan data.", "error");
-            }
+            } catch(e){ showToast("⚠️ Gagal menyimpan data.", "error"); }
         }
 
-        // --- VERIFICATION SUB-APPLICATION ---
-        function updatePendingBadge() {
-            const badge = document.getElementById('pending-count-badge');
-            if (!badge) return;
-            if (pendingDestinations.length > 0) {
-                badge.textContent = pendingDestinations.length;
-                badge.classList.remove('hidden');
-                badge.classList.add('inline-block');
-            } else {
-                badge.classList.add('hidden');
-                badge.classList.remove('inline-block');
-            }
-        }
-
+        // --- QUEUE VERIFICATION HANDLING ---
         function renderVerificationList() {
-            if (!loggedInUser || loggedInUser.role !== 'root') return;
+            if (loggedInUser.role !== 'root') return;
+            const container = document.getElementById('verification-list');
+            const emp = document.getElementById('verification-empty');
+            if (!container) return;
+            container.innerHTML = '';
 
-            const listContainer = document.getElementById('verification-list');
-            const emptyState = document.getElementById('verification-empty');
-            if (!listContainer) return;
-            
-            listContainer.innerHTML = '';
-
-            if (pendingDestinations.length === 0) {
-                emptyState.classList.remove('hidden');
-                renderVerificationHistory();
-                return;
-            }
-            emptyState.classList.add('hidden');
+            if (pendingDestinations.length === 0) { emp.classList.remove('hidden'); renderVerificationHistory(); return; }
+            emp.classList.add('hidden');
 
             pendingDestinations.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "bg-white p-5 rounded-2xl border border-gray-150 shadow-sm hover:shadow-md transition flex flex-col md:flex-row gap-5 items-start md:items-center text-left";
-                card.innerHTML = `
-                    <img src="${item.image}" class="w-full md:w-44 h-28 object-cover rounded-xl border" onerror="this.src='https://placehold.co/300x200'">
-                    <div class="flex-1 space-y-1.5">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded uppercase">${item.category}</span>
-                            <span class="text-xs text-gray-400 font-semibold">Diajukan oleh: <b class="text-gray-700">@${item.submittedBy}</b></span>
-                        </div>
-                        <h4 class="text-base font-extrabold text-gray-900">${item.name}</h4>
-                        <p class="text-xs text-gray-500 font-semibold">📍 ${item.location} • Provinsi: <b class="text-indigo-900">${item.province}</b></p>
-                        <p class="text-xs text-gray-500 leading-relaxed">${item.description}</p>
-                        <div class="text-[10px] font-bold text-emerald-800">Tarif Weekday: ${item.costWeekday} | Weekend: ${item.costWeekend}</div>
+                const div = document.createElement('div');
+                div.className = "bg-white p-5 border rounded-2xl flex flex-col md:flex-row gap-5 text-left";
+                div.innerHTML = `
+                    <img src="${item.image}" class="w-full md:w-44 h-28 object-cover rounded-xl border">
+                    <div class="flex-1">
+                        <span class="text-xs bg-amber-100 px-2 text-amber-800 rounded font-bold uppercase">${item.category}</span>
+                        <h4 class="font-extrabold text-gray-900 text-base mt-1">${item.name}</h4>
+                        <p class="text-xs text-gray-400 font-semibold mt-0.5">📍 ${item.location} | Diajukan: @${item.submittedBy}</p>
+                        <p class="text-xs text-gray-500 mt-2">${item.description}</p>
                     </div>
-                    <div class="flex md:flex-col gap-2 shrink-0 w-full md:w-auto">
-                        <button onclick="approveDestination('${item.id}')" class="flex-1 md:flex-none px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 shadow active:scale-95">
-                            <i class="fa-solid fa-check"></i> Setujui
-                        </button>
-                        <button onclick="promptRejectDestination('${item.id}')" class="flex-1 md:flex-none px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 border border-red-200 active:scale-95">
-                            <i class="fa-solid fa-xmark"></i> Tolak
-                        </button>
-                    </div>
-                `;
-                listContainer.appendChild(card);
+                    <div class="flex md:flex-col gap-2 shrink-0">
+                        <button onclick="approveDestination('${item.id}')" class="bg-emerald-600 text-white font-bold text-xs px-3 py-2 rounded-xl flex items-center gap-1"><i class="fa-solid fa-check"></i> Setuju</button>
+                        <button onclick="promptRejectDestination('${item.id}')" class="border text-red-600 font-bold text-xs px-3 py-2 rounded-xl flex items-center gap-1"><i class="fa-solid fa-xmark"></i> Tolak</button>
+                    </div>`;
+                container.appendChild(div);
             });
-
             renderVerificationHistory();
         }
 
         async function approveDestination(id) {
-            if (!loggedInUser || loggedInUser.role !== 'root') return;
-            if (!auth.currentUser) return;
-
-            const item = pendingDestinations.find(d => d.id === id);
-            if (!item) return;
-
+            const item = pendingDestinations.find(d => d.id === id); if (!item || !auth.currentUser) return;
             try {
-                const newItem = { ...item };
-                delete newItem.submittedBy;
-
-                // Move to destinations collection
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), newItem);
-                
-                // Add verification history log
-                await addVerificationHistory(item, 'Disetujui', 'Konten terverifikasi lengkap dan sesuai standar.');
-
-                // Delete from pending queue
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id));
-
-                showToast(`✅ Destinasi "${item.name}" disetujui & dipublikasikan secara real-time!`, 'success');
-            } catch (err) {
-                console.error(err);
-                showToast("⚠️ Gagal menyetujui destinasi.", "error");
-            }
+                const clone = { ...item }; delete clone.submittedBy;
+                await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations', item.id), clone);
+                await addVerificationHistory(item, 'Disetujui', 'Konten sesuai standar.');
+                await deleteDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'pendingDestinations', item.id));
+                showToast(`✅ Destinasi disetujui secara real-time!`, 'success');
+            } catch(e){}
         }
 
-        function promptRejectDestination(id) {
-            if (!loggedInUser || loggedInUser.role !== 'root') return;
-            currentVerifyItem = pendingDestinations.find(d => d.id === id);
-            if (!currentVerifyItem) return;
-
-            document.getElementById('reject-reason-input').value = '';
-            document.getElementById('reject-reason-modal').classList.remove('hidden');
-        }
-
-        function hideRejectModal() {
-            document.getElementById('reject-reason-modal').classList.add('hidden');
-            currentVerifyItem = null;
-        }
+        function promptRejectDestination(id) { currentVerifyItem = pendingDestinations.find(d => d.id === id); document.getElementById('reject-reason-input').value = ''; document.getElementById('reject-reason-modal').classList.remove('hidden'); }
+        function hideRejectModal() { document.getElementById('reject-reason-modal').classList.add('hidden'); currentVerifyItem = null; }
 
         async function executeRejectDestination() {
-            if (!loggedInUser || loggedInUser.role !== 'root') return;
-            if (!currentVerifyItem || !auth.currentUser) return;
-
             const reason = document.getElementById('reject-reason-input').value.trim();
-            if (!reason) {
-                showToast("⚠️ Harap tuliskan alasan penolakan pengajuan!", "error");
-                return;
-            }
-
+            if (!reason) { showToast("⚠️ Harap berikan alasan penolakan!", "error"); return; }
             try {
                 await addVerificationHistory(currentVerifyItem, 'Ditolak', reason);
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', currentVerifyItem.id));
-
-                showToast(`❌ Pengajuan "${currentVerifyItem.name}" ditolak secara real-time.`, 'info');
-                hideRejectModal();
-            } catch (err) {
-                console.error(err);
-                showToast("⚠️ Gagal melakukan penolakan.", "error");
-            }
+                await deleteDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'pendingDestinations', currentVerifyItem.id));
+                showToast("❌ Pengajuan ditolak secara real-time.", 'info'); hideRejectModal();
+            } catch(e){}
         }
 
         async function addVerificationHistory(item, status, reason) {
-            const histId = 'vh-' + Date.now();
-            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'verificationHistory', histId), {
-                id: histId,
-                name: item.name,
-                province: item.province,
-                submittedBy: item.submittedBy || 'unknown',
-                status: status,
-                reason: reason,
-                timestamp: Date.now(),
+            const hid = 'vh-' + Date.now();
+            await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'verificationHistory', hid), {
+                id: hid, name: item.name, province: item.province, submittedBy: item.submittedBy || 'unknown', status, reason, timestamp: Date.now(),
                 date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
             });
         }
 
         function renderVerificationHistory() {
-            const tbody = document.getElementById('verification-history-list');
-            if (!tbody) return;
+            const tbody = document.getElementById('verification-history-list'); if (!tbody) return;
             tbody.innerHTML = '';
-
-            if (verificationHistory.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-gray-400 text-xs italic">Belum ada riwayat peninjauan verifikasi.</td></tr>`;
-                return;
-            }
-
-            verificationHistory.forEach(hist => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b border-gray-50 text-xs";
-                tr.innerHTML = `
-                    <td class="py-3 px-4 font-bold text-gray-900">${hist.name}</td>
-                    <td class="py-3 px-4 text-gray-600">${hist.province}</td>
-                    <td class="py-3 px-4 text-gray-500">@${hist.submittedBy}</td>
-                    <td class="py-3 px-4">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-black ${
-                            hist.status === 'Disetujui' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                        }">${hist.status}</span>
-                    </td>
-                    <td class="py-3 px-4 text-gray-500 max-w-xs truncate" title="${hist.reason}">${hist.reason} <span class="block text-[9px] text-gray-400">${hist.date}</span></td>
-                `;
-                tbody.appendChild(tr);
+            if (verificationHistory.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-gray-400 text-xs italic">Belum ada riwayat.</td></tr>`; return; }
+            verificationHistory.forEach(h => {
+                tbody.innerHTML += `<tr class="border-b text-xs"><td class="py-3 px-4 font-bold">${h.name}</td><td class="py-3 px-4">${h.province}</td><td class="py-3 px-4">@${h.submittedBy}</td><td class="py-3 px-4"><span class="px-2 py-0.5 rounded font-black ${h.status === 'Disetujui' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">${h.status}</span></td><td class="py-3 px-4 text-gray-500">${h.reason} <span class="block text-[9px] text-gray-400">${h.date}</span></td></tr>`;
             });
         }
 
-        // --- MANAGING REGIONAL ADMIN ACCOUNT PANEL ---
+        // --- REGIONAL ADMIN MANAGEMENT ENGINE ---
         function showAddRegionalAdminModal(id = null) {
-            const form = document.getElementById('regional-admin-form');
-            form.reset();
+            const form = document.getElementById('regional-admin-form'); form.reset();
             document.getElementById('regional-admin-form-id').value = '';
             document.getElementById('regional-admin-modal-title').textContent = "Tambah Admin Regional Baru";
             document.getElementById('ra-submit-label').textContent = "Daftarkan Admin";
 
             if (id) {
-                const admin = regionalAdmins.find(a => a.id === id);
-                if (!admin) return;
-
-                document.getElementById('regional-admin-form-id').value = admin.id;
-                document.getElementById('ra-fullname').value = admin.fullname;
-                document.getElementById('ra-username').value = admin.username;
-                document.getElementById('ra-password').value = admin.password;
-                document.getElementById('ra-province').value = admin.province;
-                document.getElementById('ra-email').value = admin.email || '';
-                document.getElementById('ra-active').checked = admin.active;
-
+                const a = regionalAdmins.find(admin => admin.id === id); if (!a) return;
+                document.getElementById('regional-admin-form-id').value = a.id;
+                document.getElementById('ra-fullname').value = a.fullname;
+                document.getElementById('ra-username').value = a.username;
+                document.getElementById('ra-password').value = a.password;
+                document.getElementById('ra-province').value = a.province;
+                document.getElementById('ra-email').value = a.email || '';
+                document.getElementById('ra-active').checked = a.active;
                 document.getElementById('regional-admin-modal-title').textContent = "Ubah Data Admin Regional";
                 document.getElementById('ra-submit-label').textContent = "Simpan Perubahan";
             }
-
             document.getElementById('add-regional-admin-modal').classList.remove('hidden');
         }
 
-        function hideAddRegionalAdminModal() {
-            document.getElementById('add-regional-admin-modal').classList.add('hidden');
-            document.getElementById('regional-admin-form').reset();
-        }
+        function hideAddRegionalAdminModal() { document.getElementById('add-regional-admin-modal').classList.add('hidden'); }
 
         async function handleRegionalAdminFormSubmit(event) {
             event.preventDefault();
             if (!auth.currentUser) return;
 
             const raId = document.getElementById('regional-admin-form-id').value;
-            const fullname = document.getElementById('ra-fullname').value.trim();
-            const username = document.getElementById('ra-username').value.trim();
-            const password = document.getElementById('ra-password').value;
-            const province = document.getElementById('ra-province').value;
-            const email = document.getElementById('ra-email').value.trim();
-            const active = document.getElementById('ra-active').checked;
+            const payload = {
+                fullname: document.getElementById('ra-fullname').value.trim(),
+                username: document.getElementById('ra-username').value.trim(),
+                password: document.getElementById('ra-password').value,
+                province: document.getElementById('ra-province').value,
+                email: document.getElementById('ra-email').value.trim(),
+                active: document.getElementById('ra-active').checked
+            };
 
             try {
                 if (raId) {
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'regionalAdmins', raId);
-                    await setDoc(docRef, { fullname, username, password, province, email, active }, { merge: true });
-                    showToast("💾 Data admin regional diperbarui secara real-time!", "success");
+                    payload.id = raId;
+                    await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'regionalAdmins', raId), payload, { merge: true });
+                    showToast("💾 Data admin regional diperbarui!", "success");
                 } else {
-                    if (regionalAdmins.some(a => a.username.toLowerCase() === username.toLowerCase()) || username === 'superadmin') {
-                        showToast("⚠️ Username sudah digunakan! Gunakan alternatif lain.", "error");
-                        return;
+                    if (regionalAdmins.some(a => a.username.toLowerCase() === payload.username.toLowerCase()) || payload.username === 'superadmin') {
+                        showToast("⚠️ Username sudah digunakan!", "error"); return;
                     }
-
-                    const generatedAdminId = 'ra-' + Date.now();
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'regionalAdmins', generatedAdminId);
-                    await setDoc(docRef, {
-                        id: generatedAdminId,
-                        fullname, username, password, province, email, active
-                    });
+                    const gid = 'ra-' + Date.now(); payload.id = gid;
+                    await setDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'regionalAdmins', gid), payload);
                     showToast("🆕 Admin Regional terdaftar baru!", "success");
                 }
-
                 hideAddRegionalAdminModal();
-            } catch (err) {
-                console.error(err);
-                showToast("⚠️ Gagal menyimpan data admin regional.", "error");
-            }
+            } catch(e){ showToast("⚠️ Gagal menyimpan data admin.", "error"); }
         }
 
         function renderRegionalAdminsTable() {
-            const tbody = document.getElementById('regional-admin-table-body');
-            if (!tbody) return;
+            const tbody = document.getElementById('regional-admin-table-body'); if (!tbody) return;
             tbody.innerHTML = '';
-
             document.getElementById('stat-total-regional-admin').textContent = `Total: ${regionalAdmins.length} Admin`;
 
-            if (regionalAdmins.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-gray-400 text-xs">Belum ada Admin Regional terdaftar.</td></tr>`;
-                return;
-            }
+            if (regionalAdmins.length === 0) { tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-gray-400 text-xs">Belum ada Admin.</td></tr>`; return; }
 
             regionalAdmins.forEach(admin => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/50 transition border-b border-gray-100";
+                tr.className = "hover:bg-slate-50 border-b border-gray-100";
                 tr.innerHTML = `
-                    <td class="py-4 px-6 font-bold text-gray-900 flex items-center gap-2">
-                        <div class="h-8 w-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-xs uppercase">
-                            ${admin.fullname.substring(0, 2)}
-                        </div>
-                        <span>${admin.fullname}</span>
-                    </td>
-                    <td class="py-4 px-6 font-mono text-xs text-gray-600">@${admin.username}</td>
+                    <td class="py-4 px-6 font-bold flex items-center gap-2"><div class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center font-bold text-xs uppercase">${admin.fullname.substring(0, 2)}</div><span>${admin.fullname}</span></td>
+                    <td class="py-4 px-6 font-mono text-xs">@${admin.username}</td>
                     <td class="py-4 px-6 font-semibold text-indigo-900">${admin.province}</td>
-                    <td class="py-4 px-6">
-                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                            admin.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                        }">${admin.active ? 'Aktif' : 'Nonaktif'}</span>
-                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 rounded-full text-[10px] font-bold ${admin.active?'bg-green-100 text-green-800':'bg-red-100 text-red-800'}">${admin.active?'Aktif':'Nonaktif'}</span></td>
                     <td class="py-4 px-6 text-xs text-gray-400">${admin.email || '-'}</td>
                     <td class="py-4 px-6 text-center">
                         <div class="flex items-center justify-center gap-2">
-                            <button onclick="toggleAdminStatus('${admin.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition" title="Toggle Status Aktif">
-                                <i class="fa-solid ${admin.active ? 'fa-user-slash text-red-500' : 'fa-user-check text-green-600'}"></i>
-                            </button>
-                            <button onclick="showAddRegionalAdminModal('${admin.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-blue-600 rounded-lg transition" title="Edit Data">
-                                <i class="fa-solid fa-user-pen"></i>
-                            </button>
-                            <button onclick="triggerDeleteRegionalAdmin('${admin.id}')" class="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition" title="Hapus Akun">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                            <button onclick="toggleAdminStatus('${admin.id}')" class="p-2 bg-slate-100 rounded text-slate-700"><i class="fa-solid ${admin.active ? 'fa-user-slash text-red-500' : 'fa-user-check text-green-600'}"></i></button>
+                            <button onclick="showAddRegionalAdminModal('${admin.id}')" class="p-2 bg-slate-100 rounded text-blue-600"><i class="fa-solid fa-user-pen"></i></button>
+                            <button onclick="triggerDeleteRegionalAdmin('${admin.id}')" class="p-2 bg-red-50 rounded text-red-600"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
         }
 
         async function toggleAdminStatus(id) {
-            if (!auth.currentUser) return;
-            const admin = regionalAdmins.find(a => a.id === id);
-            if (!admin) return;
-
+            const admin = regionalAdmins.find(a => a.id === id); if (!admin || !auth.currentUser) return;
             try {
-                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'regionalAdmins', id);
-                await updateDoc(docRef, { active: !admin.active });
-                showToast(`⚙️ Status akun @${admin.username} diganti secara real-time!`, "success");
-            } catch (err) {
-                console.error(err);
-            }
+                await updateDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'regionalAdmins', id), { active: !admin.active });
+                showToast(`⚙️ Status akun @${admin.username} diganti!`, "success");
+            } catch(e){}
         }
 
-        // TRIGGER PREMIUM DELETE DIALOG FOR REGIONAL ADMIN (NEW REPLACEMENT FOR WINDOW.CONFIRM)
         function triggerDeleteRegionalAdmin(id) {
-            const admin = regionalAdmins.find(a => a.id === id);
-            if (!admin) return;
-
-            showCustomConfirm(
-                "Hapus Hak Akses Admin",
-                `Apakah Anda sangat yakin ingin menghapus akses Admin Regional "${admin.fullname}" (@${admin.username}) secara permanen?`,
-                async () => {
-                    await deleteRegionalAdmin(id);
-                },
-                true
-            );
-        }
-
-        async function deleteRegionalAdmin(id) {
-            if (!auth.currentUser) return;
-            try {
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'regionalAdmins', id));
+            const admin = regionalAdmins.find(a => a.id === id); if (!admin) return;
+            showCustomConfirm("Hapus Hak Akses Admin", `Hapus hak kontrol "${admin.fullname}" secara permanen?`, async () => {
+                if (!auth.currentUser) return;
+                await deleteDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'regionalAdmins', id));
                 showToast(`🗑️ Akun admin regional berhasil dihapus.`, "info");
-            } catch (err) {
-                console.error(err);
-                showToast("⚠️ Gagal menghapus akun admin.", "error");
-            }
+            }, true);
         }
 
-        // --- PUBLIC DELETE OPERATIONS (DESTINATIONS) ---
         function openDeleteConfirmModal(id) {
-            selectedItemForDelete = id;
-            const item = database.find(d => d.id === id);
-            if (!item) return;
-
-            document.getElementById('delete-confirm-msg').textContent = `Apakah Anda sangat yakin ingin menghapus data rekomendasi "${item.name}" secara permanen dari database nasional?`;
-            
-            const confirmBtn = document.getElementById('delete-confirm-btn');
-            confirmBtn.onclick = function() {
-                executeDeleteDestination();
+            selectedItemForDelete = id; const item = database.find(d => d.id === id); if (!item) return;
+            document.getElementById('delete-confirm-msg').textContent = `Apakah Anda sangat yakin ingin menghapus "${item.name}" secara permanen?`;
+            document.getElementById('delete-confirm-btn').onclick = async function() {
+                if (!selectedItemForDelete || !auth.currentUser) return;
+                try {
+                    await deleteDoc(doc(db, 'artifacts', trackingAppId, 'public', 'data', 'destinations', selectedItemForDelete));
+                    showToast("🗑️ Rekomendasi destinasi berhasil dihapus permanen secara real-time.", "success");
+                    closeDeleteModal();
+                } catch (err) { showToast("⚠️ Terjadi masalah database.", "error"); }
             };
-
             document.getElementById('delete-confirm-modal').classList.remove('hidden');
         }
 
-        function closeDeleteModal() {
-            document.getElementById('delete-confirm-modal').classList.add('hidden');
-            selectedItemForDelete = null;
-        }
+        function closeDeleteModal() { document.getElementById('delete-confirm-modal').classList.add('hidden'); selectedItemForDelete = null; }
 
-        async function executeDeleteDestination() {
-            if (!selectedItemForDelete || !auth.currentUser) return;
-
-            try {
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', selectedItemForDelete));
-                showToast("🗑️ Rekomendasi destinasi berhasil dihapus permanen secara real-time.", "success");
-                closeDeleteModal();
-            } catch (err) {
-                console.error(err);
-                showToast("⚠️ Terjadi masalah saat menghapus data di database.", "error");
-            }
-        }
-
-        // --- TOAST NOTIFICATIONS PIPELINE ---
         function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
+            const container = document.getElementById('toast-container'); if (!container) return;
             const toast = document.createElement('div');
-            toast.className = "px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-xs sm:text-sm font-bold animate-scale-in text-left pointer-events-auto transition duration-300";
-            
-            if (type === 'success') {
-                toast.classList.add('bg-emerald-600', 'text-white');
-                toast.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i><span>${message}</span>`;
-            } else if (type === 'error') {
-                toast.classList.add('bg-red-600', 'text-white');
-                toast.innerHTML = `<i class="fa-solid fa-circle-exclamation text-base"></i><span>${message}</span>`;
-            } else {
-                toast.classList.add('bg-gray-900', 'text-white');
-                toast.innerHTML = `<i class="fa-solid fa-circle-info text-base text-emerald-400"></i><span>${message}</span>`;
-            }
-
+            toast.className = "px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-xs sm:text-sm font-bold animate-scale-in text-left pointer-events-auto transition duration-300 bg-gray-900 text-white";
+            if (type === 'success') { toast.classList.add('bg-emerald-600'); toast.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i><span>${message}</span>`; } 
+            else if (type === 'error') { toast.classList.add('bg-red-600'); toast.innerHTML = `<i class="fa-solid fa-circle-exclamation text-base"></i><span>${message}</span>`; } 
+            else { toast.innerHTML = `<i class="fa-solid fa-circle-info text-base text-emerald-400"></i><span>${message}</span>`; }
             container.appendChild(toast);
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-y-2'); setTimeout(() => toast.remove(), 300); }, 4000);
         }
 
-        // --- ES MODULE BINDING TO WINDOW OBJECT ---
-        // Binding ES Modules to global scope for native compatibility with HTML inline Event Handlers
+        // --- GLOBAL SCROLL ES MODULE SCOPE REGISTRATION ---
         window.switchCategory = switchCategory;
         window.handleManualProvinceChange = handleManualProvinceChange;
         window.handleSearch = handleSearch;
@@ -3378,7 +2633,6 @@
         window.closeAdminDashboard = closeAdminDashboard;
         window.switchAdminTab = switchAdminTab;
         window.triggerRestoreSeedDatabase = triggerRestoreSeedDatabase; 
-        window.restoreSeedDatabase = restoreSeedDatabase;
         window.refreshDashboardTable = refreshDashboardTable;
         window.showAddEditModal = showAddEditModal;
         window.showAddEditModalWithPrefill = showAddEditModalWithPrefill;
@@ -3393,7 +2647,6 @@
         window.handleRegionalAdminFormSubmit = handleRegionalAdminFormSubmit;
         window.toggleAdminStatus = toggleAdminStatus;
         window.triggerDeleteRegionalAdmin = triggerDeleteRegionalAdmin;
-        window.deleteRegionalAdmin = deleteRegionalAdmin;
         window.openDeleteConfirmModal = openDeleteConfirmModal;
         window.closeDeleteModal = closeDeleteModal;
         window.toggleDownloadDropdown = toggleDownloadDropdown;
