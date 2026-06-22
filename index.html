@@ -1478,27 +1478,7 @@
             });
         }
 
-        async function seedDestinations() {
-            hasSeededDestinations = true;
-            for (const item of DEFAULT_DESTINATIONS) {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), item);
-            }
-        }
-
-        async function seedPending() {
-            hasSeededPending = true;
-            for (const item of DEFAULT_PENDING_DESTINATIONS) {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id), item);
-            }
-        }
-
-        async function seedAdmins() {
-            hasSeededAdmins = true;
-            for (const item of DEFAULT_REGIONAL_ADMINS) {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'regionalAdmins', item.id), item);
-            }
-        }
-
+        // --- FIRESTORE REAL-TIME SINKRONISASI ---
         async function initAuth() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -1570,7 +1550,6 @@
                     const opt1 = document.createElement('option');
                     opt1.value = prov; opt1.textContent = prov;
                     if (prov === detectedProvince) opt1.selected = true;
-                    heroSelector.appendChild(prov === detectedProvince ? opt1 : opt1);
                     heroSelector.appendChild(opt1);
                 }
 
@@ -1594,13 +1573,15 @@
             });
         }
 
-        // --- GEOLOCATION GPS PIPELINE (DENGAN REVERSE GEOCORDING USER-AGENT) ---
+        // --- GEOLOCATION GPS PIPELINE (OPTIMALISASI SENSOR PERANGKAT) ---
         function startLocationDetection() {
             const badgeText = document.getElementById('location-text');
             const heroDetected = document.getElementById('hero-detected-province');
             const heroSelector = document.getElementById('province-selector');
 
             if ("geolocation" in navigator) {
+                if (badgeText) badgeText.textContent = "Sinkronisasi GPS...";
+
                 navigator.geolocation.getCurrentPosition(
                     async (position) => {
                         const lat = position.coords.latitude;
@@ -1618,7 +1599,7 @@
                             }
 
                             const data = await response.json();
-                            let userState = data.address && (data.address.state || data.address.region || data.address.province || data.address.county);
+                            let userState = data.address && (data.address.state || data.address.region || data.address.province || data.address.county || data.address.city);
 
                             if (userState) {
                                 userState = userState.replace(/(Provinsi|Daerah Istimewa|Daerah Khusus Ibukota|Propinsi|State of)/gi, '').trim();
@@ -1642,32 +1623,38 @@
                             applyFallbackLocation("Wilayah Belum Tercover");
                         } catch (error) {
                             console.error("OSM Geocoding Error:", error);
-                            applyFallbackLocation("Gagal Sinkronisasi Peta");
+                            applyFallbackLocation("Gagal Resolusi Peta API");
                         }
                     },
                     (error) => {
-                        console.warn("GPS Access Denied:", error.message);
-                        applyFallbackLocation("Izin GPS Perangkat Ditolak");
+                        console.warn("GPS Access Denied/Timeout:", error.message);
+                        applyFallbackLocation(`Sensor Mati / ${error.message}`);
                     },
-                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                    { 
+                        enableHighAccuracy: false, 
+                        timeout: 15000,            
+                        maximumAge: 60000          
+                    }
                 );
             } else {
-                applyFallbackLocation("Browser Tidak Mendukung GPS");
+                applyFallbackLocation("Browser Tidak Support GPS");
             }
         }
 
+        // --- SMART FALLBACK PIPELINE ---
         function applyFallbackLocation(reason) {
             const badgeText = document.getElementById('location-text');
             const heroDetected = document.getElementById('hero-detected-province');
             const heroSelector = document.getElementById('province-selector');
 
-            detectedProvince = 'Lampung';
-            if (badgeText) badgeText.textContent = `Bandar Lampung, Lampung`;
-            if (heroDetected) heroDetected.textContent = 'Lampung';
-            if (heroSelector) heroSelector.value = 'Lampung';
-            updateItineraryProvinceUI('Lampung');
+            // Default dialihkan ke Bali (Bukan Lampung lagi agar perubahan data terlihat jelas)
+            detectedProvince = 'Bali';
+            if (badgeText) badgeText.textContent = `Automated Fallback: Bali`;
+            if (heroDetected) heroDetected.textContent = 'Bali';
+            if (heroSelector) heroSelector.value = 'Bali';
+            updateItineraryProvinceUI('Bali');
             
-            showToast("💡 Menggunakan Provinsi Lampung (Default)", "info");
+            showToast(`💡 GPS Kendala (${reason}). Dialihkan otomatis ke Provinsi Bali untuk pengujian data.`, 'info');
             renderDestinations();
         }
 
@@ -1765,22 +1752,6 @@
             updateItineraryBudgetMeter();
         }
 
-        const TRANSPORT_RATES = {
-            none: 0,
-            motor: 80000,
-            mobil_lepas: 350000,
-            mobil_driver: 650000,
-            guide_allin: 1100000
-        };
-
-        const TRANSPORT_LABELS = {
-            none: "Tanpa Transportasi (Mandiri)",
-            motor: "Sewa Motor Mandiri",
-            mobil_lepas: "Sewa Mobil Lepas Kunci",
-            mobil_driver: "Sewa Mobil + Sopir Lokal",
-            guide_allin: "Guide Lokal + Transportasi All-In"
-        };
-
         function updateItineraryBudgetMeter() {
             const userBudget = parseInt(document.getElementById('itinerary-budget-num').value) || 0;
             const days = parseInt(document.getElementById('itinerary-days').value) || 1;
@@ -1857,7 +1828,7 @@
             const activeTab = document.getElementById(`tab-${category}`);
             if (activeTab) {
                 activeTab.classList.remove('border-transparent', 'text-gray-500', 'font-medium');
-                activeTab.classList.add('border-primary-600', 'text-primary-600', 'font-bold');
+                activeTab.classList.add('border-primary-600', 'text-primary-700', 'font-bold');
             }
 
             const headline = document.getElementById('category-headline');
@@ -2462,209 +2433,12 @@
             switchAdminTab('destinations');
         }
 
+        // --- MANAGE SUBMISSION / DIRECT EDITS ON FIRESTORE ---
         function closeAdminDashboard() {
             const adminDashboardView = document.getElementById('admin-dashboard-view');
             if (adminDashboardView) adminDashboardView.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
             renderDestinations();
-        }
-
-        function generateItinerary(event) {
-            event.preventDefault();
-
-            const days = parseInt(document.getElementById('itinerary-days').value);
-            const userBudget = parseInt(document.getElementById('itinerary-budget-num').value) || 0;
-            const theme = document.getElementById('itinerary-theme').value;
-
-            const wisataId = document.getElementById('itinerary-select-wisata').value;
-            const kulinerId = document.getElementById('itinerary-select-kuliner').value;
-            const penginapanId = document.getElementById('itinerary-select-penginapan').value;
-            const transType = document.getElementById('itinerary-select-transport').value || 'none';
-
-            const wItem = database.find(item => item.id === wisataId) || { name: "Wisata Pilihan", location: detectedProvince, description: "Eksplorasi panorama indah sekitar." };
-            const kItem = database.find(item => item.id === kulinerId) || { name: "Kuliner Khas", location: detectedProvince, description: "Santapan lezat menu lokal otentik." };
-            const pItem = database.find(item => item.id === penginapanId) || { name: "Penginapan Favorit", location: detectedProvince, contact: "-" };
-
-            showToast("⏳ Merancang agenda liburan terbaik...", "info");
-
-            const timelineContainer = document.getElementById('itinerary-timeline');
-            if (!timelineContainer) return;
-            timelineContainer.innerHTML = '';
-
-            const resultMeta = document.getElementById('itinerary-result-meta');
-            const resultTitle = document.getElementById('itinerary-result-title');
-            if (resultMeta) resultMeta.textContent = `${days} HARI ${days - 1 > 0 ? days - 1 + ' MALAM' : ''} • BUDGET RP ${userBudget.toLocaleString('id-ID')} • TEMA ${theme.toUpperCase()}`;
-            if (resultTitle) resultTitle.textContent = `Jadwal Perjalanan - Wisata ${detectedProvince}`;
-
-            const themeActivities = {
-                "Petualangan": [
-                    "Trekking eksplorasi alam, berfoto dengan satwa lokal.",
-                    "Petualangan rute menantang, tracking hutan atau susur tebing.",
-                    "Eksplorasi panorama ekstrem puncak atau pesisir tersembunyi."
-                ],
-                "Kulineran": [
-                    "Berburu oleh-oleh jajanan legendaris & snack tradisional khas setempat.",
-                    "Mengikuti kelas memasak mini atau bincang resep rahasia dengan warga lokal.",
-                    "Menjelajahi pasar kuliner malam mencari street food unik."
-                ],
-                "Keluarga": [
-                    "Piknik santai di spot teduh sambil bertukar hadiah kenangan.",
-                    "Menonton pertunjukan seni budaya lokal bersama keluarga.",
-                    "Sesi santai berkumpul malam bernyanyi dan minum teh hangat tradisional."
-                ],
-                "Budaya": [
-                    "Keliling situs bersejarah, melihat peninggalan purbakala berarsitektur estetik.",
-                    "Mengmengunjungi museum mini & belajar anyaman kerajinan tangan lokal.",
-                    "Menyaksikan langsung upacara adat tradisional atau tarian selamat datang."
-                ]
-            };
-
-            for (let day = 1; day <= days; day++) {
-                const dayWrapper = document.createElement('div');
-                dayWrapper.className = "relative pl-8 sm:pl-10 animate-fade-in-up";
-                dayWrapper.style.animationDelay = `${day * 100}ms`;
-
-                const actIndex = (day - 1) % 3;
-                const dailySpecialActivity = themeActivities[theme] ? themeActivities[theme][actIndex] : "Menikmati waktu luang dengan bersantai di sekitar lokasi.";
-
-                dayWrapper.innerHTML = `
-                    <div class="absolute left-0 top-1 bg-primary-600 text-white font-extrabold text-xs px-2 py-1 rounded-lg shadow-md tracking-wider">HARI ${day}</div>
-                    
-                    <div class="space-y-6 pt-8">
-                        ${transType !== 'none' ? `
-                        <div class="flex flex-col sm:flex-row gap-4 bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100/30 shadow-sm transition text-left">
-                            <span class="text-xs font-bold text-emerald-800 bg-emerald-100/50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">07:00 - 08:00</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-car text-emerald-600 animate-pulse"></i> Penjemputan / Commute Perjalanan
-                                </h5>
-                                <p class="text-xs text-gray-600 mt-2 leading-relaxed">
-                                    Memulai aktivitas hari ke-${day} dengan fasilitas transportasi <b>${TRANSPORT_LABELS[transType]}</b>.
-                                </p>
-                            </div>
-                        </div>
-                        ` : ''}
-
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-primary-700 bg-primary-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">08:00 - 11:30</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-map-location-dot text-indigo-500"></i> Eksplorasi Wisata: ${wItem.name}
-                                </h5>
-                                <p class="text-xs text-gray-500 mt-0.5">📍 ${wItem.location}</p>
-                                <p class="text-xs text-gray-600 mt-2 leading-relaxed">${wItem.description}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">12:00 - 14:00</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-utensils text-orange-500"></i> Istirahat & Makan Siang di ${kItem.name}
-                                </h5>
-                                <p class="text-xs text-gray-500 mt-0.5">📍 ${kItem.location}</p>
-                                <p class="text-xs text-gray-600 mt-2 leading-relaxed">${kItem.description}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">15:00 - 18:00</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-camera text-indigo-500"></i> Tema [${theme}]: ${dailySpecialActivity}
-                                </h5>
-                            </div>
-                        </div>
-
-                        ${day < days ? `
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">19:00 - Selesai</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-hotel text-emerald-500"></i> Istirahat di ${pItem.name}
-                                </h5>
-                                <p class="text-xs text-gray-500 mt-0.5">📍 ${pItem.location} • Kontak: ${pItem.contact || '-'}</p>
-                            </div>
-                        </div>
-                        ` : `
-                        <div class="flex flex-col sm:flex-row gap-4 bg-slate-50 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-left">
-                            <span class="text-xs font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-lg self-start sm:self-auto uppercase tracking-wide">19:00 - Selesai</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-plane-departure text-red-500"></i> Perjalanan Kembali Pulang
-                                </h5>
-                                <p class="text-xs text-gray-600 mt-1 leading-relaxed">Itinerary selesai. Terima kasih telah menjelajah bersama TitikSinggah!</p>
-                            </div>
-                        </div>
-                        `}
-                    </div>
-                `;
-                timelineContainer.appendChild(dayWrapper);
-            }
-
-            const itineraryResult = document.getElementById('itinerary-result');
-            if (itineraryResult) itineraryResult.classList.remove('hidden');
-            setTimeout(() => {
-                if (itineraryResult) itineraryResult.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
-
-        function printGeneratedItinerary() {
-            document.body.classList.add('print-itinerary-active');
-            document.body.classList.remove('print-modal-active');
-            
-            window.print();
-            
-            setTimeout(() => {
-                document.body.classList.remove('print-itinerary-active');
-            }, 1000);
-        }
-
-        function resetItineraryForm() {
-            const itineraryForm = document.getElementById('itinerary-form');
-            if (itineraryForm) itineraryForm.reset();
-            const itineraryResult = document.getElementById('itinerary-result');
-            if (itineraryResult) itineraryResult.classList.add('hidden');
-            suggestItineraryByBudget();
-            showToast("🔄 Formulir dikosongkan.", "info");
-        }
-
-        function triggerRestoreSeedDatabase() {
-            showCustomConfirm(
-                "Reset Database Nasional",
-                "Apakah Anda yakin ingin menyetel ulang database pariwisata nasional ke setelan bawaan? Seluruh data kustom real-time saat ini akan dihapus permanen.",
-                async () => {
-                    await restoreSeedDatabase();
-                },
-                true
-            );
-        }
-
-        async function restoreSeedDatabase() {
-            showToast("⌛ Sedang membersihkan data awan...", "info");
-
-            try {
-                for (const item of database) {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id));
-                }
-                for (const item of pendingDestinations) {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id));
-                }
-                for (const item of verificationHistory) {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'verificationHistory', item.id));
-                }
-
-                hasSeededDestinations = false;
-                hasSeededPending = false;
-
-                await seedDestinations();
-                await seedPending();
-
-                showToast("🔄 Database berhasil dipulihkan secara real-time ke setelan bawaan!", "success");
-            } catch (e) {
-                console.error(e);
-                showToast("⚠️ Pembersihan basis data awan gagal.", "error");
-            }
         }
 
         function refreshDashboardTable() {
