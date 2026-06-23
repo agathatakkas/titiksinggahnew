@@ -6,7 +6,6 @@
     <title>TitikSinggah - Jelajahi Keindahan Nusantara</title>
     <meta name="description" content="Temukan destinasi wisata, kuliner khas, dan penginapan terbaik di provinsi Anda secara otomatis dengan perencanaan itinerary pintar.">
     
-    <!-- TAILWIND CSS VIA CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -27,7 +26,6 @@
         }
     </script>
 
-    <!-- FONTS & ICONS -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -53,7 +51,6 @@
 </head>
 <body class="min-h-screen flex flex-col text-gray-800 antialiased overflow-x-hidden">
 
-    <!-- NAVBAR NAVIGATION -->
     <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 shadow-sm animate-fade-in-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -87,7 +84,6 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <section class="relative bg-gradient-to-br from-primary-950 via-primary-900 to-slate-950 text-white overflow-hidden py-20 px-4 pb-28">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.15),transparent_60%)]"></div>
         <div class="max-w-5xl mx-auto text-center relative z-10">
@@ -120,7 +116,6 @@
         </div>
     </section>
 
-    <!-- MAIN DASHBOARD CARDS DISPLAY -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
             <div class="flex justify-center border-b border-gray-200 overflow-x-auto pb-px custom-scrollbar w-full sm:w-auto">
@@ -149,10 +144,8 @@
         </div>
 
         <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
-            <!-- Loader Cards -->
-        </div>
+            </div>
 
-        <!-- RANCANG JADWAL LIBURAN IMPIANMU CONSOLE (PERBAIKAN UTAMA DROPDOWN & REAL-TIME ESTIMASI) -->
         <section id="itinerary-section" class="bg-gradient-to-br from-emerald-900 to-primary-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden animate-fade-in-up">
             <div class="max-w-3xl mb-8 relative z-10">
                 <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Rancang Jadwal Liburan Impianmu</h3>
@@ -188,7 +181,6 @@
                     </div>
                 </div>
 
-                <!-- Dropdown Opsi Kategori Terbuka Otomatis -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                     <div>
                         <label class="text-[11px] font-bold text-emerald-300 uppercase flex items-center gap-1 mb-1"><i class="fa-solid fa-map-location-dot"></i> Wisata Pilihan</label>
@@ -217,9 +209,9 @@
                     <div class="md:col-span-9 bg-black/40 border border-white/10 rounded-xl p-4">
                         <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-widest block mb-1">Status Pengukur Anggaran Rencana</span>
                         <div class="w-full bg-white/15 rounded-full h-2.5 overflow-hidden">
-                            <div id="itinerary-meter-bar" class="h-full bg-emerald-400 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            <div id="itinerary-meter-bar" class="h-full bg-red-500 rounded-full transition-all duration-300" style="width: 0%"></div>
                         </div>
-                        <span id="itinerary-meter-text" class="text-xs text-emerald-300 mt-2 block font-bold">Memetakan kapasitas rencana...</span>
+                        <span id="itinerary-meter-text" class="text-xs text-red-300 mt-2 block font-bold">Memetakan kapasitas rencana...</span>
                     </div>
                     <div class="md:col-span-3">
                         <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3.5 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs uppercase tracking-wider btn-magnetic">
@@ -228,11 +220,10 @@
                     </div>
                 </div>
 
-                <!-- RINGKASAN ESTIMASI BIAYA BERDASARKAN HARI -->
                 <div class="border-t border-white/10 pt-4 mt-2">
                     <h5 class="text-xs font-bold text-emerald-300 uppercase tracking-widest mb-2.5">Ringkasan Estimasi Biaya Berdasarkan Hari</h5>
                     <div id="itinerary-budget-summary" class="bg-slate-950/40 p-4 rounded-xl border border-white/5 space-y-2 text-xs text-emerald-100/80">
-                    </div>
+                        </div>
                 </div>
             </form>
 
@@ -246,11 +237,9 @@
         </section>
     </main>
 
-    <!-- DETAIL INFORMATION MODAL POPUP -->
     <div id="detail-modal" class="fixed inset-0 z-50 overflow-y-auto hidden animate-scale-in">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm" onclick="closeDetailModal()"></div>
-            
             <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-2xl sm:w-full border border-gray-100 flex flex-col max-h-[95vh]">
                 <div class="relative h-56 sm:h-72 w-full shrink-0 overflow-hidden bg-gray-100">
                     <img id="detail-image" src="" alt="" class="w-full h-full object-cover">
@@ -343,7 +332,6 @@
         </div>
     </div>
 
-    <!-- PORTAL LOGIN MODAL -->
     <div id="login-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideLoginModal()"></div>
@@ -355,25 +343,28 @@
                         </div>
                         <h3 class="text-xl font-extrabold text-gray-900">Portal Login Admin</h3>
                     </div>
-                    <form id="login-form" onsubmit="window.handleLoginSubmitGlobal(event)">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Username</label>
-                                <input type="text" id="login-username" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
-                                <input type="password" id="login-password" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
-                            </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Username</label>
+                            <input type="text" id="login-username" placeholder="superadmin atau budi_lampung" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none shadow-sm">
                         </div>
-                        <button type="submit" class="w-full mt-6 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl shadow transition">Verifikasi Masuk</button>
-                    </form>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
+                            <input type="password" id="login-password" placeholder="••••••••" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none shadow-sm">
+                        </div>
+                    </div>
+                    <button type="button" onclick="executeLoginBypass()" class="w-full mt-6 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl shadow transition tracking-wide text-sm">Verifikasi Masuk</button>
+                    
+                    <div class="mt-4 bg-slate-50 rounded-xl p-3 border text-[11px] text-gray-500 space-y-1">
+                        <p>• <b>Super Admin</b>: <code class="bg-white px-1 border rounded">superadmin</code> / <code class="bg-white px-1 border rounded">superadmin123</code></p>
+                        <p>• <b>Admin Regional (Lampung)</b>: <code class="bg-white px-1 border rounded">budi_lampung</code> / <code class="bg-white px-1 border rounded">budi123</code></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ADMIN CONSOLE MANAGEMENT PANEL -->
     <div id="admin-dashboard-view" class="fixed inset-0 bg-slate-50 z-50 overflow-y-auto hidden">
         <header class="bg-gray-900 text-white px-4 sm:px-6 py-4 sticky top-0 z-10 flex justify-between items-center shadow-md">
             <div class="flex items-center gap-3">
@@ -424,7 +415,6 @@
         </div>
     </div>
 
-    <!-- FORM ADD/EDIT DATA CONTROL -->
     <div id="add-edit-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideAddEditModal()"></div>
@@ -460,9 +450,6 @@
         </div>
     </div>
 
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
-
-    <!-- CORE INTERACTION HANDLERS JavaScript -->
     <script>
         const PROVINCES = ["Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "Jambi", "Sumatera Selatan", "Bangka Belitung", "Bengkulu", "Lampung", "DKI Jakarta", "Jawa Barat", "Banten", "Jawa Tengah", "DIY Yogyakarta", "Jawa Timur", "Bali", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Kalimantan Barat", "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara", "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Sulawesi Barat", "Gorontalo", "Maluku", "Maluku Utara", "Papua Barat", "Papua"].sort();
         let currentCategory = 'wisata'; let detectedProvince = 'Lampung'; let loggedInUser = null; let activeDetailItemId = null; let selectedRating = 0; let searchKeyword = '';
@@ -542,43 +529,34 @@
             document.getElementById(`tab-btn-${tab}`).classList.add('border-primary-600', 'text-primary-700');
         }
 
-        function showAddEditModal(id = null) {
-            document.getElementById('destination-form').reset(); document.getElementById('form-id').value = id || '';
-            const provSelect = document.getElementById('form-province');
-            if (loggedInUser && loggedInUser.role === 'regional') { provSelect.value = loggedInUser.province; provSelect.disabled = true; } else { provSelect.disabled = false; }
-            if (id && window.getLoadedDataById) {
-                const data = window.getLoadedDataById(id);
-                if (data) { document.getElementById('form-name').value = data.name || ''; document.getElementById('form-category').value = data.category || 'wisata'; provSelect.value = data.province || ''; }
+        // CONTROL FIX: BYPASS SUBMIT LOGIC UNTUK MENCEGAH MACET
+        function executeLoginBypass() {
+            const u = document.getElementById('login-username').value.trim();
+            const p = document.getElementById('login-password').value;
+
+            if (u === 'superadmin' && p === 'superadmin123') {
+                loggedInUser = { fullname: 'Super Administrator', username: 'superadmin', role: 'root', province: 'ALL' };
+            } else if (u === 'budi_lampung' && p === 'budi123') {
+                loggedInUser = { fullname: 'Budi Santoso', username: 'budi_lampung', role: 'regional', province: 'Lampung' };
+            } else {
+                showToastGlobal('Username atau password salah!', 'error');
+                return;
             }
-            document.getElementById('add-edit-modal').classList.remove('hidden');
+
+            localStorage.setItem('titik_singgah_session', JSON.stringify(loggedInUser));
+            updateAdminAuthUI();
+            hideLoginModal();
+            showToastGlobal(`Selamat datang, ${loggedInUser.fullname}!`, 'success');
+            showAdminDashboard();
+            
+            if (typeof window.refreshDashboardTable === 'function') {
+                window.refreshDashboardTable();
+            }
         }
 
-        function updateAdminAuthUI() {
-            const quickBtn = document.getElementById('admin-quick-dashboard-btn'); const loginBtn = document.getElementById('admin-login-btn');
-            const badgeRole = document.getElementById('admin-role-badge'); const tabVerif = document.getElementById('tab-btn-verification');
-            if (loggedInUser) {
-                loginBtn.classList.add('hidden'); quickBtn.classList.remove('hidden');
-                badgeRole.textContent = loggedInUser.role === 'root' ? "Super Admin" : `Admin Regional (${loggedInUser.province})`;
-                if(loggedInUser.role === 'root') tabVerif.classList.remove('hidden'); else tabVerif.classList.add('hidden');
-            } else { loginBtn.classList.remove('hidden'); quickBtn.classList.add('hidden'); }
-        }
-
-        function showToast(msg, type = "success") {
-            const container = document.getElementById('toast-container'); const toast = document.createElement('div');
-            toast.className = `p-4 rounded-xl text-white text-xs font-bold shadow-lg transition duration-300 ${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`;
-            toast.textContent = msg; container.appendChild(toast); setTimeout(() => { toast.remove(); }, 3500);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => { 
-            const session = localStorage.getItem('titik_singgah_session');
-            if (session) { loggedInUser = JSON.parse(session); updateAdminAuthUI(); }
-            populateProvinceDropdowns(); 
-            startDeviceLocationDetection(); 
-        });
-        window.showToastGlobal = showToast; window.updateAdminAuthUIGlobal = updateAdminAuthUI; window.hideLoginModalGlobal = hideLoginModal; window.hideAddEditModalGlobal = hideAddEditModal;
+        window.executeLoginBypass = executeLoginBypass;
     </script>
 
-    <!-- REAL-TIME FIREBASE STORAGE CLOUD PIPELINE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -673,7 +651,6 @@
             return parseInt(str.replace(/[^0-9]/g, '')) || 0;
         }
 
-        // PERBAIKAN TOTAL SINKRONISASI REAL-TIME ESTIMASI DROPDOWN DENGAN INDIKATOR
         function updateItineraryBudgetMeter() {
             const budgetInput = document.getElementById('itinerary-budget-num'); if(!budgetInput) return;
             const userBudget = parseInt(budgetInput.value) || 0;
@@ -772,6 +749,7 @@
 
         window.getLoadedDataById = function(id) { return activeDB.find(d => d.id === id); };
         window.updateItineraryBudgetMeterGlobal = updateItineraryBudgetMeter;
+        window.refreshDashboardTable = renderAdminTable;
         window.addEventListener('provinceChanged', () => { renderPublicCards(); populateItinerarySelectors(); });
         window.addEventListener('categoryChanged', () => renderPublicCards());
         window.addEventListener('searchChanged', () => renderPublicCards());
