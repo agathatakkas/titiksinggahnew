@@ -152,44 +152,88 @@
             <!-- Loader -->
         </div>
 
-        <!-- SMART ITINERARY GENERATOR -->
+        <!-- COMPLEX SMART ITINERARY GENERATOR BLOCK (MATCHING IMAGE_D42CB3.PNG) -->
         <section id="itinerary-section" class="bg-gradient-to-br from-emerald-900 to-primary-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden animate-fade-in-up">
             <div class="max-w-3xl mb-8 relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-300 border border-emerald-500/30 uppercase mb-4">
-                    <i class="fa-solid fa-calendar-check text-emerald-400"></i> Perencana Itinerary Pintar
-                </span>
                 <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Rancang Jadwal Liburan Impianmu</h3>
                 <p class="text-xs sm:text-sm text-emerald-100/70 mt-2">
-                    Tentukan kapasitas finansial rencana kunjungan Anda di Provinsi <span id="itinerary-current-province" class="font-extrabold text-emerald-300">Lampung</span>.
+                    Masukkan anggaran keuangan Anda, sasar destinasi favorit secara bebas, atau biarkan algoritma pintar kami menyusunkan jadwal rekreasi paling pas dan aman di Provinsi <span id="itinerary-current-province" class="font-extrabold text-emerald-300">Lampung</span>.
                 </p>
             </div>
 
-            <form id="itinerary-form" onsubmit="window.generateItineraryGlobal(event)" class="grid grid-cols-1 md:grid-cols-12 gap-5 bg-white/10 backdrop-blur-md p-5 sm:p-6 rounded-2xl border border-white/10 relative z-10 shadow-lg">
-                <div class="md:col-span-4">
-                    <label class="block text-xs font-bold text-emerald-300 uppercase mb-1.5">Durasi Perjalanan</label>
-                    <select id="itinerary-days" onchange="window.updateItineraryBudgetMeterGlobal()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none">
-                        <option value="1">1 Hari Penuh</option>
-                        <option value="2">2 Hari 1 Malam</option>
-                        <option value="3" selected>3 Hari 2 Malam</option>
-                    </select>
-                </div>
-                <div class="md:col-span-8">
-                    <label class="block text-xs font-bold text-emerald-300 uppercase mb-1.5">Anggaran Biaya Maksimal (Rp)</label>
-                    <input type="number" id="itinerary-budget-num" oninput="window.updateItineraryBudgetMeterGlobal()" value="2000000" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none">
-                </div>
-
-                <div class="md:col-span-12 bg-black/40 border border-white/10 rounded-xl p-4">
-                    <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-widest block mb-1">Status Kapasitas Finansial</span>
-                    <div class="w-full bg-white/15 rounded-full h-2.5 overflow-hidden">
-                        <div id="itinerary-meter-bar" class="h-full bg-emerald-400 rounded-full transition-all duration-300" style="width: 0%"></div>
+            <form id="itinerary-form" onsubmit="window.generateItineraryGlobal(event)" class="space-y-5 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-emerald-300 uppercase mb-1.5 tracking-wider">Durasi Perjalanan</label>
+                        <select id="itinerary-days" onchange="window.updateItineraryBudgetMeterGlobal()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none cursor-pointer">
+                            <option value="1">1 Hari Penuh</option>
+                            <option value="2">2 Hari 1 Malam</option>
+                            <option value="3" selected>3 Hari 2 Malam</option>
+                        </select>
                     </div>
-                    <span id="itinerary-meter-text" class="text-xs text-emerald-300/80 mt-2 block font-medium">Memetakan kapasitas rencana...</span>
+                    <div>
+                        <label class="block text-xs font-bold text-emerald-300 uppercase mb-1.5 tracking-wider">Anggaran Biaya Maksimal (Rp)</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-300 text-xs font-bold">Rp</span>
+                            <input type="number" id="itinerary-budget-num" oninput="window.updateItineraryBudgetMeterGlobal()" value="2000000" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl pl-8 pr-3 py-2.5 text-xs font-semibold focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-emerald-300 uppercase mb-1.5 tracking-wider">Gaya Liburan</label>
+                        <select id="itinerary-theme" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none cursor-pointer">
+                            <option value="Santai" selected>Wisata Kuliner Santai</option>
+                            <option value="Petualangan">Petualangan & Alam</option>
+                            <option value="Keluarga">Keluarga & Relaksasi</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="md:col-span-12 flex justify-end">
-                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3.5 px-6 rounded-xl shadow-lg transition flex items-center gap-2 text-xs">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Buat Jadwal Otomatis
-                    </button>
+                <!-- Dropdown Baris Kedua Pilihan Destinasi -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="text-[11px] font-bold text-emerald-300 uppercase flex items-center gap-1 mb-1"><i class="fa-solid fa-map-location-dot"></i> Wisata Pilihan</label>
+                        <select id="itinerary-select-wisata" onchange="window.updateItineraryBudgetMeterGlobal()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none cursor-pointer"></select>
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-emerald-300 uppercase flex items-center gap-1 mb-1"><i class="fa-solid fa-utensils"></i> Kuliner Pilihan</label>
+                        <select id="itinerary-select-kuliner" onchange="window.updateItineraryBudgetMeterGlobal()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none cursor-pointer"></select>
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-emerald-300 uppercase flex items-center gap-1 mb-1"><i class="fa-solid fa-hotel"></i> Penginapan Pilihan</label>
+                        <select id="itinerary-select-penginapan" onchange="window.updateItineraryBudgetMeterGlobal()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none cursor-pointer"></select>
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-emerald-300 uppercase flex items-center gap-1 mb-1"><i class="fa-solid fa-car-side"></i> Transport & Sopir/Guide</label>
+                        <select id="itinerary-select-transport" onchange="window.updateItineraryBudgetMeterGlobal()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none cursor-pointer">
+                            <option value="none">Tanpa Transportasi (Mandiri) - Rp 0</option>
+                            <option value="motor">Sewa Motor Mandiri - Rp 80.000 / hari</option>
+                            <option value="mobil">Sewa Mobil Lepas Kunci - Rp 350.000 / hari</option>
+                            <option value="guide_allin" selected>Guide Lokal + Transportasi All-In - Rp 1.100.000 / hari</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    <div class="md:col-span-9 bg-black/40 border border-white/10 rounded-xl p-4">
+                        <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-widest block mb-1">Status Pengukur Anggaran Rencana</span>
+                        <div class="w-full bg-white/15 rounded-full h-2.5 overflow-hidden">
+                            <div id="itinerary-meter-bar" class="h-full bg-red-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <span id="itinerary-meter-text" class="text-xs text-red-300 mt-2 block font-bold">Memetakan kapasitas rencana...</span>
+                    </div>
+                    <div class="md:col-span-3">
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-4 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs uppercase tracking-wider btn-magnetic">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Buat Jadwal Liburan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- RINGKASAN ESTIMASI BIAYA BERDASARKAN HARI -->
+                <div class="border-t border-white/10 pt-4 mt-2">
+                    <h5 class="text-xs font-bold text-emerald-300 uppercase tracking-widest mb-2.5">Ringkasan Estimasi Biaya Berdasarkan Hari</h5>
+                    <div id="itinerary-budget-summary" class="bg-slate-950/40 p-4 rounded-xl border border-white/5 space-y-2 text-xs text-emerald-100/80">
+                        <!-- Dinamis Terisi Breakdown -->
+                    </div>
                 </div>
             </form>
 
@@ -203,20 +247,17 @@
         </section>
     </main>
 
-    <!-- ACCURATE DETAIL MODAL LAYOUT (MATCHING IMAGE_D424D5 & IMAGE_D4250E) -->
+    <!-- ACCURATE DETAIL MODAL LAYOUT -->
     <div id="detail-modal" class="fixed inset-0 z-50 overflow-y-auto hidden animate-scale-in">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm" onclick="closeDetailModal()"></div>
             
             <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-2xl sm:w-full border border-gray-100 flex flex-col max-h-[95vh]">
-                <!-- Modal Banner Image Container -->
                 <div class="relative h-56 sm:h-72 w-full shrink-0 overflow-hidden bg-gray-100">
                     <img id="detail-image" src="" alt="" class="w-full h-full object-cover">
-                    <!-- Close Anchor Overlay Button -->
                     <button onclick="closeDetailModal()" class="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition z-10">
                         <i class="fa-solid fa-xmark text-base"></i>
                     </button>
-                    <!-- Badges Overlay -->
                     <div class="absolute bottom-4 left-4 flex gap-2 items-center z-10">
                         <span id="detail-category-badge" class="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-md uppercase tracking-wider">WISATA</span>
                         <span class="px-2.5 py-1 bg-amber-500 text-white text-xs font-bold rounded-md flex items-center gap-1">
@@ -225,9 +266,7 @@
                     </div>
                 </div>
 
-                <!-- Scrolling Body Wrapper -->
                 <div class="overflow-y-auto custom-scrollbar flex-1 p-6 space-y-6">
-                    <!-- Title & Header Area -->
                     <div>
                         <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider flex items-center gap-1 mb-1">
                             <i class="fa-solid fa-location-dot"></i> <span id="detail-province-text">LAMPUNG</span>
@@ -239,15 +278,11 @@
                         </p>
                     </div>
 
-                    <!-- Full Long Description Block -->
                     <div class="bg-slate-50/70 rounded-xl p-4 border border-gray-100">
                         <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">DESKRIPSI LENGKAP</h4>
-                        <p id="detail-desc" class="text-gray-700 text-xs sm:text-sm leading-relaxed">
-                            Pahawang terkenal sebagai surga snorkeling di Lampung. Keindahan terumbu karang yang sehat, air jernih berwarna toska, serta keberadaan ikan badut (Nemo) membuat destinasi ini sangat populer.
-                        </p>
+                        <p id="detail-desc" class="text-gray-700 text-xs sm:text-sm leading-relaxed"></p>
                     </div>
 
-                    <!-- Two Horizontal Capsule Attributes Layout -->
                     <div class="grid grid-cols-2 gap-3">
                         <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 flex items-center gap-2.5">
                             <i class="fa-regular fa-clock text-indigo-600 text-sm"></i>
@@ -265,7 +300,6 @@
                         </div>
                     </div>
 
-                    <!-- Financial & Tariff Grid Section -->
                     <div class="bg-emerald-50/50 rounded-xl p-4 border border-emerald-100/70 space-y-3">
                         <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1">
                             <i class="fa-solid fa-tags"></i> RINCIAN BIAYA & TARIF TERBARU
@@ -286,16 +320,12 @@
                         </div>
                     </div>
 
-                    <!-- Reviews Layout Boundary Area -->
                     <div class="border-t border-gray-100 pt-4 space-y-4">
                         <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1">
                             <i class="fa-regular fa-comments"></i> ULASAN PENGUNJUNG ( <span id="review-count">0</span> )
                         </h4>
-                        
-                        <!-- List Wrapper Content Container -->
                         <div id="reviews-list-container" class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar pr-1"></div>
                         
-                        <!-- Write Review Form Panel -->
                         <div class="bg-slate-50 p-4 rounded-xl border space-y-3 text-left">
                             <span class="text-xs font-bold text-gray-700 block">Tulis Ulasan Anda</span>
                             <div class="flex items-center gap-2">
@@ -325,27 +355,20 @@
                             <i class="fa-solid fa-user-shield text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-extrabold text-gray-900">Portal Login Admin</h3>
-                        <p class="text-xs text-gray-500 mt-1">Masuk menggunakan Super Admin atau Regional Admin.</p>
                     </div>
-
                     <form id="login-form" onsubmit="window.handleLoginSubmitGlobal(event)">
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Username</label>
-                                <input type="text" id="login-username" required placeholder="superadmin atau budi_lampung" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                                <input type="text" id="login-username" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
-                                <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                                <input type="password" id="login-password" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
                             </div>
                         </div>
                         <button type="submit" class="w-full mt-6 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl shadow transition">Verifikasi Masuk</button>
                     </form>
-                    
-                    <div class="mt-4 bg-slate-50 rounded-xl p-3 border text-[11px] text-gray-500 space-y-1">
-                        <p>• <b>Super Admin</b>: <code class="bg-white px-1 border rounded">superadmin</code> / <code class="bg-white px-1 border rounded">superadmin123</code></p>
-                        <p>• <b>Admin Regional (Lampung)</b>: <code class="bg-white px-1 border rounded">budi_lampung</code> / <code class="bg-white px-1 border rounded">budi123</code></p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -406,7 +429,7 @@
     <div id="add-edit-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideAddEditModal()"></div>
-            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl sm:max-w-xl sm:w-full border p-6 space-y-4">
+            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-xl sm:w-full border p-6 space-y-4">
                 <h3 id="form-modal-title" class="text-lg font-extrabold text-gray-900">Formulir Rekomendasi</h3>
                 <form id="destination-form" onsubmit="window.handleFormSubmitGlobal(event)" class="space-y-4">
                     <input type="hidden" id="form-id">
@@ -444,6 +467,8 @@
     <script>
         const PROVINCES = ["Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "Jambi", "Sumatera Selatan", "Bangka Belitung", "Bengkulu", "Lampung", "DKI Jakarta", "Jawa Barat", "Banten", "Jawa Tengah", "DIY Yogyakarta", "Jawa Timur", "Bali", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Kalimantan Barat", "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara", "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Sulawesi Barat", "Gorontalo", "Maluku", "Maluku Utara", "Papua Barat", "Papua"].sort();
         let currentCategory = 'wisata'; let detectedProvince = 'Lampung'; let loggedInUser = null; let activeDetailItemId = null; let selectedRating = 0; let searchKeyword = '';
+
+        const TRANSPORT_RATES = { none: 0, motor: 80000, mobil: 350000, guide_allin: 1100000 };
 
         function populateProvinceDropdowns() {
             ['province-selector', 'form-province'].forEach(id => {
@@ -522,11 +547,7 @@
             star.onclick = function() {
                 selectedRating = parseInt(this.getAttribute('data-val'));
                 document.querySelectorAll('#review-star-selector i').forEach((s, idx) => {
-                    if (idx < selectedRating) {
-                        s.className = "fa-solid fa-star text-amber-400";
-                    } else {
-                        s.className = "fa-solid fa-star text-gray-300";
-                    }
+                    if (idx < selectedRating) s.className = "fa-solid fa-star text-amber-400"; else s.className = "fa-solid fa-star text-gray-300";
                 });
             }
         });
@@ -574,10 +595,11 @@
         const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const appId = 'titiksinggah-realtime';
         let activeDB = []; let pendingDB = [];
 
-        // BASE SEED MOCK DATA FALLBACKS
+        // BASE MOCK DATA FALLBACK
         const SEED_MOCK = [
             { id: "pahawang-1", name: "Pulau Pahawang", province: "Lampung", category: "wisata", rating: 4.0, costWeekday: "Rp 120.000", costWeekend: "Rp 150.000", costPackage: "Rp 450.000", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", description: "Pahawang terkenal sebagai surga snorkeling di Lampung. Keindahan terumbu karang yang sehat, air jernih berwarna toska, serta keberadaan ikan badut (Nemo) membuat destinasi ini sangat populer.", bestTime: "08:00 - 16:00 WIB", activities: "Snorkeling & Island Hopping", reviews: [{username: "Agatha", rating: 5, comment: "Koralnya indah sekali, airnya sangat jernih!"}] },
-            { id: "cikwo-2", name: "Seruit Lampung Cikwo Resto", province: "Lampung", category: "kuliner", rating: 4.5, costWeekday: "Rp 45.000", costWeekend: "Rp 55.000", costPackage: "Rp 180.000", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80", description: "Menyajikan makanan tradisional khas Lampung utama ikan Baung bakar disajikan dengan perpaduan sambal seruit segar, tempoyak, dan lalapan segar.", bestTime: "10:00 - 21:00 WIB", activities: "Makan Bersama Tradisional", reviews: [] }
+            { id: "cikwo-2", name: "Seruit Lampung Cikwo Resto", province: "Lampung", category: "kuliner", rating: 4.5, costWeekday: "Rp 40.000", costWeekend: "Rp 55.000", costPackage: "Rp 180.000", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80", description: "Menyajikan makanan tradisional khas Lampung utama ikan Baung bakar disajikan dengan perpaduan sambal seruit segar, tempoyak, dan lalapan segar.", bestTime: "10:00 - 21:00 WIB", activities: "Makan Bersama Tradisional", reviews: [] },
+            { id: "novotel-3", name: "Hotel Novotel Lampung", province: "Lampung", category: "penginapan", rating: 4.6, costWeekday: "Rp 780.000", costWeekend: "Rp 950.000", costPackage: "Rp 2.100.000", image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80", description: "Novotel Lampung menawarkan akomodasi penginapan strategis dengan pemandangan pesisir Seluk Lampung spektakuler dilengkapi kolam renang infinity.", bestTime: "24 Jam", activities: "Rest & Relax", reviews: [] }
         ];
 
         async function init() {
@@ -585,7 +607,7 @@
             onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'destinations'), (snap) => {
                 activeDB = []; snap.forEach(d => activeDB.push({ id: d.id, ...d.data() }));
                 if(activeDB.length === 0) activeDB = [...SEED_MOCK]; 
-                renderPublicCards(); renderAdminTable(); updateItineraryBudgetMeter();
+                renderPublicCards(); renderAdminTable(); populateItinerarySelectors();
             });
             onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations'), (snap) => {
                 pendingDB = []; snap.forEach(d => pendingDB.push({ id: d.id, ...d.data() }));
@@ -601,7 +623,7 @@
                 container.innerHTML += `
                     <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition duration-300">
                         <div class="relative h-44 w-full bg-slate-100 overflow-hidden">
-                            <img src="${item.image || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'}" class="w-full h-full object-cover group-hover:scale-105 duration-500">
+                            <img src="${item.image}" class="w-full h-full object-cover group-hover:scale-105 duration-500">
                             <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-emerald-800 flex items-center gap-1 shadow-sm">
                                 <i class="fa-solid fa-star text-amber-500"></i> <span>${Number(item.rating || 4.0).toFixed(1)}</span>
                             </div>
@@ -625,10 +647,81 @@
             });
         }
 
+        function populateItinerarySelectors() {
+            const wisataSelect = document.getElementById('itinerary-select-wisata');
+            const kulinerSelect = document.getElementById('itinerary-select-kuliner');
+            const penginapanSelect = document.getElementById('itinerary-select-penginapan');
+            if(!wisataSelect) return;
+
+            wisataSelect.innerHTML = ''; kulinerSelect.innerHTML = ''; penginapanSelect.innerHTML = '';
+
+            const filtered = activeDB.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase());
+
+            filtered.forEach(item => {
+                const optionStr = `<option value="${item.id}">${item.name} (${item.costWeekday})</option>`;
+                if(item.category === 'wisata') wisataSelect.innerHTML += optionStr;
+                if(item.category === 'kuliner') kulinerSelect.innerHTML += optionStr;
+                if(item.category === 'penginapan') penginapanSelect.innerHTML += optionStr;
+            });
+
+            updateItineraryBudgetMeter();
+        }
+
+        function extractPrice(str) {
+            if (!str) return 0;
+            return parseInt(str.replace(/[^0-9]/g, '')) || 0;
+        }
+
+        // MANAGEMENT STATUS PENGUKUR ANGGARAN & ESTIMASI COST RINGKASAN (MATCHING IMAGE_D42CB3.PNG)
+        function updateItineraryBudgetMeter() {
+            const userBudget = parseInt(document.getElementById('itinerary-budget-num').value) || 0;
+            const days = parseInt(document.getElementById('itinerary-days').value) || 1;
+            const transType = document.getElementById('itinerary-select-transport').value;
+
+            const wItem = activeDB.find(i => i.id === document.getElementById('itinerary-select-wisata').value);
+            const kItem = activeDB.find(i => i.id === document.getElementById('itinerary-select-kuliner').value);
+            const pItem = activeDB.find(i => i.id === document.getElementById('itinerary-select-penginapan').value);
+
+            const wCost = wItem ? extractPrice(wItem.costWeekday) : 120000;
+            const kCost = kItem ? extractPrice(kItem.costWeekday) * days * 2 : 240000;
+            const pCost = pItem ? extractPrice(pItem.costWeekday) * (days - 1 || 1) : 1560000;
+            const transCost = (TRANSPORT_RATES[transType] || 0) * days;
+
+            const totalEstimated = wCost + kCost + pCost + transCost;
+
+            const bar = document.getElementById('itinerary-meter-bar');
+            const text = document.getElementById('itinerary-meter-text');
+            const summary = document.getElementById('itinerary-budget-summary');
+
+            // Render Ringkasan Table Breakdown
+            if(summary) {
+                summary.innerHTML = `
+                    <div class="flex justify-between"><span>Estimasi Wisata (${wItem ? wItem.name : 'Pulau Pahawang'}):</span><span class="font-bold text-white">Rp ${wCost.toLocaleString('id-ID')}</span></div>
+                    <div class="flex justify-between"><span>Estimasi Kuliner 2x sehari (${kItem ? kItem.name : 'Seruit Lampung Cikwo'}):</span><span class="font-bold text-white">Rp ${kCost.toLocaleString('id-ID')}</span></div>
+                    <div class="flex justify-between"><span>Estimasi Penginapan ${days - 1 || 1} Malam (${pItem ? pItem.name : 'Hotel Novotel Lampung'}):</span><span class="font-bold text-white">Rp ${pCost.toLocaleString('id-ID')}</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-1.5"><span>Estimasi Transport & Guide:</span><span class="font-bold text-white">Rp ${transCost.toLocaleString('id-ID')}</span></div>
+                    <div class="flex justify-between text-sm font-black text-emerald-300 pt-1"><span>Total Biaya Perjalanan:</span><span>Rp ${totalEstimated.toLocaleString('id-ID')}</span></div>
+                `;
+            }
+
+            if(userBudget === 0) { bar.style.width = "0%"; text.textContent = "Masukkan nominal budget."; return; }
+            const pct = Math.min((totalEstimated / userBudget) * 100, 100);
+            bar.style.width = `${pct}%`;
+
+            if (totalEstimated <= userBudget) {
+                bar.className = "h-full bg-emerald-400 rounded-full transition-all duration-300";
+                text.className = "text-xs text-emerald-300 font-bold mt-2 block";
+                text.innerHTML = `Anggaran Aman! Tersisa Rp ${(userBudget - totalEstimated).toLocaleString('id-ID')} untuk dana darurat.`;
+            } else {
+                bar.className = "h-full bg-red-500 rounded-full transition-all duration-300";
+                text.className = "text-xs text-red-400 font-bold mt-2 block";
+                text.innerHTML = `Melebihi Anggaran! Estimasi biaya berlebih sebesar Rp ${(totalEstimated - userBudget).toLocaleString('id-ID')}.`;
+            }
+        }
+
         function renderAdminTable() {
             const tbody = document.getElementById('dashboard-table-body'); if (!tbody) return; tbody.innerHTML = '';
             const scopedData = activeDB.filter(item => loggedInUser && (loggedInUser.role === 'root' || item.province === loggedInUser.province));
-            if (scopedData.length === 0) { tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-gray-400 text-xs">Kosong atau di luar otoritas regional Anda.</td></tr>`; return; }
             scopedData.forEach(item => {
                 const tr = document.createElement('tr'); tr.className = "border-b hover:bg-slate-50 text-xs";
                 tr.innerHTML = `<td class="py-3 px-6 font-bold text-gray-900">${item.name}</td><td class="py-3 px-6">${item.province}</td><td class="py-3 px-6 uppercase font-bold text-primary-700">${item.category}</td>
@@ -637,7 +730,7 @@
                 document.getElementById(`edit-${item.id}`).onclick = () => showAddEditModal(item.id);
                 document.getElementById(`del-${item.id}`).onclick = async () => {
                     if (confirm(`Hapus permanen dari basis data?`)) { 
-                        if(item.id.startsWith("pahawang") || item.id.startsWith("cikwo")) {
+                        if(item.id.startsWith("pahawang") || item.id.startsWith("cikwo") || item.id.startsWith("novotel")) {
                             activeDB = activeDB.filter(d => d.id !== item.id); renderAdminTable(); renderPublicCards();
                         } else { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id)); }
                         window.showToastGlobal('Data terbit dihapus!', 'success'); 
@@ -656,7 +749,7 @@
                     <div class="flex gap-2"><button id="appr-${item.id}" class="px-3 py-1.5 bg-emerald-600 text-white font-bold rounded-lg shadow">Setujui</button><button id="rejc-${item.id}" class="px-3 py-1.5 bg-red-50 text-red-600 border rounded-lg">Tolak</button></div>`;
                 container.appendChild(div);
                 document.getElementById(`appr-${item.id}`).onclick = async () => {
-                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), { name: item.name, category: item.category, province: item.province, rating: 4.0, description: "Usulan regional disetujui pusat.", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", costWeekday: "Rp 120.000", costWeekend: "Rp 150.000", costPackage: "Rp 450.000", bestTime: "08:00 - 16:00 WIB", activities: "Eksplorasi Lapangan", reviews: [] });
+                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), { name: item.name, category: item.category, province: item.province, rating: 4.0, description: "Terverifikasi pusat.", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", costWeekday: "Rp 120.000", costWeekend: "Rp 150.000", costPackage: "Rp 450.000", bestTime: "08:00 - 16:00 WIB", activities: "Eksplorasi Lapangan", reviews: [] });
                     await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id));
                     window.showToastGlobal('Data resmi diterbitkan ke publik!', 'success');
                 };
@@ -664,78 +757,21 @@
             });
         }
 
-        function updateItineraryBudgetMeter() {
-            const budgetInput = document.getElementById('itinerary-budget-num'); if(!budgetInput) return;
-            const userBudget = parseInt(budgetInput.value) || 0; const days = parseInt(document.getElementById('itinerary-days').value) || 1;
-            const filtered = activeDB.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase());
-            const totalEstimated = ((filtered.some(i => i.category === 'wisata') ? 50000 : 25000) * days) + ((filtered.some(i => i.category === 'penginapan') ? 350000 : 0) * (days - 1 || 1)) + (100000 * days);
-            const bar = document.getElementById('itinerary-meter-bar'); const text = document.getElementById('itinerary-meter-text');
-            if(userBudget === 0) { bar.style.width = "0%"; text.textContent = "Masukkan nominal anggaran rencana perjalanan."; return; }
-            const pct = Math.min((totalEstimated / userBudget) * 100, 100); bar.style.width = `${pct}%`;
-            if (totalEstimated <= userBudget) { bar.className = "h-full bg-emerald-400"; text.innerHTML = `Anggaran Aman! Estimasi biaya Rp ${totalEstimated.toLocaleString('id-ID')} (Sisa: Rp ${(userBudget - totalEstimated).toLocaleString('id-ID')})`; } 
-            else { bar.className = "h-full bg-red-500"; text.innerHTML = `Melebihi Anggaran! Kurang: Rp ${(totalEstimated - userBudget).toLocaleString('id-ID')}`; }
-        }
+        window.generateItineraryGlobal = function(e) {
+            e.preventDefault(); const days = parseInt(document.getElementById('itinerary-days').value); const timeline = document.getElementById('itinerary-timeline'); timeline.innerHTML = '';
+            const wItem = activeDB.find(i => i.id === document.getElementById('itinerary-select-wisata').value);
+            const kItem = activeDB.find(i => i.id === document.getElementById('itinerary-select-kuliner').value);
+            const pItem = activeDB.find(i => i.id === document.getElementById('itinerary-select-penginapan').value);
 
-        window.addEventListener('openDetail', (e) => {
-            const item = activeDB.find(d => d.id === e.detail); if(!item) return;
-            document.getElementById('detail-title').textContent = item.name; 
-            document.getElementById('detail-category-badge').textContent = item.category.toUpperCase();
-            document.getElementById('detail-province-text').textContent = item.province.toUpperCase();
-            document.getElementById('detail-location').querySelector('span').textContent = `${item.province}`;
-            document.getElementById('detail-desc').textContent = item.description || "Destinasi pariwisata nusantara pilihan terbaik.";
-            document.getElementById('detail-image').src = item.image || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80";
-            document.getElementById('detail-rating-text').textContent = Number(item.rating || 4.0).toFixed(1);
-            
-            document.getElementById('detail-cost-weekday').textContent = item.costWeekday || 'Rp 120.000';
-            document.getElementById('detail-cost-weekend').textContent = item.costWeekend || 'Rp 150.000';
-            document.getElementById('detail-cost-package').textContent = item.costPackage || 'Rp 450.000';
-            
-            document.getElementById('detail-best-time').textContent = item.bestTime || '08:00 - 16:00 WIB';
-            document.getElementById('detail-activities').textContent = item.activities || 'Eksplorasi Umum';
-
-            const container = document.getElementById('reviews-list-container'); container.innerHTML = ''; const list = item.reviews || [];
-            document.getElementById('review-count').textContent = list.length;
-            if(list.length === 0) { container.innerHTML = '<p class="text-xs text-gray-400 italic py-1">Belum ada ulasan.</p>'; }
-            else { list.forEach(r => { container.innerHTML += `<div class="bg-gray-50 p-2 rounded-xl border text-[11px] text-left"><div class="flex justify-between font-bold text-gray-800"><span>${r.username}</span><span class="text-amber-500">★ ${r.rating}</span></div><p class="text-gray-600 mt-0.5">${r.comment}</p></div>`; }); }
-            document.getElementById('detail-modal').classList.remove('hidden');
-        });
-
-        window.submitUserReviewGlobal = async function() {
-            const name = document.getElementById('review-username-input').value.trim(); const comment = document.getElementById('review-text-input').value.trim();
-            if(!name || !comment || selectedRating === 0) { alert('Lengkapi kolom ulasan & bintang rating!'); return; }
-            const item = activeDB.find(d => d.id === activeDetailItemId); if(!item) return; const currentReviews = item.reviews || [];
-            currentReviews.push({ username: name, rating: selectedRating, comment: comment });
-            
-            if(item.id.startsWith("pahawang") || item.id.startsWith("cikwo")) {
-                item.reviews = currentReviews; closeDetailModal(); window.showToastGlobal('Ulasan diterbitkan!', 'success');
-            } else {
-                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', activeDetailItemId), { reviews: currentReviews });
-                window.showToastGlobal('Ulasan diterbitkan!', 'success'); closeDetailModal();
+            for(let d=1; d<=days; d++) {
+                timeline.innerHTML += `<div class="border-l-2 border-emerald-500 pl-3 py-1"><h5 class="font-bold text-gray-850">HARI KE-${d}</h5><p class="mt-0.5">• Eksplorasi Wisata: <b>${wItem ? wItem.name : "Pulau Pahawang"}</b>.</p><p>• Kulineran Khas: <b>${kItem ? kItem.name : "Seruit Resto"}</b>.</p><p>• Menginap/Akomodasi: <b>${pItem ? pItem.name : "Hotel Terpilih"}</b>.</p></div>`;
             }
+            document.getElementById('itinerary-result').classList.remove('hidden');
         };
 
-        window.handleLoginSubmitGlobal = function(e) {
-            e.preventDefault(); const u = document.getElementById('login-username').value.trim(); const p = document.getElementById('login-password').value;
-            if (u === 'superadmin' && p === 'superadmin123') loggedInUser = { fullname: 'Super Administrator', username: 'superadmin', role: 'root', province: 'ALL' };
-            else if (u === 'budi_lampung' && p === 'budi123') loggedInUser = { fullname: 'Budi (Regional)', username: 'budi_lampung', role: 'regional', province: 'Lampung' };
-            else { window.showToastGlobal('Akses ditolak!', 'error'); return; }
-            localStorage.setItem('titik_singgah_session', JSON.stringify(loggedInUser)); window.updateAdminAuthUIGlobal(); window.hideLoginModalGlobal(); showAdminDashboard();
-        };
-
-        window.handleLogoutGlobal = function() { loggedInUser = null; localStorage.removeItem('titik_singgah_session'); window.updateAdminAuthUIGlobal(); closeAdminDashboard(); };
-        
-        window.handleFormSubmitGlobal = async function(e) {
-            e.preventDefault(); const id = 'dest-' + Date.now();
-            const targetProvince = loggedInUser.role === 'regional' ? loggedInUser.province : document.getElementById('form-province').value;
-            const payload = { name: document.getElementById('form-name').value, category: document.getElementById('form-category').value, province: targetProvince, rating: 4.0, description: "Objek rekomendasi wilayah baru.", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", costWeekday: "Rp 120.000", costWeekend: "Rp 150.000", costPackage: "Rp 450.000", bestTime: "08:00 - 17:00 WIB", activities: "Eksplorasi Umum", reviews: [] };
-            if (loggedInUser.role === 'regional') { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', id), payload, { merge: true }); window.showToastGlobal('Usulan masuk antrian verifikasi pusat!', 'success'); }
-            else { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', id), payload, { merge: true }); window.showToastGlobal('Terbit sukses!', 'success'); }
-            window.hideAddEditModalGlobal();
-        };
-
-        window.printItineraryGlobal = function() { document.body.className = 'print-itinerary-active'; window.print(); };
+        window.getLoadedDataById = function(id) { return activeDB.find(d => d.id === id); };
         window.updateItineraryBudgetMeterGlobal = updateItineraryBudgetMeter;
-        window.addEventListener('provinceChanged', () => { renderPublicCards(); updateItineraryBudgetMeter(); });
+        window.addEventListener('provinceChanged', () => { renderPublicCards(); populateItinerarySelectors(); });
         window.addEventListener('categoryChanged', () => renderPublicCards());
         window.addEventListener('searchChanged', () => renderPublicCards());
         init();
