@@ -30,10 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -42,31 +39,23 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        @keyframes floatPlane { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
-        @keyframes floatCompass { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(10px) rotate(-5deg); } }
-        @keyframes waveMove { 0% { transform: translateX(0); } 50% { transform: translateX(-25%); } 100% { transform: translateX(-50%); } }
         @keyframes breathingGlow { 0%, 100% { border-color: rgba(34, 197, 94, 0.4); box-shadow: 0 0 8px rgba(34, 197, 94, 0.2); } 50% { border-color: rgba(110, 231, 183, 0.9); box-shadow: 0 0 20px rgba(34, 197, 94, 0.6); } }
         .glowing-premium-console { border: 2px solid rgba(34, 197, 94, 0.4); animation: breathingGlow 3.5s infinite ease-in-out; }
-        .glowing-premium-console:hover { border-color: #22c55e; box-shadow: 0 0 25px rgba(34, 197, 94, 0.8); }
-        .btn-magnetic { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        .btn-magnetic:hover { transform: translateY(-2px) scale(1.02); }
         .animate-fade-in-down { animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
         .animate-fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
         .animate-scale-in { animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
-        .animate-plane-float { animation: floatPlane 6s ease-in-out infinite; }
-        .animate-compass-float { animation: floatCompass 8s ease-in-out infinite; }
-        .wave-moving-1 { animation: waveMove 20s linear infinite; }
-        .wave-moving-2 { animation: waveMove 14s linear infinite; }
-        
+        .btn-magnetic { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn-magnetic:hover { transform: translateY(-2px) scale(1.02); }
         @media print {
             body * { visibility: hidden !important; }
+            body.print-itinerary-active #itinerary-result, body.print-itinerary-active #itinerary-result * { visibility: visible !important; }
             body.print-modal-active #detail-modal, body.print-modal-active #detail-modal * { visibility: visible !important; }
-            body.print-modal-active #detail-modal { position: absolute; left: 0; top: 0; width: 100%; background: white; }
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col text-gray-800 antialiased overflow-x-hidden">
 
+    <!-- NAVBAR NAVIGATION -->
     <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 shadow-sm animate-fade-in-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -86,12 +75,12 @@
                         <span id="location-text">Mendeteksi Lokasi...</span>
                     </div>
                     
-                    <button id="admin-login-btn" onclick="showLoginModal()" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition duration-200 flex items-center gap-2 shadow-md">
+                    <button id="admin-login-btn" onclick="showLoginModal()" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-user-shield text-xs"></i>
                         <span>Admin Portal</span>
                     </button>
                     
-                    <button id="admin-quick-dashboard-btn" onclick="showAdminDashboard()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition duration-200 flex items-center gap-2 shadow-md">
+                    <button id="admin-quick-dashboard-btn" onclick="showAdminDashboard()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-gauge"></i>
                         <span>Dashboard Admin</span>
                     </button>
@@ -100,15 +89,14 @@
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <section class="relative bg-gradient-to-br from-primary-950 via-primary-900 to-slate-950 text-white overflow-hidden py-20 px-4 pb-28">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.15),transparent_60%)]"></div>
-        
         <div class="max-w-5xl mx-auto text-center relative z-10">
             <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-primary-200 border border-white/10 uppercase mb-6 animate-fade-in-up">
                 <i class="fa-solid fa-cloud-arrow-up text-emerald-400 animate-pulse"></i>
                 Database Sinkronisasi Real-Time Akses Publik
             </span>
-            
             <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight animate-fade-in-up">
                 Temukan Keajaiban <br class="hidden sm:inline">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-green-300">Tersembunyi di Sekitarmu</span>
@@ -125,17 +113,16 @@
                             <p id="hero-detected-province" class="text-base sm:text-lg font-bold truncate">Memindai...</p>
                         </div>
                     </div>
-                    
                     <div class="w-full sm:w-auto text-left shrink-0">
                         <label for="province-selector" class="block text-[10px] text-emerald-300/80 font-bold tracking-wider uppercase mb-1">Pilih Provinsi Manual</label>
-                        <select id="province-selector" onchange="handleManualProvinceChange(this.value)" class="w-full bg-slate-950/60 border border-white/20 text-white rounded-xl px-3 py-2 text-sm font-semibold focus:outline-none">
-                        </select>
+                        <select id="province-selector" onchange="handleManualProvinceChange(this.value)" class="w-full bg-slate-950/60 border border-white/20 text-white rounded-xl px-3 py-2 text-sm font-semibold focus:outline-none cursor-pointer"></select>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONTENT DISPLAY MAIN INTERFACE -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
         <div class="flex justify-center border-b border-gray-200 mb-8 overflow-x-auto pb-px custom-scrollbar">
             <div class="flex space-x-2 sm:space-x-8">
@@ -148,47 +135,137 @@
                 <button onclick="switchCategory('penginapan')" id="tab-penginapan" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
                     <i class="fa-solid fa-hotel"></i> <span>Penginapan & Hotel</span>
                 </button>
+                <button onclick="switchCategory('transportasi')" id="tab-transportasi" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
+                    <i class="fa-solid fa-car-side"></i> <span>Transportasi & Guide</span>
+                </button>
             </div>
         </div>
 
         <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+            <!-- Dinamis terisi data public -->
+        </div>
+
+        <!-- SMART ITINERARY GENERATOR BLOCK -->
+        <section id="itinerary-section" class="bg-gradient-to-br from-emerald-900 to-primary-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden animate-fade-in-up">
+            <div class="max-w-3xl mb-8 relative z-10">
+                <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-300 border border-emerald-500/30 uppercase mb-4">
+                    <i class="fa-solid fa-calendar-check text-emerald-400"></i> Perencana Itinerary Pintar
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Rancang Jadwal Liburan Impianmu</h3>
+                <p class="text-xs sm:text-sm text-emerald-100/70 mt-2">
+                    Tentukan kapasitas finansial rencana kunjungan Anda di Provinsi <span id="itinerary-current-province" class="font-extrabold text-emerald-300">Lampung</span>.
+                </p>
             </div>
+
+            <form id="itinerary-form" onsubmit="window.generateItineraryGlobal(event)" class="grid grid-cols-1 md:grid-cols-12 gap-5 bg-white/10 backdrop-blur-md p-5 sm:p-6 rounded-2xl border border-white/10 relative z-10 shadow-lg">
+                <div class="md:col-span-4">
+                    <label class="block text-xs font-bold text-emerald-300 uppercase mb-1.5">Durasi Perjalanan</label>
+                    <select id="itinerary-days" onchange="window.updateItineraryBudgetMeterGlobal()" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-3 py-2.5 text-xs font-semibold focus:outline-none">
+                        <option value="1">1 Hari Penuh</option>
+                        <option value="2">2 Hari 1 Malam</option>
+                        <option value="3" selected>3 Hari 2 Malam</option>
+                    </select>
+                </div>
+                <div class="md:col-span-8">
+                    <label class="block text-xs font-bold text-emerald-300 uppercase mb-1.5">Anggaran Biaya Maksimal (Rp)</label>
+                    <input type="number" id="itinerary-budget-num" oninput="window.updateItineraryBudgetMeterGlobal()" value="2000000" class="w-full bg-slate-950/70 border border-white/15 text-white rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none">
+                </div>
+
+                <div class="md:col-span-12 bg-black/40 border border-white/10 rounded-xl p-4">
+                    <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-widest block mb-1">Status Kapasitas Finansial</span>
+                    <div class="w-full bg-white/15 rounded-full h-2.5 overflow-hidden">
+                        <div id="itinerary-meter-bar" class="h-full bg-emerald-400 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                    <span id="itinerary-meter-text" class="text-xs text-emerald-300/80 mt-2 block font-medium">Memetakan kapasitas rencana...</span>
+                </div>
+
+                <div class="md:col-span-12 flex justify-end">
+                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3.5 px-6 rounded-xl shadow-lg transition btn-magnetic flex items-center gap-2 text-xs">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Buat Jadwal Otomatis
+                    </button>
+                </div>
+            </form>
+
+            <!-- HASIL GENERATE JADWAL -->
+            <div id="itinerary-result" class="mt-8 bg-white text-gray-800 rounded-2xl p-6 hidden shadow-2xl">
+                <div class="flex justify-between items-center border-b pb-4 mb-4">
+                    <h4 class="text-base font-black text-gray-900">Rencana Perjalanan Optimal Berdasarkan Budget</h4>
+                    <button onclick="window.printItineraryGlobal()" class="px-3 py-1.5 bg-primary-600 text-white text-xs font-bold rounded-xl shadow"><i class="fa-solid fa-print"></i> Cetak Jadwal</button>
+                </div>
+                <div id="itinerary-timeline" class="space-y-4 text-left text-xs text-gray-600 leading-relaxed"></div>
+            </div>
+        </section>
     </main>
 
+    <!-- INTERACTIVE DETAIL & REVIEW MODAL -->
+    <div id="detail-modal" class="fixed inset-0 z-50 overflow-y-auto hidden animate-scale-in">
+        <div class="flex items-center justify-center min-h-screen p-4 text-center">
+            <div class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm" onclick="closeDetailModal()"></div>
+            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-xl sm:w-full border border-gray-100 flex flex-col max-h-[90vh]">
+                <div class="p-6 overflow-y-auto custom-scrollbar space-y-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span id="detail-category-badge" class="px-2 py-0.5 bg-primary-100 text-primary-800 text-[10px] font-bold rounded uppercase">Category</span>
+                            <h2 id="detail-title" class="text-xl font-black text-gray-900 mt-1">Nama Destinasi</h2>
+                        </div>
+                        <button onclick="closeDetailModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                    </div>
+
+                    <!-- BLOK REVIEW & ULASAN -->
+                    <div class="border-t pt-4">
+                        <h4 class="text-xs font-bold text-gray-700 mb-3 flex items-center gap-1"><i class="fa-regular fa-comments"></i> Kolom Ulasan Komunitas</h4>
+                        <div id="reviews-list-container" class="space-y-2 mb-4 max-h-40 overflow-y-auto custom-scrollbar"></div>
+                        
+                        <div class="bg-slate-50 p-3 rounded-xl border space-y-2">
+                            <span class="text-[11px] font-bold text-gray-700 block">Tulis Ulasan Baru</span>
+                            <div class="flex gap-1 text-amber-400 text-xs cursor-pointer" id="review-star-selector">
+                                <i class="fa-regular fa-star" data-val="1"></i><i class="fa-regular fa-star" data-val="2"></i><i class="fa-regular fa-star" data-val="3"></i><i class="fa-regular fa-star" data-val="4"></i><i class="fa-regular fa-star" data-val="5"></i>
+                            </div>
+                            <input type="text" id="review-username-input" placeholder="Nama Anda..." class="w-full px-3 py-1.5 text-xs border rounded-xl focus:outline-none bg-white">
+                            <textarea id="review-text-input" rows="2" placeholder="Tulis tanggapan atau pengalaman di sini..." class="w-full px-3 py-1.5 text-xs border rounded-xl focus:outline-none bg-white resize-none"></textarea>
+                            <button onclick="window.submitUserReviewGlobal()" class="px-3 py-1.5 bg-emerald-600 text-white font-bold text-xs rounded-lg shadow">Kirim Ulasan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PORTAL LOGIN MODAL -->
     <div id="login-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideLoginModal()"></div>
-            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-md sm:w-full border border-gray-100">
+            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-md sm:w-full border border-gray-100">
                 <div class="px-6 py-8">
                     <div class="text-center mb-6">
-                        <div class="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-primary-50 text-primary-600 mb-4">
+                        <div class="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-primary-50 text-primary-600 mb-4 border border-primary-100">
                             <i class="fa-solid fa-user-shield text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-extrabold text-gray-900">Portal Login Admin</h3>
+                        <p class="text-xs text-gray-500 mt-1">Masuk dengan Super Admin atau Admin Regional wilayah.</p>
                     </div>
+
                     <form id="login-form" onsubmit="window.handleLoginSubmitGlobal(event)">
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Username</label>
-                                <input type="text" id="login-username" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                                <input type="text" id="login-username" required placeholder="superadmin atau budi_lampung" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
-                                <input type="password" id="login-password" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                                <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
                             </div>
                         </div>
-                        <div class="mt-6 flex flex-col gap-2">
-                            <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl shadow transition">Verifikasi Masuk</button>
-                            <button type="button" onclick="hideLoginModal()" class="w-full bg-gray-100 text-gray-700 font-semibold py-3 rounded-xl text-sm">Batal</button>
-                        </div>
+                        <button type="submit" class="w-full mt-6 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl shadow transition">Verifikasi Masuk</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- ADMIN DASHBOARD CONTAINER -->
     <div id="admin-dashboard-view" class="fixed inset-0 bg-slate-50 z-50 overflow-y-auto hidden">
-        <header class="bg-gray-900 text-white px-4 sm:px-6 py-4 sticky top-0 z-10 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-md">
+        <header class="bg-gray-900 text-white px-4 sm:px-6 py-4 sticky top-0 z-10 flex justify-between items-center shadow-md">
             <div class="flex items-center gap-3">
                 <div class="h-10 w-10 bg-emerald-500 rounded-xl flex items-center justify-center text-white text-lg font-extrabold shadow">TS</div>
                 <div>
@@ -196,90 +273,79 @@
                     <span id="admin-role-badge" class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Super Admin</span>
                 </div>
             </div>
-            <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end flex-wrap">
-                <button onclick="showAddEditModal()" class="bg-primary-600 hover:bg-primary-500 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow flex items-center gap-2">
+            <div class="flex items-center gap-2">
+                <button onclick="showAddEditModal()" class="bg-primary-600 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow flex items-center gap-2">
                     <i class="fa-solid fa-circle-plus"></i> <span>Tambah Data</span>
                 </button>
-                <button onclick="closeAdminDashboard()" class="bg-white/10 text-white border border-white/10 font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition">
-                    <i class="fa-solid fa-eye mr-1"></i> Lihat Web
-                </button>
-                <button onclick="window.handleLogoutGlobal()" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl transition" title="Keluar">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
+                <button onclick="closeAdminDashboard()" class="bg-white/10 text-white text-xs sm:text-sm px-4 py-2.5 rounded-xl transition">Lihat Web</button>
+                <button onclick="window.handleLogoutGlobal()" class="bg-red-600 text-white text-xs sm:text-sm px-3.5 py-2.5 rounded-xl transition"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </header>
 
-        <div id="admin-tabs-bar" class="bg-white border-b border-gray-200 px-4 sm:px-6 sticky top-[72px] z-[9]">
-            <div class="max-w-7xl mx-auto flex gap-1 overflow-x-auto">
+        <div id="admin-tabs-bar" class="bg-white border-b sticky top-[72px] z-[9]">
+            <div class="max-w-7xl mx-auto flex gap-1 overflow-x-auto px-4">
                 <button onclick="switchAdminTab('destinations')" id="tab-btn-destinations" class="admin-tab-btn flex items-center gap-2 px-4 py-3.5 text-xs font-bold border-b-2 border-primary-600 text-primary-700 whitespace-nowrap">
-                    <i class="fa-solid fa-map-location-dot"></i> Data Destinasi Aktif
+                    <i class="fa-solid fa-map-location-dot"></i> Data Destinasi Terbit
                 </button>
-                <button onclick="switchAdminTab('regional-admins')" id="tab-btn-regional-admins" class="admin-tab-btn flex items-center gap-2 px-4 py-3.5 text-xs font-bold border-b-2 border-transparent text-gray-500 whitespace-nowrap">
-                    <i class="fa-solid fa-users-gear"></i> Kelola Admin Regional
+                <button onclick="switchAdminTab('verification')" id="tab-btn-verification" class="admin-tab-btn flex items-center gap-2 px-4 py-3.5 text-xs font-bold border-b-2 border-transparent text-gray-500 whitespace-nowrap relative">
+                    <i class="fa-solid fa-shield-halved"></i> Verifikasi Destinasi Baru
+                    <span id="pending-count-badge" class="bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full hidden">0</span>
                 </button>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto px-4 py-8">
             <div id="admin-tab-destinations" class="admin-tab-content">
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden p-5">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse min-w-[700px]">
-                            <thead>
-                                <tr class="bg-slate-50 text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                    <th class="py-4 px-6">Nama Tempat</th>
-                                    <th class="py-4 px-6">Provinsi</th>
-                                    <th class="py-4 px-6">Kategori</th>
-                                    <th class="py-4 px-6 text-center">Tindakan</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dashboard-table-body" class="divide-y divide-gray-100 text-sm">
-                                </tbody>
-                        </table>
-                    </div>
+                <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-slate-50 border-b text-xs font-bold text-gray-500 uppercase"><th class="py-4 px-6">Nama</th><th class="py-4 px-6">Provinsi</th><th class="py-4 px-6">Kategori</th><th class="py-4 px-6 text-center">Aksi</th></tr>
+                        </thead>
+                        <tbody id="dashboard-table-body" class="divide-y text-sm"></tbody>
+                    </table>
                 </div>
             </div>
-            
-            <div id="admin-tab-regional-admins" class="admin-tab-content hidden">
-                <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
-                    <i class="fa-solid fa-users-gear text-4xl text-gray-300 mb-2"></i>
-                    <p class="text-sm text-gray-500">Manajemen Akun Regional Aktif.</p>
+
+            <div id="admin-tab-verification" class="admin-tab-content hidden">
+                <div id="verification-empty-state" class="bg-white rounded-2xl p-12 text-center border">
+                    <i class="fa-solid fa-circle-check text-4xl text-emerald-500 mb-2"></i>
+                    <h4 class="font-bold text-gray-700">Antrian Bersih!</h4>
                 </div>
+                <div id="verification-list-container" class="grid grid-cols-1 gap-4"></div>
             </div>
         </div>
     </div>
 
+    <!-- FORM ADD EDIT MODAL -->
     <div id="add-edit-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="fixed inset-0 bg-slate-950/65 backdrop-blur-sm" onclick="hideAddEditModal()"></div>
-            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-xl sm:w-full border border-gray-100">
-                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                    <h3 id="form-modal-title" class="text-lg font-extrabold text-gray-900">Formulir Rekomendasi</h3>
-                    <button onclick="hideAddEditModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-                </div>
-                <form id="destination-form" onsubmit="window.handleFormSubmitGlobal(event)" class="p-6 space-y-4">
+            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl sm:max-w-xl sm:w-full border p-6 space-y-4">
+                <h3 id="form-modal-title" class="text-lg font-extrabold text-gray-900">Formulir Usulan Baru</h3>
+                <form id="destination-form" onsubmit="window.handleFormSubmitGlobal(event)" class="space-y-4">
                     <input type="hidden" id="form-id">
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nama Tempat</label>
-                        <input type="text" id="form-name" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nama Konten</label>
+                        <input type="text" id="form-name" required class="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none bg-gray-50">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Kategori</label>
-                            <select id="form-category" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                            <select id="form-category" required class="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none bg-gray-50">
                                 <option value="wisata">Wisata</option>
                                 <option value="kuliner">Kuliner</option>
                                 <option value="penginapan">Penginapan</option>
+                                <option value="transportasi">Transportasi</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Provinsi</label>
-                            <select id="form-province" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none"></select>
+                            <select id="form-province" required class="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none bg-gray-50"></select>
                         </div>
                     </div>
                     <div class="pt-4 border-t flex justify-end gap-3">
                         <button type="button" onclick="hideAddEditModal()" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-semibold rounded-xl">Batal</button>
-                        <button type="submit" class="px-5 py-2 bg-primary-600 text-white text-sm font-bold rounded-xl shadow">Simpan Data</button>
+                        <button type="submit" class="px-5 py-2 bg-primary-600 text-white text-sm font-bold rounded-xl shadow">Kirim Usulan</button>
                     </div>
                 </form>
             </div>
@@ -288,86 +354,45 @@
 
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
 
+    <!-- SCRIPTS CORE INTERACTION GLOBAL -->
     <script>
-        const PROVINCES = [
-            "Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "Jambi", 
-            "Sumatera Selatan", "Bangka Belitung", "Bengkulu", "Lampung", "DKI Jakarta", 
-            "Jawa Barat", "Banten", "Jawa Tengah", "DIY Yogyakarta", "Jawa Timur", "Bali", 
-            "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Kalimantan Barat", "Kalimantan Tengah", 
-            "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara", "Sulawesi Utara", 
-            "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Sulawesi Barat", 
-            "Gorontalo", "Maluku", "Maluku Utara", "Papua Barat", "Papua"
-        ].sort();
-
-        let database = [];
-        let currentCategory = 'wisata';
-        let detectedProvince = 'Lampung'; 
-        let loggedInUser = null;
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const session = localStorage.getItem('titik_singgah_session');
-            if (session) {
-                loggedInUser = JSON.parse(session);
-                updateAdminAuthUI();
-            }
-            populateProvinceDropdowns();
-            startDeviceLocationDetection();
-        });
+        const PROVINCES = ["Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "Jambi", "Sumatera Selatan", "Bangka Belitung", "Bengkulu", "Lampung", "DKI Jakarta", "Jawa Barat", "Banten", "Jawa Tengah", "DIY Yogyakarta", "Jawa Timur", "Bali", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Kalimantan Barat", "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara", "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Sulawesi Barat", "Gorontalo", "Maluku", "Maluku Utara", "Papua Barat", "Papua"].sort();
+        let currentCategory = 'wisata'; let detectedProvince = 'Lampung'; let loggedInUser = null; let activeDetailItemId = null; let selectedRating = 0;
 
         function populateProvinceDropdowns() {
-            const selectors = ['province-selector', 'form-province'];
-            selectors.forEach(id => {
+            ['province-selector', 'form-province'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
                     el.innerHTML = id === 'form-province' ? '<option value="">-- Pilih Provinsi --</option>' : '';
-                    PROVINCES.forEach(p => {
-                        el.innerHTML += `<option value="${p}">${p}</option>`;
-                    });
+                    PROVINCES.forEach(p => { el.innerHTML += `<option value="${p}">${p}</option>`; });
                 }
             });
         }
 
         function startDeviceLocationDetection() {
-            const badgeText = document.getElementById('location-text');
-            const heroProvince = document.getElementById('hero-detected-province');
-            const mainSelector = document.getElementById('province-selector');
-
             if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
+                navigator.geolocation.getCurrentPosition(async (pos) => {
                     try {
-                        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`);
+                        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&zoom=10`);
                         const data = await res.json();
                         let state = data.address && (data.address.state || data.address.region || data.address.province);
-                        
                         if (state) {
                             state = state.replace(/(Provinsi|Daerah Istimewa|Daerah Khusus|Ibukota|Propinsi)/gi, '').trim();
                             const matched = PROVINCES.find(p => state.toLowerCase().includes(p.toLowerCase()));
-                            if (matched) {
-                                detectedProvince = matched;
-                                updateLocationUI(matched);
-                                return;
-                            }
+                            if (matched) { detectedProvince = matched; updateLocationUI(matched); return; }
                         }
                         applyDynamicFallback();
-                    } catch (e) {
-                        applyDynamicFallback();
-                    }
-                }, () => {
-                    applyDynamicFallback();
-                }, { timeout: 8000 });
-            } else {
-                applyDynamicFallback();
-            }
+                    } catch (e) { applyDynamicFallback(); }
+                }, () => { applyDynamicFallback(); }, { timeout: 6000 });
+            } else { applyDynamicFallback(); }
         }
 
         function applyDynamicFallback() {
             const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            let fallback = "DKI Jakarta"; 
+            let fallback = "DKI Jakarta";
             if (tz.includes("Makassar") || tz.includes("Bali")) fallback = "Bali";
             if (tz.includes("Jayapura")) fallback = "Papua";
-            
+            if (tz.includes("Jakarta")) fallback = "Lampung";
             detectedProvince = fallback;
             updateLocationUI(fallback, true);
         }
@@ -375,93 +400,81 @@
         function updateLocationUI(prov, isFallback = false) {
             document.getElementById('location-text').textContent = isFallback ? `Auto (Tz): ${prov}` : `Aktif: ${prov}`;
             document.getElementById('hero-detected-province').textContent = prov;
-            const sel = document.getElementById('province-selector');
-            if (sel) sel.value = prov;
-            
+            if (document.getElementById('province-selector')) document.getElementById('province-selector').value = prov;
+            if (document.getElementById('itinerary-current-province')) document.getElementById('itinerary-current-province').textContent = prov;
             window.dispatchEvent(new CustomEvent('provinceChanged', { detail: prov }));
         }
 
-        function handleManualProvinceChange(val) {
-            detectedProvince = val;
-            updateLocationUI(val, false);
-        }
-
+        function handleManualProvinceChange(val) { detectedProvince = val; updateLocationUI(val, false); }
         function switchCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.category-tab').forEach(t => {
-                t.classList.remove('border-primary-600', 'text-primary-600', 'font-bold');
-                t.classList.add('border-transparent', 'text-gray-500', 'font-medium');
+                t.classList.remove('border-primary-600', 'text-primary-600', 'font-bold'); t.classList.add('border-transparent', 'text-gray-500', 'font-medium');
             });
-            const active = document.getElementById(`tab-${cat}`);
-            if (active) active.classList.add('border-primary-600', 'text-primary-600', 'font-bold');
-            
+            document.getElementById(`tab-${cat}`).classList.add('border-primary-600', 'text-primary-600', 'font-bold');
             window.dispatchEvent(new CustomEvent('categoryChanged', { detail: cat }));
         }
 
         function showLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
         function hideLoginModal() { document.getElementById('login-modal').classList.add('hidden'); }
-        function showAdminDashboard() { 
-            document.getElementById('admin-dashboard-view').classList.remove('hidden'); 
-            switchAdminTab('destinations');
-        }
+        function showAdminDashboard() { document.getElementById('admin-dashboard-view').classList.remove('hidden'); switchAdminTab('destinations'); }
         function closeAdminDashboard() { document.getElementById('admin-dashboard-view').classList.add('hidden'); }
+        function hideAddEditModal() { document.getElementById('add-edit-modal').classList.add('hidden'); }
+        function openDetailModal(id) { activeDetailItemId = id; window.dispatchEvent(new CustomEvent('openDetail', { detail: id })); }
+        function closeDetailModal() { document.getElementById('detail-modal').classList.add('hidden'); activeDetailItemId = null; }
 
         function switchAdminTab(tab) {
             document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
-            document.querySelectorAll('.admin-tab-btn').forEach(b => {
-                b.classList.remove('border-primary-600', 'text-primary-700');
-                b.classList.add('border-transparent', 'text-gray-500');
-            });
+            document.querySelectorAll('.admin-tab-btn').forEach(b => { b.classList.remove('border-primary-600', 'text-primary-700'); b.classList.add('border-transparent', 'text-gray-500'); });
             document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
             document.getElementById(`tab-btn-${tab}`).classList.add('border-primary-600', 'text-primary-700');
         }
 
         function showAddEditModal(id = null) {
-            document.getElementById('destination-form').reset();
-            document.getElementById('form-id').value = id || '';
-            document.getElementById('form-modal-title').textContent = id ? "Ubah Data" : "Tambah Data Rekomendasi Baru";
-            
+            document.getElementById('destination-form').reset(); document.getElementById('form-id').value = id || '';
+            const provSelect = document.getElementById('form-province');
+            if (loggedInUser && loggedInUser.role === 'regional') { provSelect.value = loggedInUser.province; provSelect.disabled = true; } else { provSelect.disabled = false; }
             if (id && window.getLoadedDataById) {
                 const data = window.getLoadedDataById(id);
-                if (data) {
-                    document.getElementById('form-name').value = data.name || '';
-                    document.getElementById('form-category').value = data.category || 'wisata';
-                    document.getElementById('form-province').value = data.province || '';
-                }
+                if (data) { document.getElementById('form-name').value = data.name || ''; document.getElementById('form-category').value = data.category || 'wisata'; provSelect.value = data.province || ''; }
             }
             document.getElementById('add-edit-modal').classList.remove('hidden');
         }
-        function hideAddEditModal() { document.getElementById('add-edit-modal').classList.add('hidden'); }
 
         function updateAdminAuthUI() {
+            const quickBtn = document.getElementById('admin-quick-dashboard-btn'); const loginBtn = document.getElementById('admin-login-btn');
+            const badgeRole = document.getElementById('admin-role-badge'); const tabVerif = document.getElementById('tab-btn-verification');
             if (loggedInUser) {
-                document.getElementById('admin-login-btn').classList.add('hidden');
-                document.getElementById('admin-quick-dashboard-btn').classList.remove('hidden');
-            } else {
-                document.getElementById('admin-login-btn').classList.remove('hidden');
-                document.getElementById('admin-quick-dashboard-btn').classList.add('hidden');
-            }
+                loginBtn.classList.add('hidden'); quickBtn.classList.remove('hidden');
+                badgeRole.textContent = loggedInUser.role === 'root' ? "Super Admin" : `Admin Regional (${loggedInUser.province})`;
+                if(loggedInUser.role === 'root') tabVerif.classList.remove('hidden'); else tabVerif.classList.add('hidden');
+            } else { loginBtn.classList.remove('hidden'); quickBtn.classList.add('hidden'); }
         }
 
         function showToast(msg, type = "success") {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `p-4 rounded-xl text-white text-xs font-bold shadow-lg transition duration-300 transform translate-y-0 ${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`;
-            toast.textContent = msg;
-            container.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 3500);
+            const container = document.getElementById('toast-container'); const toast = document.createElement('div');
+            toast.className = `p-4 rounded-xl text-white text-xs font-bold shadow-lg transition duration-300 ${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`;
+            toast.textContent = msg; container.appendChild(toast); setTimeout(() => { toast.remove(); }, 3500);
         }
 
-        window.showToastGlobal = showToast;
-        window.updateAdminAuthUIGlobal = updateAdminAuthUI;
-        window.hideLoginModalGlobal = hideLoginModal;
-        window.hideAddEditModalGlobal = hideAddEditModal;
+        document.querySelectorAll('#review-star-selector i').forEach(star => {
+            star.onclick = function() {
+                selectedRating = parseInt(this.getAttribute('data-val'));
+                document.querySelectorAll('#review-star-selector i').forEach((s, idx) => {
+                    if (idx < selectedRating) s.className = "fa-solid fa-star text-amber-400"; else s.className = "fa-regular fa-star text-gray-300";
+                });
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => { populateProvinceDropdowns(); startDeviceLocationDetection(); });
+        window.showToastGlobal = showToast; window.updateAdminAuthUIGlobal = updateAdminAuthUI; window.hideLoginModalGlobal = hideLoginModal; window.hideAddEditModalGlobal = hideAddEditModal;
     </script>
 
+    <!-- CLOUD FIREBASE PIPELINE INTEGRATION MODULE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC_dDQHTGlLSdlvv7__GGzNShPlQsFIzgM",
@@ -472,118 +485,181 @@
             appId: "1:254951989273:web:40a285259ce3cd14c68a88"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = 'titiksinggah-realtime';
-
-        let localDB = [];
+        const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const appId = 'titiksinggah-realtime';
+        let activeDB = []; let pendingDB = [];
 
         async function init() {
             await signInAnonymously(auth);
             onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'destinations'), (snap) => {
-                localDB = [];
-                snap.forEach(d => localDB.push({ id: d.id, ...d.data() }));
-                renderPublicCards();
-                renderAdminTable();
+                activeDB = []; snap.forEach(d => activeDB.push({ id: d.id, ...d.data() }));
+                renderPublicCards(); renderAdminTable(); updateItineraryBudgetMeter();
+            });
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations'), (snap) => {
+                pendingDB = []; snap.forEach(d => pendingDB.push({ id: d.id, ...d.data() }));
+                renderVerificationTab();
             });
         }
 
         function renderPublicCards() {
-            const container = document.getElementById('cards-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            const filtered = localDB.filter(item => 
-                item.province.toLowerCase() === detectedProvince.toLowerCase() && 
-                item.category.toLowerCase() === currentCategory.toLowerCase()
-            );
-
-            if(filtered.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center p-10 text-gray-400 text-sm">Tidak ada objek wisata/kuliner terdaftar di wilayah ini.</div>`;
-                return;
-            }
-
+            const container = document.getElementById('cards-container'); if (!container) return; container.innerHTML = '';
+            const filtered = activeDB.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category.toLowerCase() === currentCategory.toLowerCase());
+            if (filtered.length === 0) { container.innerHTML = `<div class="col-span-full text-center p-12 text-gray-400 text-sm"><i class="fa-solid fa-folder-open text-2xl mb-2 block"></i>Belum ada data ${currentCategory} di wilayah ini.</div>`; return; }
             filtered.forEach(item => {
                 container.innerHTML += `
-                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col p-5">
-                        <h4 class="text-base font-extrabold text-gray-900">${item.name}</h4>
-                        <p class="text-xs text-gray-400 mt-1">${item.province} • ${item.category}</p>
+                    <div class="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition">
+                        <div>
+                            <div class="flex justify-between items-center mb-2"><span class="text-[10px] font-bold text-primary-600 uppercase tracking-widest">${item.category}</span></div>
+                            <h4 class="text-base font-extrabold text-gray-900 group-hover:text-primary-700 transition">${item.name}</h4>
+                            <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-location-dot text-red-400"></i> ${item.province}</p>
+                        </div>
+                        <button onclick="openDetailModal('${item.id}')" class="mt-4 w-full py-2 bg-gray-100 text-gray-800 font-bold text-xs rounded-xl hover:bg-primary-600 hover:text-white transition">Lihat & Beri Ulasan</button>
                     </div>`;
             });
         }
 
         function renderAdminTable() {
-            const tbody = document.getElementById('dashboard-table-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-
-            localDB.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b border-gray-100 hover:bg-slate-50";
-                tr.innerHTML = `
-                    <td class="py-3 px-6 font-bold text-gray-900">${item.name}</td>
-                    <td class="py-3 px-6">${item.province}</td>
-                    <td class="py-3 px-6 uppercase text-xs font-bold">${item.category}</td>
-                    <td class="py-3 px-6 text-center">
-                        <button onclick="showAddEditModal('${item.id}')" class="text-blue-600 hover:text-blue-800 mx-1"><i class="fa-solid fa-pen"></i></button>
-                        <button id="del-${item.id}" class="text-red-600 hover:text-red-800 mx-1"><i class="fa-solid fa-trash shadow-sm"></i></button>
-                    </td>`;
-                tbody.appendChild(tr);
-
-                document.getElementById(`del-${item.id}`).onclick = async () => {
-                    if(confirm('Hapus item ini secara permanen?')) {
-                        await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id));
-                        window.showToastGlobal('Data terhapus secara real-time!', 'success');
-                    }
-                };
+            const tbody = document.getElementById('dashboard-table-body'); if (!tbody) return; tbody.innerHTML = '';
+            const keyword = document.getElementById('db-search-input') ? document.getElementById('db-search-input').value.toLowerCase().trim() : '';
+            const scopedData = activeDB.filter(item => item.name.toLowerCase().includes(keyword) && (loggedInUser && (loggedInUser.role === 'root' || item.province === loggedInUser.province)));
+            if (scopedData.length === 0) { tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-gray-400 text-xs">Kosong atau di luar akses teritori regional Anda.</td></tr>`; return; }
+            scopedData.forEach(item => {
+                tbody.innerHTML += `
+                    <tr class="border-b hover:bg-slate-50 text-xs">
+                        <td class="py-3 px-6 font-bold text-gray-900">${item.name}</td><td class="py-3 px-6">${item.province}</td><td class="py-3 px-6 uppercase font-bold text-primary-700">${item.category}</td>
+                        <td class="py-3 px-6 text-center">
+                            <button id="edit-${item.id}" class="text-blue-600 mx-1"><i class="fa-solid fa-pen"></i></button>
+                            <button id="del-${item.id}" class="text-red-600 mx-1"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                setTimeout(() => {
+                    document.getElementById(`edit-${item.id}`).onclick = () => showAddEditModal(item.id);
+                    document.getElementById(`del-${item.id}`).onclick = async () => {
+                        if (confirm(`Hapus permanen dari basis data?`)) { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id)); window.showToastGlobal('Data terbit dihapus!', 'success'); }
+                    };
+                }, 50);
             });
         }
 
-        window.getLoadedDataById = function(id) {
-            return localDB.find(d => d.id === id);
+        function renderVerificationTab() {
+            const badge = document.getElementById('pending-count-badge'); const container = document.getElementById('verification-list-container'); const emptyState = document.getElementById('verification-empty-state');
+            if (!container) return; container.innerHTML = '';
+            if (pendingDB.length > 0) { badge.textContent = pendingDB.length; badge.classList.remove('hidden'); emptyState.classList.add('hidden'); } else { badge.classList.add('hidden'); emptyState.classList.remove('hidden'); }
+            pendingDB.forEach(item => {
+                const div = document.createElement('div'); div.className = "bg-white p-4 rounded-xl border border-amber-200 flex justify-between items-center text-left text-xs";
+                div.innerHTML = `<div><span class="bg-amber-100 text-amber-800 text-[9px] px-2 font-bold rounded uppercase">${item.category}</span><h4 class="font-black text-gray-900 mt-1">${item.name} (${item.province})</h4></div>
+                    <div class="flex gap-2"><button id="appr-${item.id}" class="px-3 py-1.5 bg-emerald-600 text-white font-bold rounded-lg shadow">Setujui</button><button id="rejc-${item.id}" class="px-3 py-1.5 bg-red-50 text-red-600 border rounded-lg">Tolak</button></div>`;
+                container.appendChild(div);
+                document.getElementById(`appr-${item.id}`).onclick = async () => {
+                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), { name: item.name, category: item.category, province: item.province, reviews: [] });
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id));
+                    window.showToastGlobal('Data resmi diterbitkan ke publik!', 'success');
+                };
+                document.getElementById(`rejc-${item.id}`).onclick = async () => { if (confirm('Tolak usulan?')) { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id)); window.showToastGlobal('Usulan ditolak & dibersihkan.', 'success'); } };
+            });
+        }
+
+        // PERENCANA LIBURAN (SMART ITINERARY ALGORITHM)
+        function updateItineraryBudgetMeter() {
+            const budgetInput = document.getElementById('itinerary-budget-num'); if(!budgetInput) return;
+            const userBudget = parseInt(budgetInput.value) || 0;
+            const days = parseInt(document.getElementById('itinerary-days').value) || 1;
+            
+            // Mengalkulasi estimasi biaya mockup per kategori di provinsi terpilih
+            const filtered = activeDB.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase());
+            const hasWisata = filtered.some(i => i.category === 'wisata') ? 50000 : 0;
+            const hasKuliner = filtered.some(i => i.category === 'kuliner') ? 100000 : 0;
+            const hasHotel = filtered.some(i => i.category === 'penginapan') ? 350000 : 0;
+            const hasTransport = filtered.some(i => i.category === 'transportasi') ? 150000 : 0;
+
+            const baseCostPerDay = hasWisata + hasKuliner + hasTransport;
+            const totalEstimated = (baseCostPerDay * days) + (hasHotel * (days - 1 || 1));
+
+            const bar = document.getElementById('itinerary-meter-bar'); const text = document.getElementById('itinerary-meter-text');
+            if(userBudget === 0) { bar.style.width = "0%"; text.textContent = "Masukkan nominal anggaran rencana perjalanan."; return; }
+            const pct = Math.min((totalEstimated / userBudget) * 100, 100); bar.style.width = `${pct}%`;
+            if (totalEstimated <= userBudget) { bar.className = "h-full bg-emerald-400"; text.innerHTML = `Anggaran Aman! Estimasi biaya Rp ${totalEstimated.toLocaleString('id-ID')} (Sisa: Rp ${(userBudget - totalEstimated).toLocaleString('id-ID')})`; } 
+            else { bar.className = "h-full bg-red-500"; text.innerHTML = `Melebihi Anggaran! Estimasi paket Rp ${totalEstimated.toLocaleString('id-ID')} (Kurang: Rp ${(totalEstimated - userBudget).toLocaleString('id-ID')})`; }
+        }
+
+        window.generateItineraryGlobal = function(e) {
+            e.preventDefault();
+            const days = parseInt(document.getElementById('itinerary-days').value);
+            const timeline = document.getElementById('itinerary-timeline');
+            timeline.innerHTML = '';
+            
+            const filtered = activeDB.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase());
+            const sampleWisata = filtered.find(i => i.category === 'wisata')?.name || "Destinasi Eksplorasi Lokal";
+            const sampleKuliner = filtered.find(i => i.category === 'kuliner')?.name || "Resto Tradisional Pilihan";
+            const sampleHotel = filtered.find(i => i.category === 'penginapan')?.name || "Hotel/Penginapan Setempat";
+            const sampleTransport = filtered.find(i => i.category === 'transportasi')?.name || "Layanan Tour Mandiri";
+
+            for(let d=1; d<=days; d++) {
+                timeline.innerHTML += `
+                    <div class="border-l-2 border-emerald-500 pl-3 py-1">
+                        <h5 class="font-bold text-gray-800 text-xs">HARI KE-${d}</h5>
+                        <p class="mt-0.5">• Pagi - Penjemputan via <b>${sampleTransport}</b> & eksplorasi menuju <b>${sampleWisata}</b>.</p>
+                        <p>• Siang - Istirahat makan siang menu khas di <b>${sampleKuliner}</b>.</p>
+                        <p class="mb-1">• Malam - Check-in / Istirahat relaksasi nyaman di <b>${sampleHotel}</b>.</p>
+                    </div>`;
+            }
+            document.getElementById('itinerary-result').classList.remove('hidden');
+        };
+
+        // INTEGRASI SYSTEM REVIEW & ULASAN KOMUNITAS REAL-TIME
+        window.addEventListener('openDetail', (e) => {
+            const item = activeDB.find(d => d.id === e.detail); if(!item) return;
+            document.getElementById('detail-title').textContent = item.name;
+            document.getElementById('detail-category-badge').textContent = item.category;
+            const container = document.getElementById('reviews-list-container'); container.innerHTML = '';
+            const list = item.reviews || [];
+            if(list.length === 0) { container.innerHTML = `<p class="text-xs text-gray-400 italic">Belum ada ulasan. Jadi yang pertama memberi ulasan!</p>`; }
+            else {
+                list.forEach(r => {
+                    container.innerHTML += `<div class="bg-gray-50 p-2 rounded-xl border text-[11px]"><div class="flex justify-between font-bold text-gray-800"><span>${r.username}</span><span class="text-amber-500">★ ${r.rating}</span></div><p class="text-gray-600 mt-0.5">${r.comment}</p></div>`;
+                });
+            }
+            document.getElementById('detail-modal').classList.remove('hidden');
+        });
+
+        window.submitUserReviewGlobal = async function() {
+            const name = document.getElementById('review-username-input').value.trim();
+            const comment = document.getElementById('review-text-input').value.trim();
+            if(!name || !comment || selectedRating === 0) { alert('Harap isi nama, ulasan, dan rating bintang!'); return; }
+            const item = activeDB.find(d => d.id === activeDetailItemId); if(!item) return;
+            const currentReviews = item.reviews || [];
+            currentReviews.push({ username: name, rating: selectedRating, comment: comment });
+            await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', activeDetailItemId), { reviews: currentReviews });
+            window.showToastGlobal('Ulasan diterbitkan secara real-time!', 'success'); closeDetailModal();
         };
 
         window.handleLoginSubmitGlobal = function(e) {
-            e.preventDefault();
-            const u = document.getElementById('login-username').value;
-            const p = document.getElementById('login-password').value;
-            if(u === 'superadmin' && p === 'superadmin123') {
-                loggedInUser = { fullname: 'Super Administrator', username: 'superadmin', role: 'root' };
-                localStorage.setItem('titik_singgah_session', JSON.stringify(loggedInUser));
-                window.updateAdminAuthUIGlobal();
-                window.hideLoginModalGlobal();
-                window.showToastGlobal('Berhasil masuk sebagai Root Admin!', 'success');
-                showAdminDashboard();
-            } else {
-                window.showToastGlobal('Kredensial salah!', 'error');
-            }
+            e.preventDefault(); const u = document.getElementById('login-username').value.trim(); const p = document.getElementById('login-password').value;
+            if (u === 'superadmin' && p === 'superadmin123') loggedInUser = { fullname: 'Super Administrator', username: 'superadmin', role: 'root', province: 'ALL' };
+            else if (u === 'budi_lampung' && p === 'budi123') loggedInUser = { fullname: 'Budi Santoso', username: 'budi_lampung', role: 'regional', province: 'Lampung' };
+            else { window.showToastGlobal('Akun tidak terdaftar!', 'error'); return; }
+            localStorage.setItem('titik_singgah_session', JSON.stringify(loggedInUser)); window.updateAdminAuthUIGlobal(); window.hideLoginModalGlobal(); window.showToastGlobal(`Selamat datang!`, 'success'); showAdminDashboard();
         };
 
-        window.handleLogoutGlobal = function() {
-            loggedInUser = null;
-            localStorage.removeItem('titik_singgah_session');
-            window.updateAdminAuthUIGlobal();
-            closeAdminDashboard();
-            window.showToastGlobal('Sesi berakhir.', 'success');
-        };
-
+        window.handleLogoutGlobal = function() { loggedInUser = null; localStorage.removeItem('titik_singgah_session'); window.updateAdminAuthUIGlobal(); closeAdminDashboard(); window.showToastGlobal('Sesi keluar.', 'success'); };
+        
         window.handleFormSubmitGlobal = async function(e) {
-            e.preventDefault();
-            const id = document.getElementById('form-id').value || 'dest-' + Date.now();
-            const payload = {
-                name: document.getElementById('form-name').value,
-                category: document.getElementById('form-category').value,
-                province: document.getElementById('form-province').value
-            };
-            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', id), payload, { merge: true });
+            e.preventDefault(); const id = document.getElementById('form-id').value || 'dest-' + Date.now();
+            const targetProvince = loggedInUser.role === 'regional' ? loggedInUser.province : document.getElementById('form-province').value;
+            const payload = { name: document.getElementById('form-name').value, category: document.getElementById('form-category').value, province: targetProvince, reviews: [] };
+            if (loggedInUser.role === 'regional') {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', id), payload, { merge: true });
+                window.showToastGlobal('Usulan dikirim ke antrian verifikasi!', 'success');
+            } else {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', id), payload, { merge: true });
+                window.showToastGlobal('Data terbit secara real-time!', 'success');
+            }
             window.hideAddEditModalGlobal();
-            window.showToastGlobal('Database tersinkronisasi!', 'success');
         };
 
-        window.addEventListener('provinceChanged', () => renderPublicCards());
+        window.printItineraryGlobal = function() { document.body.className = 'print-itinerary-active'; window.print(); };
+        window.updateItineraryBudgetMeterGlobal = updateItineraryBudgetMeter;
+        window.addEventListener('provinceChanged', () => { renderPublicCards(); updateItineraryBudgetMeter(); });
         window.addEventListener('categoryChanged', () => renderPublicCards());
-
         init();
     </script>
 </body>
