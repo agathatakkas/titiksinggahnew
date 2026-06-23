@@ -35,21 +35,17 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         @keyframes breathingGlow { 0%, 100% { border-color: rgba(34, 197, 94, 0.4); box-shadow: 0 0 8px rgba(34, 197, 94, 0.2); } 50% { border-color: rgba(110, 231, 183, 0.9); box-shadow: 0 0 20px rgba(34, 197, 94, 0.6); } }
-        
         .glowing-premium-console { border: 2px solid rgba(34, 197, 94, 0.4); animation: breathingGlow 3.5s infinite ease-in-out; }
         .animate-fade-in-down { animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
         .animate-fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
         .animate-scale-in { animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
-        
         @media print {
             body * { visibility: hidden !important; }
             body.print-itinerary-active #itinerary-result, body.print-itinerary-active #itinerary-result * { visibility: visible !important; }
-            body.print-modal-active #detail-modal, body.print-modal-active #detail-modal * { visibility: visible !important; }
         }
     </style>
 </head>
@@ -74,12 +70,12 @@
                         <span id="location-text">Mendeteksi Lokasi...</span>
                     </div>
                     
-                    <button id="admin-login-btn" onclick="showLoginModal()" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md hover:scale-105 duration-200">
+                    <button id="admin-login-btn" onclick="showLoginModal()" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-user-shield text-xs"></i>
                         <span>Admin Portal</span>
                     </button>
                     
-                    <button id="admin-quick-dashboard-btn" onclick="showAdminDashboard()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md hover:scale-105 duration-200">
+                    <button id="admin-quick-dashboard-btn" onclick="showAdminDashboard()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-gauge"></i>
                         <span>Dashboard Admin</span>
                     </button>
@@ -88,18 +84,17 @@
         </div>
     </nav>
 
-    <section class="relative bg-gradient-to-br from-primary-950 via-primary-900 to-slate-950 text-white overflow-hidden py-24 px-4 pb-32">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.18),transparent_60%)]"></div>
+    <section class="relative bg-gradient-to-br from-primary-950 via-primary-900 to-slate-950 text-white overflow-hidden py-20 px-4 pb-28">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.15),transparent_60%)]"></div>
         <div class="max-w-5xl mx-auto text-center relative z-10">
             <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-primary-200 border border-white/10 uppercase mb-6 animate-fade-in-up">
                 <i class="fa-solid fa-cloud-arrow-up text-emerald-400 animate-pulse"></i>
                 Database Sinkronisasi Real-Time Akses Publik
             </span>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight animate-fade-in-up">
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight animate-fade-in-up">
                 Temukan Keajaiban <br class="hidden sm:inline">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-green-300">Tersembunyi di Sekitarmu</span>
             </h1>
-            <p class="mt-4 text-sm sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">Eksplorasi pariwisata daerah, kuliner legendaris, hotel ternyaman, serta jasa pemandu lokal tepercaya terintegrasi cloud database.</p>
             
             <div class="mt-10 max-w-xl mx-auto bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-5 shadow-2xl glowing-premium-console">
                 <div class="flex flex-col sm:flex-row items-center gap-4">
@@ -122,29 +117,34 @@
     </section>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
-        <div class="flex justify-center border-b border-gray-200 mb-8 overflow-x-auto pb-px custom-scrollbar">
-            <div class="flex space-x-2 sm:space-x-8">
-                <button onclick="switchCategory('wisata')" id="tab-wisata" class="category-tab border-b-2 border-primary-600 text-primary-600 px-4 py-3 text-sm sm:text-base font-bold flex items-center gap-2 transition">
-                    <i class="fa-solid fa-map-location-dot"></i> <span>Wisata Terpopuler</span>
-                </button>
-                <button onclick="switchCategory('kuliner')" id="tab-kuliner" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
-                    <i class="fa-solid fa-utensils"></i> <span>Kuliner Khas</span>
-                </button>
-                <button onclick="switchCategory('penginapan')" id="tab-penginapan" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
-                    <i class="fa-solid fa-hotel"></i> <span>Penginapan & Hotel</span>
-                </button>
-                <button onclick="switchCategory('transportasi')" id="tab-transportasi" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
-                    <i class="fa-solid fa-car-side"></i> <span>Transportasi & Guide</span>
-                </button>
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+            <div class="flex justify-center border-b border-gray-200 overflow-x-auto pb-px custom-scrollbar w-full sm:w-auto">
+                <div class="flex space-x-2 sm:space-x-8 whitespace-nowrap">
+                    <button onclick="switchCategory('wisata')" id="tab-wisata" class="category-tab border-b-2 border-primary-600 text-primary-600 px-4 py-3 text-sm sm:text-base font-bold flex items-center gap-2 transition">
+                        <i class="fa-solid fa-map-location-dot"></i> <span>Wisata Terpopuler</span>
+                    </button>
+                    <button onclick="switchCategory('kuliner')" id="tab-kuliner" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
+                        <i class="fa-solid fa-utensils"></i> <span>Kuliner Khas</span>
+                    </button>
+                    <button onclick="switchCategory('penginapan')" id="tab-penginapan" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
+                        <i class="fa-solid fa-hotel"></i> <span>Penginapan & Hotel</span>
+                    </button>
+                    <button onclick="switchCategory('transportasi')" id="tab-transportasi" class="category-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-4 py-3 text-sm sm:text-base font-medium flex items-center gap-2 transition">
+                        <i class="fa-solid fa-car-side"></i> <span>Transportasi & Guide</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="relative w-full sm:w-80">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                </span>
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari nama, lokasi, atau deskripsi..." class="w-full pl-9 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm">
             </div>
         </div>
 
         <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
-            <div class="col-span-full py-16 text-center">
-                <i class="fa-solid fa-spinner animate-spin text-3xl text-primary-500 mb-3"></i>
-                <p class="text-gray-500 text-sm">Menghubungkan ke basis data awan real-time...</p>
             </div>
-        </div>
 
         <section id="itinerary-section" class="bg-gradient-to-br from-emerald-900 to-primary-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden animate-fade-in-up">
             <div class="max-w-3xl mb-8 relative z-10">
@@ -199,28 +199,91 @@
     <div id="detail-modal" class="fixed inset-0 z-50 overflow-y-auto hidden animate-scale-in">
         <div class="flex items-center justify-center min-h-screen p-4 text-center">
             <div class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm" onclick="closeDetailModal()"></div>
-            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-xl sm:w-full border border-gray-100 flex flex-col max-h-[90vh]">
-                <div class="p-6 overflow-y-auto custom-scrollbar space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <span id="detail-category-badge" class="px-2 py-0.5 bg-primary-100 text-primary-800 text-[10px] font-bold rounded uppercase">Kategori</span>
-                            <h2 id="detail-title" class="text-xl font-black text-gray-900 mt-1">Nama Tempat</h2>
+            
+            <div class="relative bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-2xl sm:w-full border border-gray-100 flex flex-col max-h-[92vh]">
+                <div class="relative h-52 sm:h-64 w-full shrink-0 overflow-hidden bg-gray-100">
+                    <img id="detail-image" src="" alt="" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <button onclick="closeDetailModal()" class="absolute top-4 right-4 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                    <div class="absolute bottom-4 left-4 flex gap-2 items-center">
+                        <span id="detail-category-badge" class="px-2.5 py-1 bg-primary-600 text-white text-xs font-bold rounded shadow-md uppercase tracking-wider"></span>
+                        <span class="px-2.5 py-1 bg-amber-500 text-white text-xs font-bold rounded shadow-md flex items-center gap-1">
+                            <i class="fa-solid fa-star"></i> <span id="detail-rating-text">4.0</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-5">
+                    <div>
+                        <div class="text-[11px] font-bold text-primary-600 uppercase tracking-widest flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-map-pin"></i> <span id="detail-province-text">LAMPUNG</span>
                         </div>
-                        <button onclick="closeDetailModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                        <h2 id="detail-title" class="text-2xl sm:text-3xl font-black text-gray-900 leading-tight">Pulau Pahawang</h2>
+                        <p id="detail-location" class="text-xs text-gray-400 flex items-center gap-1.5 mt-1 font-semibold">
+                            <i class="fa-solid fa-location-dot text-red-500"></i>
+                            <span>Pesawaran, Lampung</span>
+                        </p>
                     </div>
 
-                    <div class="border-t pt-4">
-                        <h4 class="text-xs font-bold text-gray-700 mb-3 flex items-center gap-1"><i class="fa-regular fa-comments"></i> Kolom Ulasan Komunitas</h4>
-                        <div id="reviews-list-container" class="space-y-2 mb-4 max-h-40 overflow-y-auto custom-scrollbar"></div>
-                        
-                        <div class="bg-slate-50 p-3 rounded-xl border space-y-2">
-                            <span class="text-[11px] font-bold text-gray-700 block">Tulis Ulasan Baru</span>
-                            <div class="flex gap-1 text-amber-400 text-xs cursor-pointer" id="review-star-selector">
-                                <i class="fa-regular fa-star" data-val="1"></i><i class="fa-regular fa-star" data-val="2"></i><i class="fa-regular fa-star" data-val="3"></i><i class="fa-regular fa-star" data-val="4"></i><i class="fa-regular fa-star" data-val="5"></i>
+                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                        <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Deskripsi Lengkap</h4>
+                        <p id="detail-desc" class="text-gray-600 text-xs sm:text-sm leading-relaxed"></p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-indigo-50/50 p-3 rounded-xl border border-indigo-100 flex items-center gap-3">
+                            <i class="fa-regular fa-clock text-indigo-600 text-base"></i>
+                            <div>
+                                <span class="text-[9px] block text-gray-400 font-bold uppercase">Waktu Terbaik Kunjungan</span>
+                                <span class="text-xs font-bold text-indigo-900">07:00 - 16:00 WIB</span>
                             </div>
-                            <input type="text" id="review-username-input" placeholder="Nama Anda..." class="w-full px-3 py-1.5 text-xs border rounded-xl bg-white">
-                            <textarea id="review-text-input" rows="2" placeholder="Bagikan pengalaman menarik Anda..." class="w-full px-3 py-1.5 text-xs border rounded-xl bg-white resize-none"></textarea>
-                            <button onclick="window.submitUserReviewGlobal()" class="px-3 py-1.5 bg-emerald-600 text-white font-bold text-xs rounded-lg shadow">Kirim Ulasan</button>
+                        </div>
+                        <div class="bg-amber-50/50 p-3 rounded-xl border border-amber-100 flex items-center gap-3">
+                            <i class="fa-solid fa-circle-nodes text-amber-600 text-base"></i>
+                            <div>
+                                <span class="text-[9px] block text-gray-400 font-bold uppercase">Aktivitas Terpopuler</span>
+                                <span class="text-xs text-amber-900 font-bold">Snorkeling & Foto</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-50/60 rounded-xl p-4 border border-emerald-100 space-y-2 text-left">
+                        <h4 class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1">
+                            <i class="fa-solid fa-tags"></i> Rincian Biaya & Tarif Terbaru
+                        </h4>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
+                                <span class="text-[9px] font-bold text-gray-400 block uppercase">Hari Biasa (Weekday)</span>
+                                <span id="detail-cost-weekday" class="text-xs font-black text-emerald-900 mt-0.5 block">Rp 120.000</span>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
+                                <span class="text-[9px] font-bold text-gray-400 block uppercase">Akhir Pekan (Weekend)</span>
+                                <span id="detail-cost-weekend" class="text-xs font-black text-amber-700 mt-0.5 block">Rp 150.000</span>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
+                                <span class="text-[9px] font-bold text-gray-400 block uppercase">Pilihan Paket / Spesial</span>
+                                <span id="detail-cost-package" class="text-xs font-black text-indigo-900 mt-0.5 block">Rp 450.000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-150 pt-4 space-y-3">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-regular fa-comments"></i> Ulasan Pengunjung (<span id="review-count">0</span>)
+                        </h4>
+                        <div id="reviews-list-container" class="space-y-2 max-h-36 overflow-y-auto custom-scrollbar">
+                            </div>
+                        
+                        <div class="bg-slate-50 p-4 rounded-xl border space-y-2.5 text-left">
+                            <span class="text-xs font-bold text-gray-700 block">Tulis Ulasan Anda</span>
+                            <div class="flex gap-1 text-gray-300 text-sm cursor-pointer" id="review-star-selector">
+                                <i class="fa-solid fa-star" data-val="1"></i><i class="fa-solid fa-star" data-val="2"></i><i class="fa-solid fa-star" data-val="3"></i><i class="fa-solid fa-star" data-val="4"></i><i class="fa-solid fa-star" data-val="5"></i>
+                            </div>
+                            <input type="text" id="review-username-input" placeholder="Nama Anda..." class="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg focus:outline-none bg-white shadow-sm">
+                            <textarea id="review-text-input" rows="2" placeholder="Tulis komentar petualangan Anda disini..." class="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg focus:outline-none bg-white resize-none shadow-sm"></textarea>
+                            <button onclick="window.submitUserReviewGlobal()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition">Kirim Ulasan</button>
                         </div>
                     </div>
                 </div>
@@ -238,25 +301,23 @@
                             <i class="fa-solid fa-user-shield text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-extrabold text-gray-900">Portal Login Admin</h3>
-                        <p class="text-xs text-gray-500 mt-1">Masuk dengan Super Admin atau Admin Regional wilayah.</p>
+                        <p class="text-xs text-gray-500 mt-1">Masuk menggunakan Super Admin atau Admin Regional.</p>
                     </div>
 
                     <form id="login-form" onsubmit="window.handleLoginSubmitGlobal(event)">
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Username</label>
-                                <input type="text" id="login-username" required placeholder="superadmin atau budi_lampung" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                                <input type="text" id="login-username" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
-                                <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
+                                <input type="password" id="login-password" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none">
                             </div>
                         </div>
                         <button type="submit" class="w-full mt-6 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl shadow transition">Verifikasi Masuk</button>
                     </form>
-                    
                     <div class="mt-4 bg-slate-50 rounded-xl p-3 border text-[11px] text-gray-500 space-y-1">
-                        <p>💡 <b>Kredensial Otoritas Wilayah:</b></p>
                         <p>• <b>Super Admin</b>: <code class="bg-white px-1 border rounded">superadmin</code> / <code class="bg-white px-1 border rounded">superadmin123</code></p>
                         <p>• <b>Admin Regional (Lampung)</b>: <code class="bg-white px-1 border rounded">budi_lampung</code> / <code class="bg-white px-1 border rounded">budi123</code></p>
                     </div>
@@ -354,7 +415,7 @@
 
     <script>
         const PROVINCES = ["Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "Jambi", "Sumatera Selatan", "Bangka Belitung", "Bengkulu", "Lampung", "DKI Jakarta", "Jawa Barat", "Banten", "Jawa Tengah", "DIY Yogyakarta", "Jawa Timur", "Bali", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Kalimantan Barat", "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara", "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Sulawesi Barat", "Gorontalo", "Maluku", "Maluku Utara", "Papua Barat", "Papua"].sort();
-        let currentCategory = 'wisata'; let detectedProvince = 'Lampung'; let loggedInUser = null; let activeDetailItemId = null; let selectedRating = 0;
+        let currentCategory = 'wisata'; let detectedProvince = 'Lampung'; let loggedInUser = null; let activeDetailItemId = null; let selectedRating = 0; let searchKeyword = '';
 
         function populateProvinceDropdowns() {
             ['province-selector', 'form-province'].forEach(id => {
@@ -403,6 +464,8 @@
         }
 
         function handleManualProvinceChange(val) { detectedProvince = val; updateLocationUI(val, false); }
+        function handleSearch() { searchKeyword = document.getElementById('search-input').value.toLowerCase().trim(); window.dispatchEvent(new CustomEvent('searchChanged')); }
+
         function switchCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.category-tab').forEach(t => {
@@ -415,7 +478,7 @@
         function showLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
         function hideLoginModal() { document.getElementById('login-modal').classList.add('hidden'); }
         function showAdminDashboard() { document.getElementById('admin-dashboard-view').classList.remove('hidden'); switchAdminTab('destinations'); }
-        function closeAdminDashboard() { document.getElementById('admin-dashboard-view').classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }
+        function closeAdminDashboard() { document.getElementById('admin-dashboard-view').classList.add('hidden'); }
         function hideAddEditModal() { document.getElementById('add-edit-modal').classList.add('hidden'); }
         function openDetailModal(id) { activeDetailItemId = id; window.dispatchEvent(new CustomEvent('openDetail', { detail: id })); }
         function closeDetailModal() { document.getElementById('detail-modal').classList.add('hidden'); activeDetailItemId = null; }
@@ -458,12 +521,11 @@
             star.onclick = function() {
                 selectedRating = parseInt(this.getAttribute('data-val'));
                 document.querySelectorAll('#review-star-selector i').forEach((s, idx) => {
-                    if (idx < selectedRating) s.className = "fa-solid fa-star text-amber-400"; else s.className = "fa-regular fa-star text-gray-300";
+                    if (idx < selectedRating) s.className = "fa-solid fa-star text-amber-400"; else s.className = "fa-solid fa-star text-gray-300";
                 });
             }
         });
 
-        window.addEventListener('DOMContentLoaded', () => { populateProvinceDropdowns(); startDeviceLocationDetection(); });
         window.showToastGlobal = showToast; window.updateAdminAuthUIGlobal = updateAdminAuthUI; window.hideLoginModalGlobal = hideLoginModal; window.hideAddEditModalGlobal = hideAddEditModal;
     </script>
 
@@ -484,10 +546,18 @@
         const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const appId = 'titiksinggah-realtime';
         let activeDB = []; let pendingDB = [];
 
+        // BASE MOCK DATA FALLBACK (Mencegah tampilan kosong saat database baru dionlinekan)
+        const SEED_MOCK = [
+            { id: "pahawang-1", name: "Pulau Pahawang", province: "Lampung", category: "wisata", rating: 4.0, costWeekday: "Rp 120.000", costWeekend: "Rp 150.000", costPackage: "Rp 450.000", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", description: "Pahawang terkenal sebagai surga snorkeling di Lampung. Keindahan terumbu karang yang sehat, air jernih berwarna toska, serta keberadaan ikan badut (Nemo) membuat destinasi ini sangat populer.", reviews: [{username: "Agatha", rating: 5, comment: "Koralnya indah sekali, airnya sangat jernih!"}] },
+            { id: "cikwo-2", name: "Seruit Lampung Cikwo Resto", province: "Lampung", category: "kuliner", rating: 4.5, costWeekday: "Rp 45.000", costWeekend: "Rp 55.000", costPackage: "Rp 180.000", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80", description: "Menyajikan makanan tradisional khas Lampung utama ikan Baung bakar disajikan dengan perpaduan sambal seruit segar, tempoyak, dan lalapan segar.", reviews: [] }
+        ];
+
         async function init() {
             await signInAnonymously(auth);
             onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'destinations'), (snap) => {
-                activeDB = []; snap.forEach(d => activeDB.push({ id: d.id, ...d.data() }));
+                activeDB = []; 
+                snap.forEach(d => activeDB.push({ id: d.id, ...d.data() }));
+                if(activeDB.length === 0) activeDB = [...SEED_MOCK]; // Inject local fallbacks if empty
                 renderPublicCards(); renderAdminTable(); updateItineraryBudgetMeter();
             });
             onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations'), (snap) => {
@@ -498,26 +568,53 @@
 
         function renderPublicCards() {
             const container = document.getElementById('cards-container'); if (!container) return; container.innerHTML = '';
-            const filtered = activeDB.filter(item => item.province.toLowerCase() === detectedProvince.toLowerCase() && item.category.toLowerCase() === currentCategory.toLowerCase());
-            if (filtered.length === 0) { container.innerHTML = `<div class="col-span-full text-center p-12 text-gray-400 text-sm"><i class="fa-solid fa-folder-open text-2xl mb-2 block"></i>Belum ada data ${currentCategory} di wilayah ini.</div>`; return; }
+            
+            const filtered = activeDB.filter(item => {
+                const matchesProvince = item.province.toLowerCase() === detectedProvince.toLowerCase();
+                const matchesCategory = item.category.toLowerCase() === currentCategory.toLowerCase();
+                const matchesSearch = item.name.toLowerCase().includes(searchKeyword) || item.description.toLowerCase().includes(searchKeyword);
+                return matchesProvince && matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) { 
+                container.innerHTML = `<div class="col-span-full text-center p-12 text-gray-400 text-sm"><i class="fa-solid fa-folder-open text-2xl mb-2 block"></i>Belum ada data ${currentCategory} di wilayah ini.</div>`; 
+                return; 
+            }
+
             filtered.forEach(item => {
                 container.innerHTML += `
-                    <div class="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition">
-                        <div>
-                            <span class="text-[10px] font-bold text-primary-600 uppercase block mb-1">${item.category}</span>
-                            <h4 class="text-base font-extrabold text-gray-900 group-hover:text-primary-700 transition">${item.name}</h4>
-                            <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-location-dot text-red-400"></i> ${item.province}</p>
+                    <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition duration-300">
+                        <div class="relative h-44 w-full bg-slate-100 overflow-hidden">
+                            <img src="${item.image || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'}" class="w-full h-full object-cover group-hover:scale-105 duration-500">
+                            <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-emerald-800 flex items-center gap-1 shadow-sm">
+                                <i class="fa-solid fa-star text-amber-500"></i> <span>${Number(item.rating || 4.0).toFixed(1)}</span>
+                            </div>
                         </div>
-                        <button onclick="openDetailModal('${item.id}')" class="mt-4 w-full py-2 bg-gray-100 text-gray-800 font-bold text-xs rounded-xl hover:bg-primary-600 hover:text-white transition">Lihat & Beri Ulasan</button>
+                        <div class="p-5 flex-1 flex flex-col justify-between text-left">
+                            <div>
+                                <span class="text-[10px] font-bold text-primary-600 uppercase tracking-widest block mb-1">${item.province}</span>
+                                <h4 class="text-base font-extrabold text-gray-900 group-hover:text-primary-700 transition">${item.name}</h4>
+                                <p class="text-xs text-gray-400 flex items-center gap-1 mt-0.5 font-medium">
+                                    <i class="fa-solid fa-location-dot text-red-400"></i> <span class="truncate">${item.province}</span>
+                                </p>
+                                <p class="text-xs text-gray-500 mt-2.5 line-clamp-2 leading-relaxed">${item.description || ''}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                                <div class="text-[11px] text-gray-500">
+                                    <span class="block">Mulai Dari:</span>
+                                    <span class="font-extrabold text-emerald-800 text-sm">${item.costWeekday || 'Rp 120.000'}</span>
+                                </div>
+                                <button onclick="openDetailModal('${item.id}')" class="px-3 py-1.5 bg-gray-100 text-gray-800 font-bold text-xs rounded-xl hover:bg-primary-600 hover:text-white transition duration-200">Detail Info</button>
+                            </div>
+                        </div>
                     </div>`;
             });
         }
 
         function renderAdminTable() {
             const tbody = document.getElementById('dashboard-table-body'); if (!tbody) return; tbody.innerHTML = '';
-            const keyword = document.getElementById('db-search-input') ? document.getElementById('db-search-input').value.toLowerCase().trim() : '';
-            const scopedData = activeDB.filter(item => item.name.toLowerCase().includes(keyword) && (loggedInUser && (loggedInUser.role === 'root' || item.province === loggedInUser.province)));
-            if (scopedData.length === 0) { tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-gray-400 text-xs">Kosong atau di luar akses teritori regional Anda.</td></tr>`; return; }
+            const scopedData = activeDB.filter(item => loggedInUser && (loggedInUser.role === 'root' || item.province === loggedInUser.province));
+            if (scopedData.length === 0) { tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-gray-400 text-xs">Kosong atau di luar otoritas regional Anda.</td></tr>`; return; }
             scopedData.forEach(item => {
                 const tr = document.createElement('tr'); tr.className = "border-b hover:bg-slate-50 text-xs";
                 tr.innerHTML = `<td class="py-3 px-6 font-bold text-gray-900">${item.name}</td><td class="py-3 px-6">${item.province}</td><td class="py-3 px-6 uppercase font-bold text-primary-700">${item.category}</td>
@@ -525,7 +622,12 @@
                 tbody.appendChild(tr);
                 document.getElementById(`edit-${item.id}`).onclick = () => showAddEditModal(item.id);
                 document.getElementById(`del-${item.id}`).onclick = async () => {
-                    if (confirm(`Hapus permanen dari basis data?`)) { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id)); window.showToastGlobal('Data terbit dihapus!', 'success'); }
+                    if (confirm(`Hapus permanen dari basis data?`)) { 
+                        if(item.id.startsWith("pahawang") || item.id.startsWith("cikwo")) {
+                            activeDB = activeDB.filter(d => d.id !== item.id); renderAdminTable(); renderPublicCards();
+                        } else { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id)); }
+                        window.showToastGlobal('Data terbit dihapus!', 'success'); 
+                    }
                 };
             });
         }
@@ -540,7 +642,7 @@
                     <div class="flex gap-2"><button id="appr-${item.id}" class="px-3 py-1.5 bg-emerald-600 text-white font-bold rounded-lg shadow">Setujui</button><button id="rejc-${item.id}" class="px-3 py-1.5 bg-red-50 text-red-600 border rounded-lg">Tolak</button></div>`;
                 container.appendChild(div);
                 document.getElementById(`appr-${item.id}`).onclick = async () => {
-                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), { name: item.name, category: item.category, province: item.province, reviews: [] });
+                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', item.id), { name: item.name, category: item.category, province: item.province, rating: 4.0, description: "Usulan regional terverifikasi.", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", costWeekday: "Rp 120.000", costWeekend: "Rp 150.000", costPackage: "Rp 450.000", reviews: [] });
                     await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', item.id));
                     window.showToastGlobal('Data resmi diterbitkan ke publik!', 'success');
                 };
@@ -574,20 +676,37 @@
 
         window.addEventListener('openDetail', (e) => {
             const item = activeDB.find(d => d.id === e.detail); if(!item) return;
-            document.getElementById('detail-title').textContent = item.name; document.getElementById('detail-category-badge').textContent = item.category;
+            document.getElementById('detail-title').textContent = item.name; 
+            document.getElementById('detail-category-badge').textContent = item.category;
+            document.getElementById('detail-province-text').textContent = item.province.toUpperCase();
+            document.getElementById('detail-location').querySelector('span').textContent = `${item.province}`;
+            document.getElementById('detail-desc').textContent = item.description || "Destinasi favorit pariwisata nusantara pilihan terbaik.";
+            document.getElementById('detail-image').src = item.image || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80";
+            document.getElementById('detail-rating-text').textContent = Number(item.rating || 4.0).toFixed(1);
+            
+            document.getElementById('detail-cost-weekday').textContent = item.costWeekday || 'Rp 120.000';
+            document.getElementById('detail-cost-weekend').textContent = item.costWeekend || 'Rp 150.000';
+            document.getElementById('detail-cost-package').textContent = item.costPackage || 'Rp 450.000';
+
             const container = document.getElementById('reviews-list-container'); container.innerHTML = ''; const list = item.reviews || [];
-            if(list.length === 0) { container.innerHTML = `<p class="text-xs text-gray-400 italic">Belum ada ulasan.</p>`; }
-            else { list.forEach(r => { container.innerHTML += `<div class="bg-gray-50 p-2 rounded-xl border text-[11px]"><div class="flex justify-between font-bold text-gray-800"><span>${r.username}</span><span class="text-amber-500">★ ${r.rating}</span></div><p class="text-gray-600 mt-0.5">${r.comment}</p></div>`; }); }
+            document.getElementById('review-count').textContent = list.length;
+            if(list.length === 0) { container.innerHTML = `<p class="text-xs text-gray-400 italic py-1">Belum ada ulasan.</p>`; }
+            else { list.forEach(r => { container.innerHTML += `<div class="bg-gray-50 p-2 rounded-xl border text-[11px] text-left"><div class="flex justify-between font-bold text-gray-800"><span>${r.username}</span><span class="text-amber-500">★ ${r.rating}</span></div><p class="text-gray-600 mt-0.5">${r.comment}</p></div>`; }); }
             document.getElementById('detail-modal').classList.remove('hidden');
         });
 
         window.submitUserReviewGlobal = async function() {
             const name = document.getElementById('review-username-input').value.trim(); const comment = document.getElementById('review-text-input').value.trim();
-            if(!name || !comment || selectedRating === 0) { alert('Lengkapi kolom ulasan!'); return; }
+            if(!name || !comment || selectedRating === 0) { alert('Lengkapi kolom ulasan & bintang rating!'); return; }
             const item = activeDB.find(d => d.id === activeDetailItemId); if(!item) return; const currentReviews = item.reviews || [];
             currentReviews.push({ username: name, rating: selectedRating, comment: comment });
-            await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', activeDetailItemId), { reviews: currentReviews });
-            window.showToastGlobal('Ulasan diterbitkan!', 'success'); closeDetailModal();
+            
+            if(item.id.startsWith("pahawang") || item.id.startsWith("cikwo")) {
+                item.reviews = currentReviews; closeDetailModal(); window.showToastGlobal('Ulasan diterbitkan!', 'success');
+            } else {
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', activeDetailItemId), { reviews: currentReviews });
+                window.showToastGlobal('Ulasan diterbitkan!', 'success'); closeDetailModal();
+            }
         };
 
         window.handleLoginSubmitGlobal = function(e) {
@@ -601,9 +720,9 @@
         window.handleLogoutGlobal = function() { loggedInUser = null; localStorage.removeItem('titik_singgah_session'); window.updateAdminAuthUIGlobal(); closeAdminDashboard(); };
         
         window.handleFormSubmitGlobal = async function(e) {
-            e.preventDefault(); const id = document.getElementById('form-id').value || 'dest-' + Date.now();
+            e.preventDefault(); const id = 'dest-' + Date.now();
             const targetProvince = loggedInUser.role === 'regional' ? loggedInUser.province : document.getElementById('form-province').value;
-            const payload = { name: document.getElementById('form-name').value, category: document.getElementById('form-category').value, province: targetProvince, reviews: [] };
+            const payload = { name: document.getElementById('form-name').value, category: document.getElementById('form-category').value, province: targetProvince, rating: 4.5, description: "Objek rekomendasi baru.", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80", costWeekday: "Rp 100.000", costWeekend: "Rp 120.000", costPackage: "Rp 350.000", reviews: [] };
             if (loggedInUser.role === 'regional') { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pendingDestinations', id), payload, { merge: true }); window.showToastGlobal('Usulan masuk antrian verifikasi pusat!', 'success'); }
             else { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'destinations', id), payload, { merge: true }); window.showToastGlobal('Terbit sukses!', 'success'); }
             window.hideAddEditModalGlobal();
@@ -613,6 +732,7 @@
         window.updateItineraryBudgetMeterGlobal = updateItineraryBudgetMeter;
         window.addEventListener('provinceChanged', () => { renderPublicCards(); updateItineraryBudgetMeter(); });
         window.addEventListener('categoryChanged', () => renderPublicCards());
+        window.addEventListener('searchChanged', () => renderPublicCards());
         init();
     </script>
 </body>
